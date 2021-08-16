@@ -1,11 +1,12 @@
 node {
-
-  try {
-    // Fails with non-zero exit if dir1 does not exist
-    def dir1 = sh(script:'ls -l', returnStdout:true).trim()
-} catch (Exception ex) {
-    println("Unable to read dir1: ${ex}")
-}
+  stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'maven-3', type: 'maven'
+        withSonarQubeEnv('sonar-6') { 
+          sh "${mvnHome}/bin/mvn clean verify sonar:sonar"
+        }
+    }
+   
+ 
   
 
 }
