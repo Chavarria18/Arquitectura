@@ -1,8 +1,7 @@
 node {
   
   stage('Build'){
-    def mvnHome = tool 'M3'  
-    sh "ls"
+   def output = sh returnStdout: true, script: 'ls -l'
 
   }
   
