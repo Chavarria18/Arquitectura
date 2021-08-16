@@ -1,5 +1,5 @@
 node {
-stages{
+
 
 
 stage 'Checkout'
@@ -8,22 +8,15 @@ stage 'Checkout'
  stage('test') {
         def mvnHome =  tool name: 'M3', type: 'maven'
         sh "ls"
+        catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
+                emailext body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'chavarria181386@unis.edu.gt'
+                }
        
 
         
     }
-  }
-   post {  
-         always {  
-             echo 'This will always run'  
-         }  
-         success {  
-             echo 'This will run only if successful'  
-         }  
-         failure {  
-             emailext body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'chavarria181386@unis.edu.gt'
-         }  
-         }
+  
+   
 
 
  //def mvnHome = tool 'M3' 
