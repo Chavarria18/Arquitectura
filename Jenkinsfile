@@ -1,4 +1,7 @@
 node {
+stages{
+
+
 stage 'Checkout'
 
     checkout scm
@@ -9,7 +12,8 @@ stage 'Checkout'
 
         
     }
-    post {  
+  }
+   post {  
          always {  
              echo 'This will always run'  
          }  
@@ -20,13 +24,15 @@ stage 'Checkout'
              emailext body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'chavarria181386@unis.edu.gt'
          }  
          }
+
+
  //def mvnHome = tool 'M3' 
- stage('SonarQube Analysis') {
+ /*stage('SonarQube Analysis') {
         def mvnHome =  tool name: 'M3', type: 'maven'
         withSonarQubeEnv('sonarq') { 
           sh "${mvnHome}/bin/mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
         }
-    }
+    }*/
 
 
 
