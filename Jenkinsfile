@@ -1,20 +1,11 @@
 node {
 
-   stage('SCM Checkout'){
-     git(
-       url: 'https://github.com/Chavarria18/Arquitectura.git',
-       credentialsId: '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',
-       branch: "${DEV}"
-    )
-   }
-  
-  stage('Build'){
-    post{ 
-        def output = sh returnStdout: true, script: 'ls -l'
-    }
-  
-
-  }
+  try {
+    // Fails with non-zero exit if dir1 does not exist
+    def dir1 = sh(script:'ls -la dir1', returnStdout:true).trim()
+} catch (Exception ex) {
+    println("Unable to read dir1: ${ex}")
+}
   
 
 }
