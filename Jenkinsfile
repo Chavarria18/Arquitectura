@@ -2,7 +2,11 @@ node {
 stage 'Checkout'
 
     checkout scm
-
+ stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'M3', type: 'maven'
+        sh "${mvnHome}/bin/mvn test"
+        
+    }
  //def mvnHome = tool 'M3' 
  stage('SonarQube Analysis') {
         def mvnHome =  tool name: 'M3', type: 'maven'
