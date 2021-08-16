@@ -1,8 +1,16 @@
 node {
-  stage ('test') {
- 
-    withMaven {
-      sh "mvn clean verify"
-    } 
+
+  stages{
+     stage ('test') {
+      steps{
+          {
+            sh "mvn clean verify"
+          } 
+
+      }
+   
   }
+
+  }
+ 
 }
