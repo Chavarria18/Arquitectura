@@ -1,12 +1,10 @@
 node {
-  stage('SonarQube Analysis') {
-        def mvnHome =  tool name: 'maven-3', type: 'maven'
+ //def mvnHome = tool 'M3' 
+ stage('SonarQube Analysis') {
+        def mvnHome =  tool name: 'M#', type: 'maven'
         withSonarQubeEnv('sonar-6') { 
-          sh "${mvnHome}/bin/mvn clean verify sonar:sonar"
+          sh "${mvnHome}/bin/mvn sonar:sonar"
         }
     }
-   
- 
-  
 
 }
