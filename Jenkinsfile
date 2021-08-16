@@ -1,5 +1,5 @@
 node {
-  agent(label 'DEV')
+  agent{label 'DEV'}
   
   stages{
 
