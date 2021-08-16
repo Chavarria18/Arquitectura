@@ -1,5 +1,6 @@
 node {
   
   def mvnHome = tool 'M3'
-  sh "${mvnHome}/bin/mvn -B verify"
+  def pomfilepath= "./pom.xml"
+  sh "${mvnHome}/bin/mvn -f ${pomfilepath} verify"
 }
