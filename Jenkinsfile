@@ -1,5 +1,5 @@
 node {
-  node{
+
    stage('SCM Checkout'){
      git(
        url: 'https://github.com/Chavarria18/Arquitectura.git',
