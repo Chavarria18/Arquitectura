@@ -8,12 +8,17 @@ stage 'Checkout'
  stage('test') {
         def mvnHome =  tool name: 'M3', type: 'maven'
         sh "ls"
-        emailext attachLog: false,body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+        
                 
        
 
         
     }
+  stage('email'){
+    steps{
+      emailext attachLog: false,body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+    }
+  }
   
    
 
