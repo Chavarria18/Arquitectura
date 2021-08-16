@@ -1,18 +1,15 @@
-node {
-  agent{label 'DEV'}
-  
-  stages{
-
-     stage ('test') {
-      steps{
-          dir("Arquitectura"){
-            sh "mvn clean verify"
-          } 
-
-      }
-   
-  }
-
-  }
- 
+@Library('javahome-libs') _
+pipeline{
+    agent any
+    tools{
+        maven 'maven3'
+    }
+    stages{
+        stage("Maven Build"){
+            steps{
+                sh 'mvn verify sonar:sonar'
+            }
+        }
+        
+    }
 }
