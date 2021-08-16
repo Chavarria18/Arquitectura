@@ -4,8 +4,12 @@ stage 'Checkout'
     checkout scm
  stage('test') {
         def mvnHome =  tool name: 'M3', type: 'maven'
-        sh "${mvnHome}/bin/mvn test"
-        post {  
+        sh "ls"
+       
+
+        
+    }
+    post {  
          always {  
              echo 'This will always run'  
          }  
@@ -16,9 +20,6 @@ stage 'Checkout'
              emailext body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'chavarria181386@unis.edu.gt'
          }  
          }
-
-        
-    }
  //def mvnHome = tool 'M3' 
  stage('SonarQube Analysis') {
         def mvnHome =  tool name: 'M3', type: 'maven'
