@@ -9,7 +9,10 @@ node {
    }
   
   stage('Build'){
-   def output = sh returnStdout: true, script: 'ls -l'
+    post{ 
+        def output = sh returnStdout: true, script: 'ls -l'
+    }
+  
 
   }
   
