@@ -1,19 +1,13 @@
-node{
-   
-   stage('Compile-Package'){
-     withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-        sh "mvn clean package"
+pipeline {
+  agent any
+  tools {
+    maven 'M3'
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
       }
-   }
-   
-   stage('SonarQube Analysis') {
-        def mvnHome =  tool name: 'maven-3', type: 'maven'
-        withSonarQubeEnv('sonar-6') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar"
-        }
     }
-   
-  
-   
-
+  }
 }
