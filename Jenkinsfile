@@ -1,11 +1,5 @@
-pipeline {
-  def mvnHome = tool 'M3'
+node {
   
-  stages {
-    stage('Build') {
-      steps {
-        sh 'mvn -B -DskipTests clean package'
-      }
-    }
-  }
+  def mvnHome = tool 'M3'
+  sh "${mvnHome}/bin/mvn -B verify"
 }
