@@ -7,7 +7,7 @@ stage 'Checkout'
  stage('unit-test') {
     def mvnHome =  tool name: 'M3', type: 'maven'       
     echo "REALIZANDO LOS UNIT TESTS"
-    sh "${mvnHome}/bin/mvn test"
+    sh "${mvnHome}/bin/mvn clean test"
         
         
     } 
