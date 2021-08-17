@@ -11,7 +11,7 @@ stage 'Checkout'
         sh "ls"
         echo env.BRANCH_NAME
         if (env.BRANCH_NAME == 'DEV') {
-            echo 'Execute on devvvvv'
+            echo 'Execute on devvvvvvvvvvvfv'
         } else {
             echo 'I execute elsewhere'
         }
