@@ -11,7 +11,7 @@ stage 'Checkout'
         sh "ls"
         echo env.BRANCH_NAME
         if (env.BRANCH_NAME == 'DEV') {
-            echo 'I only execute on the master branch'
+            echo 'Execute on dev'
         } else {
             echo 'I execute elsewhere'
         }
