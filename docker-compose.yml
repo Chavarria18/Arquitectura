@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
     ventas-server:
         container_name: spring-v
@@ -8,18 +8,12 @@ services:
         image: ventas-server:latest
         ports:
             - 18888:8888
-        command: ["./wait-for-it.sh", "sudo docker start myxedb1" ]
-    sonarqube:
-
-        image: sonarqube
-        restart: unless-stopped
-        ports:
-            - "9000:9000"
-       
+      
 networks:
    default:
       external:
-         name: netgg
+         name: netgg  
+      
 
 
 
