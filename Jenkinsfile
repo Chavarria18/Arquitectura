@@ -8,6 +8,12 @@ stage 'Checkout'
  stage('test') {
         def mvnHome =  tool name: 'M3', type: 'maven'
         sh "ls"
+        when {
+        branch 'DEV'
+    }
+    steps {
+        echo 'Corriendo test y analizis sonarq en DEV branch'
+    }
         
                 
        
