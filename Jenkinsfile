@@ -12,21 +12,22 @@ stage('dev-branch') {
     }
 }
 
-stage('dev-branch') {
+stage('uat-branch') {
     when {
-        branch 'DEV'
+        branch 'UAT'
     }
     steps {
-        echo 'Corriendo test y analizis sonarq en DEV branch'
+        echo 'Corriendo test y analizis sonarq en UAT branch'
     }
 }
 
-stage('dev-branch') {
+stage('prod-branch') {
     when {
-        branch 'DEV'
+        branch 'PROD'
     }
     steps {
-        echo 'Corriendo test y analizis sonarq en DEV branch'
+        echo 'Corriendo test y analizis sonarq en PROD branch'
+        //
     }
 }
 
