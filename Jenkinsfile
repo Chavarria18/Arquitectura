@@ -17,7 +17,7 @@ stage 'Checkout'
   stage('email'){
    
     emailext attachLog: false,body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-    
+    //emailext attachLog: false,body: 'Hubo un error en la pipeline', subject: 'Jenkins-pipeline-status', to: 'marroquin181358@unis.edu.gt'
   }
   
    
