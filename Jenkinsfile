@@ -8,7 +8,7 @@ stage 'Checkout'
     def mvnHome =  tool name: 'M3', type: 'maven'       
     echo "REALIZANDO LOS UNIT TESTS-2"
     sh "ls"
-    sh "${mvnHome}/bin/mvn clean test"        
+    sh "${mvnHome}/bin/mvn install"        
         
     }catchError(stageResult: 'FAILURE') {
                      emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
