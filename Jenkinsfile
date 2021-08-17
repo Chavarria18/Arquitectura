@@ -1,8 +1,8 @@
 node {
-stage 'Checkout'{
+stage 'Checkout'
   checkout scm
 
-}
+
 stage('dev-branch') {
     when {
         branch 'DEV'
@@ -27,8 +27,7 @@ stage('prod-branch') {
     }
     steps {
         echo 'Corriendo test y analizis sonarq en PROD branch'
-        //
-    }
+        }
 }
 
     
