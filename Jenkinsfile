@@ -7,10 +7,12 @@ stage 'Checkout'
  stage('unit-test') {
     def mvnHome =  tool name: 'M3', type: 'maven'       
     echo "REALIZANDO LOS UNIT TESTS-2"
-    sh "${mvnHome}/bin/mvn clean test"
+    sh "ls"
+    sh "${mvnHome}/bin/mvn clean test"        
         
-        
-    } 
+    }catchError(stageResult: 'FAILURE') {
+                     emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+                }
 
 
   stage('SonarQube Analysis') {
@@ -18,7 +20,9 @@ stage 'Checkout'
         withSonarQubeEnv('sonarq') { 
           sh "${mvnHome}/bin/mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
         }
-    }
+    }catchError(stageResult: 'FAILURE') {
+                     emailext attachLog: false,body: 'Hubo un error en sonarqube', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+                }
 
     stage('Build') {
       def mvnHome =  tool name: 'M3', type: 'maven'       
