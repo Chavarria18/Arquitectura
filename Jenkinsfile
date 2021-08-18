@@ -12,7 +12,7 @@ stage 'Checkout'
     sh "ls"
     sh "${mvnHome}/bin/mvn test"        
         
-    }catchError(buildResult: 'FAILURE',stageResult: 'FAILURE') {
+    }catch(e) {
                      emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
                 }
 
