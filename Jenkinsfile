@@ -8,6 +8,7 @@ stage 'Checkout'
     def mvnHome =  tool name: 'M3', type: 'maven'       
     echo "REALIZANDO LOS UNIT TESTS-2"
     sh "M3 -v"
+    echo "a"
     sh "ls"
     sh "${mvnHome}/bin/mvn test"        
         
