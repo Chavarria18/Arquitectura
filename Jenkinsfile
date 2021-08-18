@@ -14,6 +14,7 @@ stage 'Checkout'
 
    }catch(err){
      emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+     emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
 
    }
 
