@@ -8,7 +8,6 @@ stage 'Checkout'
    try{
       def mvnHome =  tool name: 'M3', type: 'maven'                 
       echo "REALIZANDO LOS UNIT TESTS-2"
-      sh "M3 -v"
       echo "a"
       sh "ls"
       sh "${mvnHome}/bin/mvn test" 
@@ -42,7 +41,7 @@ stage 'Checkout'
     stage('Build') {
       try{ 
       def mvnHome =  tool name: 'M3', type: 'maven'       
-      echo "REALIZANDO LOS UNIT TESTS"
+      echo "REALIZANDO EL BUILD"
       sh "${mvnHome}/bin/mvn build"
       }catch(err){
         emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
