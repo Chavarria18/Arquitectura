@@ -5,13 +5,19 @@ stage 'Checkout'
 
 
  stage('unit-test') {
-    def mvnHome =  tool name: 'M3', type: 'maven' 
-    emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'             
-    echo "REALIZANDO LOS UNIT TESTS-2"
-    sh "M3 -v"
-    echo "a"
-    sh "ls"
-    sh "${mvnHome}/bin/mvn test" 
+   try{
+      def mvnHome =  tool name: 'M3', type: 'maven'                 
+      echo "REALIZANDO LOS UNIT TESTS-2"
+      sh "M3 -v"
+      echo "a"
+      sh "ls"
+      sh "${mvnHome}/bin/mvn test" 
+
+   }catch(err){
+     emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+
+   }
+
     
         
     }
