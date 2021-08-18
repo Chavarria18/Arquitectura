@@ -10,11 +10,12 @@ stage 'Checkout'
     sh "M3 -v"
     echo "a"
     sh "ls"
-    sh "${mvnHome}/bin/mvn test"        
+    sh "${mvnHome}/bin/mvn test" 
+    emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'       
         
-    }catchError(e) {
-                     emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-                }
+    }
+                     
+                
 
 
   stage('SonarQube Analysis') {
