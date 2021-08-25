@@ -12,7 +12,7 @@ stage 'Checkout'
       echo "ahora"
       sh "ls"
       withMaven(maven: 'M3') {
-            sh "mvn clean package"
+            sh "mvn -f ventas/pom.xml clean package"
         }
 
    }catch(err){
