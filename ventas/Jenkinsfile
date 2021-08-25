@@ -10,7 +10,7 @@ stage 'Checkout'
       echo "REALIZANDO LOS UNIT TESTS-2"
       echo "a"
       sh "ls"
-      sh "${mvnHome}/bin/mvn test" 
+      sh "ventas/mvn test" 
 
    }catch(err){
      emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
