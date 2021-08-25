@@ -6,7 +6,7 @@ stage 'Checkout'
 
  stage('unit-test') {
    try{
-      Class.forName("com.mysql.jdbc.Driver")
+     
      
       def mvnHome =  tool name: 'M3', type: 'maven'                 
       echo "REALIZANDO LOS UNIT TESTS-2"
