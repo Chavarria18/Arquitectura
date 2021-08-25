@@ -6,15 +6,16 @@ stage 'Checkout'
 
  stage('unit-test') {
    try{
+      maven 'M3'
       def mvnHome =  tool name: 'M3', type: 'maven'                 
       echo "REALIZANDO LOS UNIT TESTS-2"
       echo "a"
       sh "ls"
-      sh "ventas/mvn test" 
+      sh "mvn test" 
 
    }catch(err){
-     emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-     emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
+     //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+     //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
 
    }
 
@@ -33,7 +34,7 @@ stage 'Checkout'
         }
 
     }catch(err){
-      emailext attachLog: false,body: 'Hubo un error en sonarqube', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+     // emailext attachLog: false,body: 'Hubo un error en sonarqube', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
 
     }}
   
@@ -45,7 +46,7 @@ stage 'Checkout'
       echo "REALIZANDO EL BUILD"
       sh "${mvnHome}/bin/mvn build"
       }catch(err){
-        emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
         
         
