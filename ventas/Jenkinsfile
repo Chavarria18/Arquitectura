@@ -9,10 +9,10 @@ stage 'Checkout'
      
       def mvnHome =  tool name: 'M3', type: 'maven'                 
       echo "REALIZANDO LOS UNIT TESTS-2"
-      echo "a"
+      echo "ahora"
       sh "ls"
       withMaven(maven: 'M3') {
-            sh "mvn clean package"
+            sh "ventas/mvn clean package"
         }
 
    }catch(err){
