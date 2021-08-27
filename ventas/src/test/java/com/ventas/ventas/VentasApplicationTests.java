@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame; 
 
-//@SpringBootTest
+@SpringBootTest
 class VentasApplicationTests {
 
 	
@@ -17,7 +17,7 @@ class VentasApplicationTests {
 	void contextLoads() {
 	}*/
 
-	public Telefono tel = new Telefono(); 
+	/*public Telefono tel = new Telefono(); 
     
     @Test
 	public void Testgetysetters() throws Exception {
@@ -66,7 +66,7 @@ class VentasApplicationTests {
 					
 
 	}
-
+*/
 
 	
 
