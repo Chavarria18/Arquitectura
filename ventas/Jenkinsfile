@@ -47,11 +47,11 @@ stage 'Checkout'
   
     
 
-    stage('Build') {
+    stage('Build war') {
       try{ 
       def mvnHome =  tool name: 'M3', type: 'maven'       
       echo "REALIZANDO EL BUILD"
-      sh "${mvnHome}/bin/mvn build"
+      sh "${mvnHome}/bin/mvn package"
       }catch(err){
        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
@@ -62,10 +62,8 @@ stage 'Checkout'
 
        stage('Server') {
       try{ 
-        sh "docker cp ~/target/ventas-0.0.1-SNAPSHOT.jar mytomcat:/opt/apache-tomcat-8.5.50/webapps"
-        sh "docker exec -i mytomcat bash ./opt/apache-tomcat-8.5.50/bin/shutdown.sh"
-        sh"docker exec -i mytomcat bash ./opt/apache-tomcat-8.5.50/bin/startup.sh"
-
+        sh "mvn spring-boot:run"
+       
    
 
      
@@ -79,3 +77,5 @@ stage 'Checkout'
 
 
 }
+
+
