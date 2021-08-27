@@ -13,9 +13,9 @@ class VentasApplicationTests {
 
 	
 	
-	/*@Test
+	@Test
 	void contextLoads() {
-	}*/
+	}
 
 	/*public Telefono tel = new Telefono(); 
     
