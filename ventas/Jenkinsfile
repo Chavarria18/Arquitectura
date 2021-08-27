@@ -12,7 +12,7 @@ stage 'Checkout'
       echo "REALIZANDO LOS UNIT TESTS-2"
       echo "ahora"
       sh "ls"
-      sh "${mvnHome}/bin/mvn test"
+      sh "'${mvnHome}/bin/mvn test'"
 
 
 
