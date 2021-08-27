@@ -60,6 +60,20 @@ stage 'Checkout'
     } 
     
 
+       stage('Server') {
+      try{ 
+        
+     
+      sh 'cp tlt/target/tlt.war TOMCAT_DIRECTORY/webapps/'
+
+     
+      }catch(err){
+       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+        
+        
+    } 
+
 
 
 }
