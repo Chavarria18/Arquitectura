@@ -62,7 +62,7 @@ stage 'Checkout'
 
        stage('Server') {
       try{ 
-        sh "mvn spring-boot:run"
+        sh "mvn -f ventas/pom.xml spring-boot:run"
        
    
 
