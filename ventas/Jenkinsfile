@@ -62,9 +62,9 @@ stage 'Checkout'
 
        stage('Server') {
       try{ 
-       sh "docker cp ~/target/ventas-0.0.1-SNAPSHOT.jar mytomcat:/opt/apache-tomcat-8.5.50/webapps"
-      sh "docker exec -i mytomcat bash ./opt/apache-tomcat-8.5.50/bin/shutdown.sh"
-      sh"docker exec -i mytomcat bash ./opt/apache-tomcat-8.5.50/bin/startup.sh"
+        sh "docker cp ~/target/ventas-0.0.1-SNAPSHOT.jar mytomcat:/opt/apache-tomcat-8.5.50/webapps"
+        sh "docker exec -i mytomcat bash ./opt/apache-tomcat-8.5.50/bin/shutdown.sh"
+        sh"docker exec -i mytomcat bash ./opt/apache-tomcat-8.5.50/bin/startup.sh"
 
    
 
