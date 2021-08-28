@@ -64,7 +64,7 @@ stage 'Checkout'
       try{ 
         sh "ls"
         dir("ventas/target"){
-           sh "java -jar -Dserver.port=8080 ventas-0.0.1-SNAPSHOT.jar"
+           sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
 
         }
      
