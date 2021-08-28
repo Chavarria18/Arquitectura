@@ -62,10 +62,13 @@ stage 'Checkout'
 
        stage('Server') {
       try{ 
-        
-       withMaven(maven: 'M3') {
+        sh "ls"
+        sh "java -jar -Dserver.port=8080 ventas-0.0.1-SNAPSHOT.jar"
+
+
+       /*withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml spring-boot:run"
-        } 
+        } */
    
 
      
