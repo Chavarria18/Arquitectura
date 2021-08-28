@@ -52,7 +52,11 @@ stage 'Checkout'
       try{ 
       def mvnHome =  tool name: 'M3', type: 'maven'       
       echo "REALIZANDO EL BUILD"
-      sh "${mvnHome}/bin/mvn package"
+      //sh "${mvnHome}/bin/mvn package"
+      withMaven(maven: 'M3') {
+            sh "mvn -f ventas/pom.xml test"
+        }
+
       }catch(err){
        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
