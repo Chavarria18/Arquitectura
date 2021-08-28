@@ -54,7 +54,7 @@ stage 'Checkout'
       echo "REALIZANDO EL BUILD"
       //sh "${mvnHome}/bin/mvn package"
       withMaven(maven: 'M3') {
-            sh "mvn -f ventas/pom.xml test"
+            sh "mvn -f ventas/pom.xml package"
         }
 
       }catch(err){
