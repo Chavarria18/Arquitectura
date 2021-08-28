@@ -1,5 +1,5 @@
 node {
- def tomcatWeb = 'D:\\Auto_deployment\\apache-tomcat-9.0.30\\apache-tomcat-9.0.30\\webapps'
+ 
 stage 'Checkout'
   checkout scm
 
@@ -66,7 +66,8 @@ stage 'Checkout'
         
         
         dir("ventas/target"){
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war mytomcat:/usr/local/tomcat/webapps"
+            agent { label 'docker'}
+          sh "docker cp ventas-0.0.1-SNAPSHOT.war mytomcat:/usr/local/tomcat/webapps" 
 
         }
         
