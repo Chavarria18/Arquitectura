@@ -67,7 +67,7 @@ stage 'Checkout'
         
         
         dir("ventas/target"){
-          
+          sh "systemctl start docker"
           sh "docker cp ventas-0.0.1-SNAPSHOT.war mytomcat:/usr/local/tomcat/webapps" 
 
         }
