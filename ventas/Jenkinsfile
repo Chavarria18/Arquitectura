@@ -1,5 +1,5 @@
 node {
-
+ def tomcatWeb = 'D:\\Auto_deployment\\apache-tomcat-9.0.30\\apache-tomcat-9.0.30\\webapps'
 stage 'Checkout'
   checkout scm
 
@@ -63,10 +63,17 @@ stage 'Checkout'
        stage('Server') {
       try{ 
         sh "ls"
+        
+        
         dir("ventas/target"){
-           sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
+          sh "docker cp ventas-0.0.1-SNAPSHOT.war mytomcat:/usr/local/tomcat/webapps"
 
         }
+        
+        /*dir("ventas/target"){
+           sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
+
+        }*/ 
      
        
 
