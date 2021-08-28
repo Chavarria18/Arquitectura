@@ -14,11 +14,11 @@ stage 'Checkout'
       sh "ls"
       //sh "'${mvnHome}/bin/mvn test'"
 
-
+/* 
 
       withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml test"
-        }
+        }*/
 
    }catch(err){
      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -63,7 +63,7 @@ stage 'Checkout'
        stage('Server') {
       try{ 
         sh "ls"
-        sh "java -jar -Dserver.port=8080 ventas-0.0.1-SNAPSHOT.jar"
+        sh "java -jar -Dserver.port=8080 target/ventas-0.0.1-SNAPSHOT.jar"
 
 
        /*withMaven(maven: 'M3') {
