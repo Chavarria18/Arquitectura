@@ -17,9 +17,9 @@ stage 'Checkout'
 
  
 
-      withMaven(maven: 'M3') {
+     /* withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml test"
-        }
+        }*/
 
    }catch(err){
      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -72,7 +72,7 @@ stage 'Checkout'
         
         dir("ventas/target"){
    
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war mytomcat:/usr/local/tomcat/webapps" 
+          sh "docker cp ventas-0.0.1-SNAPSHOT.war objective_elion:/usr/local/tomcat/webapps" 
 
         }
         
