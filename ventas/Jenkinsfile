@@ -63,8 +63,12 @@ stage 'Checkout'
        stage('Server') {
       try{ 
         sh "ls"
-        cd "target"
-        sh "java -jar -Dserver.port=8080 ventas-0.0.1-SNAPSHOT.jar"
+        dir("target"){
+           sh "java -jar -Dserver.port=8080 ventas-0.0.1-SNAPSHOT.jar"
+
+        }
+     
+       
 
 
        /*withMaven(maven: 'M3') {
