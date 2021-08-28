@@ -1,5 +1,6 @@
 node {
- 
+ def dockerHome = tool 'docker'
+  env.PATH = "${dockerHome}/bin:${env.PATH}"
 stage 'Checkout'
   checkout scm
 
@@ -66,7 +67,7 @@ stage 'Checkout'
         
         
         dir("ventas/target"){
-           sh "docker -v"
+          
           sh "docker cp ventas-0.0.1-SNAPSHOT.war mytomcat:/usr/local/tomcat/webapps" 
 
         }
