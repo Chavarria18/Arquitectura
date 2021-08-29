@@ -6,7 +6,7 @@ stage 'Checkout'
 
 stage('BRANCH INFO'){
   echo env.BRANCH_NAME
-  echo "My branch is: ${BRANCH_NAME}" //SOLO PARA MULTI
+  //SOLO PARA MULTI
 }
 
  stage('unit-test') {
