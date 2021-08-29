@@ -6,6 +6,7 @@ stage 'Checkout'
 
 stage('BRANCH INFO'){
   echo env.BRANCH_NAME
+  echo "My branch is: ${BRANCH_NAME}" //SOLO PARA MULTI
 }
 
  stage('unit-test') {
@@ -75,7 +76,7 @@ stage('BRANCH INFO'){
         
         dir("ventas/target"){
    
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war objective_elion:/usr/local/tomcat/webapps" 
+          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps" 
 
         }
         
