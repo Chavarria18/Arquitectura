@@ -4,10 +4,7 @@ node {
 stage 'Checkout'
   checkout scm
 
-stage('BRANCH INFO'){
-  echo env.BRANCH_NAME
-  //SOLO PARA MULTI
-}
+
 
  stage('unit-test') {
    try{
