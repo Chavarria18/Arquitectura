@@ -1,6 +1,6 @@
 projectKey=com.ventas:ventas
-serverUrl=http://172.18.0.1:9000
+serverUrl=http://172.18.0.6:9000
 serverVersion=9.0.1.46107
-dashboardUrl=http://172.18.0.1:9000/dashboard?id=com.ventas%3Aventas
-ceTaskId=AXtMChxoxvdTk1Kv0aw-
-ceTaskUrl=http://172.18.0.1:9000/api/ce/task?id=AXtMChxoxvdTk1Kv0aw-
+dashboardUrl=http://172.18.0.6:9000/dashboard?id=com.ventas%3Aventas
+ceTaskId=AXuZBbyfJeqvXznA-lPc
+ceTaskUrl=http://172.18.0.6:9000/api/ce/task?id=AXuZBbyfJeqvXznA-lPc
