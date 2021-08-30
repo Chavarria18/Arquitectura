@@ -17,7 +17,7 @@ class VentasApplicationTests {
 	void contextLoads() {
 	}*/
 
-	/*public Telefono tel = new Telefono(); 
+	public Telefono tel = new Telefono(); 
     
     @Test
 	public void Testgetysetters() throws Exception {
@@ -66,7 +66,7 @@ class VentasApplicationTests {
 					
 
 	}
-*/
+
 
 	
 
