@@ -21,14 +21,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ventas</name>
 	<description>Demo project for Spring Boot
-	
 	</description>
 	<packaging>war</packaging>
 	<properties>
 		<java.version>1.8</java.version>
 		<sonar.scanner.force-deprecated-java-version>true</sonar.scanner.force-deprecated-java-version>
-		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
 			<sonar.host.url>http://172.18.0.6:9000</sonar.host.url>
 			<sonar.login>admin</sonar.login>
 			<sonar.password>tzec99</sonar.password>
@@ -106,7 +104,10 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		 </dependency>
-
+		 <dependency>
+			<groupId>org.junit.vintage</groupId>
+			<artifactId>junit-vintage-engine</artifactId>
+		</dependency>
 		
 
 	
