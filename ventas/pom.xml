@@ -43,7 +43,7 @@
 			<artifactId>jacoco-maven-plugin</artifactId>
 			<version>0.8.6</version>
 		</dependency>
-	    
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -143,7 +143,12 @@
 			</executions>
 		</plugin>
 
-
+			<!-- plugin de sonarq-->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
+			</plugin>
 
 		</plugins>
 	</build>
