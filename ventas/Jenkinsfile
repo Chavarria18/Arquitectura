@@ -18,9 +18,9 @@ node {
 
  
 
-     /* withMaven(maven: 'M3') {
+     withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml test"
-        }*/
+        }
 
     }catch(err){
      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
