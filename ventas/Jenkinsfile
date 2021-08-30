@@ -63,9 +63,9 @@ node {
       def mvnHome =  tool name: 'M3', type: 'maven'       
       echo "REALIZANDO EL BUILD"
       //sh "${mvnHome}/bin/mvn package"
-      withMaven(maven: 'M3') {
+     /* withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml package"
-        }
+        }*/
 
     }catch(err){
        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -80,11 +80,11 @@ node {
       sh "ls"
         
         
-      dir("ventas/target"){
+     /* dir("ventas/target"){
    
         sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps" 
 
-      }
+      }*/
         
         /*dir("ventas/target"){
            sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
