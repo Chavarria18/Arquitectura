@@ -37,9 +37,11 @@ stage 'Checkout'
 
   stage('SonarQube Analysis') {
     try{
+
         def mvnHome =  tool name: 'M3', type: 'maven'
         withSonarQubeEnv('sonarq') { 
-          sh "${mvnHome}/bin/mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
+          sh "ls"
+          sh "ventas/mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
         }
 
     }catch(err){
