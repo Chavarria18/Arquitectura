@@ -39,9 +39,8 @@ stage 'Checkout'
     try{
 
         def mvnHome =  tool name: 'M3', type: 'maven'
-       withMaven(maven: 'M3'){ 
-          sh "ls"
-          sh "mvn -f ventas/pom.xml clean verify  sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
+      withSonarQubeEnv('sonarq') { 
+          sh "${mvnHome}/bin/mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=Jmo=tzec99"
         }
 
     }catch(err){
