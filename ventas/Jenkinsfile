@@ -232,7 +232,7 @@ node {
 
   }else if(env.BRANCH_NAME == "PROD"){
 
-        stage('Build war') {
+    stage('Build war') {
       try{ 
         def mvnHome =  tool name: 'M3', type: 'maven'       
         echo "REALIZANDO EL BUILD"
