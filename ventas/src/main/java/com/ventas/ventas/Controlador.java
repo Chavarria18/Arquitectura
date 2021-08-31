@@ -142,12 +142,7 @@ public class Controlador {
             @RequestParam(name = "foto2") MultipartFile foto2, @RequestParam(name = "foto3") MultipartFile foto3,
             @RequestParam(name = "id_bodega") int id, HttpSession session) throws IOException {
 
-        byte[] fotoa = foto1.getBytes();
-        byte[] fotob = foto2.getBytes();
-        byte[] fotoc = foto3.getBytes();
-        dao.updateF(fotoa, "UPDATE VENTAS.BODEGA SET foto1=? WHERE id_bodega=?", id);
-        dao.updateF(fotob, "UPDATE VENTAS.BODEGA SET foto2=? WHERE id_bodega=?", id);
-        dao.updateF(fotoc, "UPDATE VENTAS.BODEGA SET foto3=? WHERE id_bodega=?", id);
+      
 
         String tabla = "Bodega";
         dao.historialC(session2, "Update", tabla);
