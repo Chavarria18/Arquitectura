@@ -15,7 +15,8 @@ node {
 
       echo env.BRANCH_NAME
       echo env.BUILD_CAUSE
-        
+       sh "./publish.sh"
+
         
      /* dir("ventas/target"){
    
