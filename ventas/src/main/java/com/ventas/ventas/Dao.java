@@ -1,24 +1,24 @@
 package com.ventas.ventas;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Arrays;
+//import java.sql.Date;
+//import java.util.ArrayList;
+//import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.data.jpa.repository.Query;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.client.RestTemplate;
+//import org.springframework.web.multipart.MultipartFile;
 
-import javassist.tools.framedump;
+//import javassist.tools.framedump;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -50,7 +50,7 @@ public class Dao {
     }
 
 
-    //TODO: Método para el manejo de catalogo de terminales 
+    //Método para el manejo de catalogo de terminales 
 
     /**
      * <p>Método para listar todas las terminales en la pagina de inicio </p>
@@ -58,8 +58,8 @@ public class Dao {
     */
     public List<Telefono> list() {
         String sql = "select *from VENTAS.BODEGA inner join VENTAS.FABRICA on origen = id_FABRICA  where id_estados = 3 or id_estados = 4";
-        List<Telefono> listaDis = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Telefono.class));
-        return listaDis;
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Telefono.class));
+        
 
     }
 
@@ -71,8 +71,8 @@ public class Dao {
     public List<Telefono> list2(int id) {
         String sql = "select *from VENTAS.BODEGA inner join VENTAS.FABRICA on origen = id_FABRICA where id_BODEGA  = ?";
         Object[] args = { id };
-        List<Telefono> listaIn = jdbcTemplate.query(sql, args, BeanPropertyRowMapper.newInstance(Telefono.class));
-        return listaIn;
+        return jdbcTemplate.query(sql, args, BeanPropertyRowMapper.newInstance(Telefono.class));
+        
 
     }
 
@@ -88,22 +88,7 @@ public class Dao {
         return nuevo;
     }
 
-     /**
-     * <p>Método para actualizar las fotos de las terminales </p>
-     * @deprecated
-     * Este Método quedo desactualizado, se paso a manejar las imagenes con url 
-     * @param foto son los bytes de la foto
-     * @param consulta el string para generar la consulta para actualizar los dispositivos
-     * @param id la llave primaria para ejectuar la consulta sobre un registro en particular
-    */
-    public void updateF(byte[] foto, String consulta, int id) {
-
-        if (foto.length > 0) {
-            jdbcTemplate.update(consulta, foto, id);
-
-        }
-
-    }
+     
 
     /**
      * <p>Método para actualizar los parametros de las terminales </p>
@@ -239,7 +224,7 @@ public class Dao {
 
 
 
-    //TODO: Métodos para el manejo del cátalgo de clientes 
+    //Métodos para el manejo del cátalgo de clientes 
 
   /**
      * <p>Método para listar todos los clientes dentro de la base de datos, quitando el registro de cliente individual</p>

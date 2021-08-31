@@ -1,14 +1,10 @@
 package com.ventas.ventas;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame; 
 
-@SpringBootTest
+
 class VentasApplicationTests {
 
 	
@@ -20,7 +16,7 @@ class VentasApplicationTests {
 	public Telefono tel = new Telefono(); 
     
     @Test
-	public void Testgetysetters() throws Exception {
+	void Testgetysetters() throws Exception {
 
        
         tel.setNombret("NombrePrueba");
