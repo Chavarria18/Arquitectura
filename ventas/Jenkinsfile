@@ -1,5 +1,5 @@
 node {
-//Prueba
+//Pruebaaaaaa
   def dockerHome = tool 'docker'
   env.PATH = "${dockerHome}/bin:${env.PATH}"
   stage 'Checkout'
@@ -69,10 +69,10 @@ node {
       try{ 
         def mvnHome =  tool name: 'M3', type: 'maven'       
         echo "REALIZANDO EL BUILD"
-      //sh "${mvnHome}/bin/mvn package"
-     /* withMaven(maven: 'M3') {
+     
+     withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml package"
-        }*/
+        }
 
       }catch(err){
         // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -91,7 +91,7 @@ node {
           
         dir("ventas/target"){
           sh "mv ventas-0.0.1-SNAPSHOT.war main.war"
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps" 
+          sh "docker cp main.war tomcat1:/usr/local/tomcat/webapps" 
 
         }
           
