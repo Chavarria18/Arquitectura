@@ -4,9 +4,9 @@ node {
   env.PATH = "${dockerHome}/bin:${env.PATH}"
   stage 'Checkout'
     checkout scm
-
-stage('unit-test') {
-    try{
+  if(env.BRANCH_NAME.startsWith('PR')){
+    stage('unit-test') {
+      try{
      
      
       def mvnHome =  tool name: 'M3', type: 'maven'                 
@@ -21,7 +21,7 @@ stage('unit-test') {
             sh "mvn -f ventas/pom.xml test"
         }
 
-    }catch(err){
+      }catch(err){
      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
 
@@ -33,56 +33,55 @@ stage('unit-test') {
                 
 
 
-  stage('SonarQube Analysis') {
-    try{
+    stage('SonarQube Analysis') {
+      try{
 
-      withMaven(maven: 'M3') {
-            sh "mvn -f ventas/pom.xml clean install"
+        withMaven(maven: 'M3') {
+              sh "mvn -f ventas/pom.xml clean install"
+          }
+        def mvnHome =  tool name: 'M3', type: 'maven'
+        withSonarQubeEnv('sonarq') { 
+            sh "${mvnHome}/bin/mvn -f ventas/pom.xml verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
         }
-      def mvnHome =  tool name: 'M3', type: 'maven'
-      withSonarQubeEnv('sonarq') { 
-          sh "${mvnHome}/bin/mvn -f ventas/pom.xml verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
+
+
+      }catch(err){
+      // emailext attachLog: false,body: 'Hubo un error en sonarqube', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+
       }
-
-
-    }catch(err){
-     // emailext attachLog: false,body: 'Hubo un error en sonarqube', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-
     }
-  }
 
-  stage('Quality gate'){
-      //waitForQualityGate abortPipeline: true
-       
-    def qg = waitForQualityGate() 
-    if (qg.status != 'OK') {
-      error "Pipeline aborted due to quality gate failure: ${qg.status}"
-    }else{
-      echo "EXITO EN QUAILYT GATES"
-    }
-  
-      
-  
-
-  }
-  
+    stage('Quality gate'){
+        //waitForQualityGate abortPipeline: true
+        
+      def qg = waitForQualityGate() 
+      if (qg.status != 'OK') {
+        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+      }else{
+        echo "EXITO EN QUAILYT GATES"
+      }
+    
+        
     
 
-  stage('Build war') {
-    try{ 
-      def mvnHome =  tool name: 'M3', type: 'maven'       
-      echo "REALIZANDO EL BUILD"
+    }
+
+  }else{
+    stage('Build war') {
+      try{ 
+        def mvnHome =  tool name: 'M3', type: 'maven'       
+        echo "REALIZANDO EL BUILD"
       //sh "${mvnHome}/bin/mvn package"
      /* withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml package"
         }*/
 
-    }catch(err){
-       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }catch(err){
+        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+        
+        
     }
-        
-        
-  }
  
     
 
@@ -122,6 +121,19 @@ stage('unit-test') {
         
         
   } 
+
+
+
+  }
+ 
+  
+    
+
+
+
+
+
+
 
 
 
