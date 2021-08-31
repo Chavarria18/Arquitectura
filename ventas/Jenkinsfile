@@ -67,6 +67,7 @@ node {
   }else if(env.BRANCH_NAME == "main"){
     stage('Build war') {
       try{ 
+        echo "The PR is over the  ${pullRequest.base} branch."
         def mvnHome =  tool name: 'M3', type: 'maven'       
         echo "REALIZANDO EL BUILD"
      
