@@ -1,307 +1,177 @@
 node {
-
   def dockerHome = tool 'docker'
   env.PATH = "${dockerHome}/bin:${env.PATH}"
   stage 'Checkout'
     checkout scm
-  if(env.BRANCH_NAME.startsWith('PR')){
+  if (env.BRANCH_NAME.startsWith('PR')) {
     stage('unit-test') {
-      try{
-     
-     
-      def mvnHome =  tool name: 'M3', type: 'maven'                 
-      echo "REALIZANDO LOS UNIT TESTS-2"
-      echo "ahora"
-      sh "ls"
+      try {
+        echo 'REALIZANDO LOS UNIT TESTS-2'
+        echo 'ahora'
+        sh 'ls'
       //sh "'${mvnHome}/bin/mvn test'"
 
- 
-
-     withMaven(maven: 'M3') {
-            sh "mvn -f ventas/pom.xml test"
+        withMaven(maven: 'M3') {
+            sh 'mvn -f ventas/pom.xml test'
         }
-
-      }catch(err){
-     //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-     //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
-
+      }catch (err) {
+        echo 'ERROR EN LOS UNIT TEST'
+      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      //emailext attachLog: false,body: 'Hubo un error en los unit test', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
       }
+    }
 
-    
-    }     
-               
     stage('SonarQube Analysis') {
-        try{
-
-          withMaven(maven: 'M3') {
-                sh "mvn -f ventas/pom.xml clean install"
-            }
-          def mvnHome =  tool name: 'M3', type: 'maven'
-          withSonarQubeEnv('sonarq') { 
+        try {
+        withMaven(maven: 'M3') {
+          sh 'mvn -f ventas/pom.xml clean install'
+        }
+        def mvnHome =  tool name: 'M3', type: 'maven'
+        withSonarQubeEnv('sonarq') {
               sh "${mvnHome}/bin/mvn -f ventas/pom.xml verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99"
-          }
-
-
-        }catch(err){
+        }
+        }catch (err) {
         // emailext attachLog: false,body: 'Hubo un error en sonarqube', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-
         }
     }
 
-    stage('Quality gate'){
+    stage('Quality gate') {
           //waitForQualityGate abortPipeline: true
-          
-        def qg = waitForQualityGate() 
+
+        def qg = waitForQualityGate()
         if (qg.status != 'OK') {
-          error "Pipeline aborted due to quality gate failure: ${qg.status}"
-        }else{
-          echo "EXITO EN QUAILYT GATES"
+        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+        }else {
+        echo 'EXITO EN QUAILYT GATES'
         }
-      
-          
-      
-
     }
-
-  
-  }else if(env.BRANCH_NAME == "main"){
+  }else if (env.BRANCH_NAME == 'main') {
     stage('Build war') {
-      try{ 
-        echo "CONSTRULLENDO EL WAR"
-        def mvnHome =  tool name: 'M3', type: 'maven'       
-        echo "REALIZANDO EL BUILD"
-     
-     withMaven(maven: 'M3') {
-            sh "mvn -f ventas/pom.xml package"
-        }
+      try {
+        echo 'CONSTRULLENDO EL WAR'
 
-      }catch(err){
-        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+        echo 'REALIZANDO EL BUILD'
+
+        withMaven(maven: 'M3') {
+            sh 'mvn -f ventas/pom.xml package'
+        }
+      }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
-        
-        
     }
- 
-    
 
     stage('Server') {
-      try{ 
-        sh "ls"
-        echo env.BRANCH_NAME  
+      try {
+        sh 'ls'
+        echo env.BRANCH_NAME
 
-          
-        dir("ventas/target"){
-          sh "mv ventas-0.0.1-SNAPSHOT.war main.war"
-          sh "docker cp main.war tomcat1:/usr/local/tomcat/webapps" 
-
+        dir('ventas/target') {
+          sh 'mv ventas-0.0.1-SNAPSHOT.war main.war'
+          sh 'docker cp main.war tomcat1:/usr/local/tomcat/webapps'
         }
-          
-          
-      
-       
-
 
        /*withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml spring-boot:run"
         } */
-   
-
-     
-      }catch(err){
-       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
-        
-        
-    } 
-
-
-
-  }else if(env.BRANCH_NAME == "DEV"){
+    }
+  }else if (env.BRANCH_NAME == 'DEV') {
     stage('Build war') {
-      try{ 
-        def mvnHome =  tool name: 'M3', type: 'maven'       
-        echo "REALIZANDO EL BUILD"
+      try {
+        echo 'REALIZANDO EL BUILD PARA DEV'
+
+        withMaven(maven: 'M3') {
+              sh 'mvn -f ventas/pom.xml package'
+        }
+        }catch (err) {
+        echo 'ERROR EN EL BUILD'
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+    }
+
+    stage('Server') {
+      try {
+        dir('ventas/target') {
+          echo 'MANDANDO EL WAR A TOMCAT DE DEV'
+          sh 'docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps'
+        }
+
+      }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+    }
+  }else if (env.BRANCH_NAME == 'UAT') {
+    stage('Build war') {
+      try {
+        echo 'REALIZANDO EL BUILD'
         //sh "${mvnHome}/bin/mvn package"
+        withMaven(maven: 'M3') {
+              sh 'mvn -f ventas/pom.xml package'
+        }
+        }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+    }
+
+    stage('Server') {
+      try {
+        sh 'ls'
+
+        dir('ventas/target') {
+          sh 'docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps'
+        }
+
+          /*dir("ventas/target"){
+            sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
+
+          }*/
+
+       /*withMaven(maven: 'M3') {
+            sh "mvn -f ventas/pom.xml spring-boot:run"
+        } */
+      }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+    }
+  }else if (env.BRANCH_NAME == 'PROD') {
+    stage('Build war') {
+      try {
+        echo 'REALIZANDO EL BUILD'
+      //sh "${mvnHome}/bin/mvn package"
       /* withMaven(maven: 'M3') {
               sh "mvn -f ventas/pom.xml package"
           }*/
-
-        }catch(err){
-        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-        }
-        
-        
+        }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
     }
- 
-    
-
     stage('Server') {
-      try{ 
-        sh "ls"
+      try {
+        sh 'ls'
 
         echo env.BRANCH_NAME
         echo env.BUILD_CAUSE
         echo env.BUILD_CAUSE
-        
 
-          
       /* dir("ventas/target"){
-    
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps" 
+
+          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps"
 
         }*/
-          
+
           /*dir("ventas/target"){
             sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
 
-          }*/ 
-      
-       
-
-
-       /*withMaven(maven: 'M3') {
-            sh "mvn -f ventas/pom.xml spring-boot:run"
-        } */
-   
-
-     
-      }catch(err){
-       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-      }
-        
-        
-    } 
-
-
-  }else if(env.BRANCH_NAME == "UAT"){
-    stage('Build war') {
-      try{ 
-        def mvnHome =  tool name: 'M3', type: 'maven'       
-        echo "REALIZANDO EL BUILD"
-        //sh "${mvnHome}/bin/mvn package"
-      /* withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml package"
           }*/
 
-        }catch(err){
-        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-        }
-        
-        
-    }
- 
-    
-
-    stage('Server') {
-      try{ 
-        sh "ls"
-
-        echo env.BRANCH_NAME
-        echo env.BUILD_CAUSE
-        echo env.BUILD_CAUSE
-        
-
-          
-      /* dir("ventas/target"){
-    
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps" 
-
-        }*/
-          
-          /*dir("ventas/target"){
-            sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
-
-          }*/ 
-      
-       
-
-
        /*withMaven(maven: 'M3') {
             sh "mvn -f ventas/pom.xml spring-boot:run"
         } */
-   
-
-     
-      }catch(err){
-       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
-        
-        
-    } 
-
-
-
-  }else if(env.BRANCH_NAME == "PROD"){
-
-    stage('Build war') {
-      try{ 
-        def mvnHome =  tool name: 'M3', type: 'maven'       
-        echo "REALIZANDO EL BUILD"
-        //sh "${mvnHome}/bin/mvn package"
-      /* withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml package"
-          }*/
-
-        }catch(err){
-        // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-        }
-        
-        
     }
- 
-    
-
-    stage('Server') {
-      try{ 
-        sh "ls"
-
-        echo env.BRANCH_NAME
-        echo env.BUILD_CAUSE
-        echo env.BUILD_CAUSE
-        
-
-          
-      /* dir("ventas/target"){
-    
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps" 
-
-        }*/
-          
-          /*dir("ventas/target"){
-            sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
-
-          }*/ 
-      
-       
-
-
-       /*withMaven(maven: 'M3') {
-            sh "mvn -f ventas/pom.xml spring-boot:run"
-        } */
-   
-
-     
-      }catch(err){
-       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
-      }
-        
-        
-    } 
-
-
   }
- 
-  
-    
-
-
-
-
-
-
-
-
-
 }
-
-
