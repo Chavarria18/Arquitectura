@@ -213,7 +213,7 @@ node {
         
       
        withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml -Dspring.profiles.active=prod package"
+              sh "mvn -Dspring.profiles.active=prod -f ventas/pom.xml package  "
           }
         }catch (err) {
       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
