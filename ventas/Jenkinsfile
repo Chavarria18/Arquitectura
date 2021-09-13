@@ -9,7 +9,8 @@ node {
         echo 'REALIZANDO LOS UNIT TESTS-2'
         echo 'ahora'
         sh 'ls'
-        my.app.prop=${spring.datasource.url}
+        ehco 'PROPPIEDADESSSSSSS'
+        my.app.prop= ${spring.datasource.url}
         echo my.app.prop
       //sh "'${mvnHome}/bin/mvn test'"
 
