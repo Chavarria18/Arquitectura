@@ -88,7 +88,11 @@ node {
       try {
         echo 'REALIZANDO EL BUILD PARA DEV'
         
-
+        echo 'PROPIEDADESS'
+        
+        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.2'
+        
+        echo  OPENSHIFT_MYSQL_DB_HOST
         withMaven(maven: 'M3') {
               sh 'mvn -f ventas/pom.xml package'
         }
@@ -115,6 +119,14 @@ node {
       try {
         echo 'REALIZANDO EL BUILD'
         //sh "${mvnHome}/bin/mvn package"
+
+         echo 'REALIZANDO EL BUILD PARA DEV'
+        
+        echo 'PROPIEDADESS'
+        
+        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.41'
+        
+        echo  OPENSHIFT_MYSQL_DB_HOST
         withMaven(maven: 'M3') {
               sh 'mvn -f ventas/pom.xml package'
         }
@@ -149,9 +161,17 @@ node {
       try {
         echo 'REALIZANDO EL BUILD'
       //sh "${mvnHome}/bin/mvn package"
-      /* withMaven(maven: 'M3') {
+
+       echo 'REALIZANDO EL BUILD PARA DEV'
+        
+        echo 'PROPIEDADESS'
+        
+        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.42'
+        
+        echo  OPENSHIFT_MYSQL_DB_HOST
+       withMaven(maven: 'M3') {
               sh "mvn -f ventas/pom.xml package"
-          }*/
+          }
         }catch (err) {
       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
