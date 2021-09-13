@@ -55,10 +55,12 @@ node {
 
         echo 'REALIZANDO EL BUILD'
         echo 'PROPIEDADESS'
+
+        ehco 'PROPPIEDADESSSSSSS'
+        my.app.prop= ${spring.datasource.url}
+        echo my.app.prop
         
-        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.2'
-        
-        echo  OPENSHIFT_MYSQL_DB_HOST
+     
         withMaven(maven: 'M3') {
             sh 'mvn -f ventas/pom.xml package'
         }
