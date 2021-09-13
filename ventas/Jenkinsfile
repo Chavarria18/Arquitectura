@@ -3,8 +3,7 @@ node {
   env.PATH = "${dockerHome}/bin:${env.PATH}"
   stage 'Checkout'
     checkout scm
-    my.app.prop=${ENV_VARIABLE}
-    echo  my.app.prop
+ 
   if (env.BRANCH_NAME.startsWith('PR')) {
     stage('unit-test') {
       try {
