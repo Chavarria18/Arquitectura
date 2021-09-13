@@ -9,6 +9,8 @@ node {
         echo 'REALIZANDO LOS UNIT TESTS-2'
         echo 'ahora'
         sh 'ls'
+        my.app.prop=${spring.datasource.url}
+        echo my.app.prop
       //sh "'${mvnHome}/bin/mvn test'"
 
         withMaven(maven: 'M3') {
@@ -51,6 +53,8 @@ node {
         echo 'CONSTRULLENDO EL WAR'
 
         echo 'REALIZANDO EL BUILD'
+        my.app.prop=${spring.datasource.url}
+        echo my.app.prop
 
         withMaven(maven: 'M3') {
             sh 'mvn -f ventas/pom.xml package'
@@ -81,6 +85,7 @@ node {
     stage('Build war') {
       try {
         echo 'REALIZANDO EL BUILD PARA DEV'
+        
 
         withMaven(maven: 'M3') {
               sh 'mvn -f ventas/pom.xml package'
@@ -95,7 +100,8 @@ node {
       try {
         dir('ventas/target') {
           echo 'MANDANDO EL WAR A TOMCAT DE DEV'
-          sh 'docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps'
+             sh 'mv ventas-0.0.1-SNAPSHOT.war main-dev.war'
+          sh 'docker cp main-dev.war tomcat1:/usr/local/tomcat/webapps'
         }
 
       }catch (err) {
@@ -120,7 +126,8 @@ node {
         sh 'ls'
 
         dir('ventas/target') {
-          sh 'docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps'
+           sh 'mv ventas-0.0.1-SNAPSHOT.war main-uat.war'          
+          sh 'docker cp main-uat.war tomcat2:/usr/local/tomcat/webapps'
         }
 
           /*dir("ventas/target"){
@@ -155,11 +162,12 @@ node {
         echo env.BUILD_CAUSE
         echo env.BUILD_CAUSE
 
-      /* dir("ventas/target"){
+        dir("ventas/target"){
+          sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod.war'
 
-          sh "docker cp ventas-0.0.1-SNAPSHOT.war tomcat1:/usr/local/tomcat/webapps"
+          sh "docker cp main-prod.war tomcat3:/usr/local/tomcat/webapps"
 
-        }*/
+        }
 
           /*dir("ventas/target"){
             sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
