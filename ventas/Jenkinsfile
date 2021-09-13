@@ -3,6 +3,8 @@ node {
   env.PATH = "${dockerHome}/bin:${env.PATH}"
   stage 'Checkout'
     checkout scm
+    my.app.prop=${ENV_VARIABLE}
+    echo  my.app.prop
   if (env.BRANCH_NAME.startsWith('PR')) {
     stage('unit-test') {
       try {
@@ -10,9 +12,7 @@ node {
         echo 'ahora'
         sh 'ls'
      
-        my.app.prop= ${spring.datasource.url}
-        echo my.app.prop
-      //sh "'${mvnHome}/bin/mvn test'"
+      
 
         withMaven(maven: 'M3') {
             sh 'mvn -f ventas/pom.xml test'
@@ -57,12 +57,10 @@ node {
         echo 'PROPIEDADESS'
 
     
-        my.app.prop= ${spring.datasource.url}
-        echo my.app.prop
         
      
         withMaven(maven: 'M3') {
-            sh 'mvn -f ventas/pom.xml package'
+            sh 'mvn -f ventas/pom.xml -Dspring.profiles.active=prod package'
         }
       }catch (err) {
       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
