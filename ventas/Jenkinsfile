@@ -209,11 +209,9 @@ node {
 
        echo 'REALIZANDO EL BUILD PARA DEV'
         
-        echo 'PROPIEDADESS'
+      
         
-        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.42'
-        
-        echo  OPENSHIFT_MYSQL_DB_HOST
+      
        withMaven(maven: 'M3') {
               sh "mvn -f ventas/pom.xml -Dspring.profiles.active=prod package"
           }
