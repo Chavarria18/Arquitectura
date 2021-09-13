@@ -90,9 +90,7 @@ node {
         
         echo 'PROPIEDADESS'
         
-        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.2'
         
-        echo  OPENSHIFT_MYSQL_DB_HOST
         withMaven(maven: 'M3') {
               sh 'mvn -f ventas/pom.xml package'
         }
@@ -124,9 +122,7 @@ node {
         
         echo 'PROPIEDADESS'
         
-        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.41'
-        
-        echo  OPENSHIFT_MYSQL_DB_HOST
+      
         withMaven(maven: 'M3') {
               sh 'mvn -f ventas/pom.xml package'
         }
@@ -171,6 +167,51 @@ node {
         echo  OPENSHIFT_MYSQL_DB_HOST
        withMaven(maven: 'M3') {
               sh "mvn -f ventas/pom.xml package"
+          }
+        }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+    }
+    stage('Server') {
+      try {
+        sh 'ls'
+
+        echo env.BRANCH_NAME
+        echo env.BUILD_CAUSE
+        echo env.BUILD_CAUSE
+
+        dir("ventas/target"){
+          sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod.war'
+
+          sh "docker cp main-prod.war tomcat3:/usr/local/tomcat/webapps"
+
+        }
+
+          /*dir("ventas/target"){
+            sh "java -jar -Dserver.port=8081 ventas-0.0.1-SNAPSHOT.jar"
+
+          }*/
+
+       /*withMaven(maven: 'M3') {
+            sh "mvn -f ventas/pom.xml spring-boot:run"
+        } */
+      }catch (err) {
+      // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+      }
+    }
+  }else if (env.BRANCH_NAME == 'prueba01') {
+    stage('Build war') {
+      try {
+        echo 'REALIZANDO EL BUILD'
+      //sh "${mvnHome}/bin/mvn package"
+
+       echo 'REALIZANDO EL BUILD PARA DEV'
+        
+      
+        
+      
+       withMaven(maven: 'M3') {
+              sh "mvn -f ventas/pom.xml -Pprod package  "
           }
         }catch (err) {
       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
