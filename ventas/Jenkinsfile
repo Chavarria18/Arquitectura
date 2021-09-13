@@ -12,9 +12,7 @@ node {
         echo 'ahora'
         sh 'ls'
      
-        my.app.prop= ${spring.datasource.url}
-        echo my.app.prop
-      //sh "'${mvnHome}/bin/mvn test'"
+      
 
         withMaven(maven: 'M3') {
             sh 'mvn -f ventas/pom.xml test'
@@ -59,12 +57,10 @@ node {
         echo 'PROPIEDADESS'
 
     
-        my.app.prop= ${spring.datasource.url}
-        echo my.app.prop
         
      
         withMaven(maven: 'M3') {
-            sh 'mvn -f ventas/pom.xml package'
+            sh 'mvn -f ventas/pom.xml -Dspring.profiles.active=prod package'
         }
       }catch (err) {
       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
