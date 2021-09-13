@@ -122,9 +122,7 @@ node {
         
         echo 'PROPIEDADESS'
         
-        OPENSHIFT_MYSQL_DB_HOST = 'jdbc:mysql://172.18.0.41'
-        
-        echo  OPENSHIFT_MYSQL_DB_HOST
+      
         withMaven(maven: 'M3') {
               sh 'mvn -f ventas/pom.xml package'
         }
@@ -213,7 +211,7 @@ node {
         
       
        withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml package  "
+              sh "mvn -f ventas/pom.xml -Pprod package  "
           }
         }catch (err) {
       // emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
