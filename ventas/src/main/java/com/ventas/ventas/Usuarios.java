@@ -1,5 +1,5 @@
 package com.ventas.ventas;
-import java.util.Random; 
+
 
 /**
   * <p>Clase utilizada para manejar a los <b>Clientes</b></p>
