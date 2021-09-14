@@ -147,8 +147,9 @@ node {
 
         
       }catch (err) {
-        emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+        emailext attachLog: false,body: 'Huboo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
     }
   }
 }
+//Comentario
