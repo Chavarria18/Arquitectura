@@ -6,7 +6,7 @@ package com.ventas.ventas;
  */
 public class Usuarios {
 
-   
+      
 
     private int id_usuario;
 
