@@ -126,7 +126,7 @@ node {
       }
     }
     //--------------------------------------
-  }else if (env.BRANCH_NAME == 'PROD') {
+  }else if (env.BRANCH_NAME == '1PROD') {
     stage('Build war') {
       try {
         echo 'REALIZANDO EL BUILD para PROD' 
