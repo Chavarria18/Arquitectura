@@ -36,9 +36,10 @@ node {
     stage('Quality gate') {
         def qgate = waitForQualityGate()
         if (qgate.status != 'OK') {
-          error "Pipeline aborted due to quality gate failure: ${qgate.status}"
-            emailext attachLog: true,body: 'Error en las quality gates, revisar la deuda tecnica', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
+          emailext attachLog: true,body: 'Error en las quality gates, revisar la deuda tecnica', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
            emailext attachLog: true,body: 'Error en las quality gates, revisar la deuda tecnica', subject: 'Jenkins-pipeline-status', to: 'jflores@unis.edu.gt'
+          error "Pipeline aborted due to quality gate failure: ${qgate.status}"
+            
         }else {
           echo 'EXITO EN QUAILYT GATES'
         }
