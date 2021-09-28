@@ -1,7 +1,6 @@
-#Prueba
+#Pruebaaaaa
 kind: pipeline
 name: default
-
 steps:
 - name: test
   image: maven:3-jdk-10
