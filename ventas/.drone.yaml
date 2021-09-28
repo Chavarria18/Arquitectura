@@ -1,7 +1,9 @@
 #Prueba
 kind: pipeline
 name: default
-
+workspace:
+  base: /Arquitectura
+  path: https://github.com/Chavarria18/Arquitectura/ventas
 steps:
 - name: test
   image: maven:3-jdk-10
