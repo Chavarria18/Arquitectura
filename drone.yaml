@@ -1,4 +1,4 @@
-#Pruebaa
+#Prueba
 kind: pipeline
 name: default
 steps:
