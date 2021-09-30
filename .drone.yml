@@ -1,10 +1,8 @@
 kind: pipeline
 name: default
-
 steps:
-  - name: docker-tag-demo
-    image: debian:stable-slim
-    commands:
-      - echo "The current branch is ${DRONE_BRANCH}"
-      - echo "The current commit hash is ${DRONE_COMMIT_SHA}"
-      - echo "The image tag is ${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}"
+- name: test
+  image: maven:3-jdk-10
+  commands:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn test -B
