@@ -8,6 +8,6 @@ steps:
 - name: Servers
   image: alpine
   commands:
-    - mv ventas-0.0.1-SNAPSHOT.war main-uat.war        
+    - ls       
    
    
