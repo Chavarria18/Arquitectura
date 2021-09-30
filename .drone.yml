@@ -9,5 +9,13 @@ steps:
 - name: code-analysis
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://f81b-45-229-42-199.ngrok.io 
+    - mvn -f ventas/pom.xml verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://f81b-45-229-42-199.ngrok.io
+- name: build-war
+  image: maven:3-jdk-11
+  commands:
+    - mvn -f ventas/pom.xml package 
+- name: Production
+  image: maven:3-jdk-11
+  commands:
+      - mvn tomcat1:redeploy
    
