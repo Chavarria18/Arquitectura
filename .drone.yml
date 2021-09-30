@@ -1,15 +1,6 @@
 kind: pipeline
 name: default
 steps:
-- name: Unit testing 
-  image: maven:3-jdk-11
-  commands:
-  - echo "AAAA"
-  - mvn -f ventas/pom.xml test
-- name: code-analysis
-  image: maven:3-jdk-11
-  commands:
-    - mvn -f ventas/pom.xml verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://f81b-45-229-42-199.ngrok.io
 - name: build-war
   image: maven:3-jdk-11
   commands:
