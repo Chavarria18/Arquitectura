@@ -9,5 +9,8 @@ steps:
   image: alpine
   commands:
     - ls       
+    - cd ventas/target
+    - ls
+    
    
    
