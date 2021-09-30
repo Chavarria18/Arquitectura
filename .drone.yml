@@ -1,11 +1,8 @@
 kind: pipeline
 name: default
 steps:
-- name: info 
+- name: Unit testing 
+  image: maven:3-jdk-11
   commands:
   - echo "AAAA"
-- name: test
-  image: maven:3-jdk-10
-  commands:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - mvn test -B
+  - mvn -f ventas/pom.xml test
