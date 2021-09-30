@@ -5,8 +5,8 @@ steps:
   image: maven:3-jdk-11
   commands:
     - mvn -f ventas/pom.xml package 
-- name: Production
-  image: maven:3-jdk-11
+- name: Servers
   commands:
-    - mvn -f ventas/pom.xml  tomcat7:deploy
+    - sh 'mv ventas-0.0.1-SNAPSHOT.war main-uat.war'          
+    - sh 'docker cp main-uat.war tomcat1:/usr/local/tomcat/webapps'
    
