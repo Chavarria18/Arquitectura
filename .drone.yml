@@ -11,6 +11,7 @@ steps:
     - ls       
     - cd ventas/target
     - ls
-    
+    -ls
+
    
    
