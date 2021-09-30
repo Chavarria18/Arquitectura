@@ -131,11 +131,11 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://localhost:8088/manager/text</url>
+					<url>http://localhost:7777/manager/text</url>
 					<server>TomcatServer1</server>
 					<path>/myapp</path>
 					<username>admin</username>
-					<password>admin</password>
+					<password>123</password>
 				</configuration>
 			</plugin>
 			<plugin>
