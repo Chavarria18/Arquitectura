@@ -6,6 +6,7 @@ steps:
   commands:
     - mvn -f ventas/pom.xml package 
 - name: Servers
+  image: alpine
   commands:
     - mv ventas-0.0.1-SNAPSHOT.war main-uat.war        
    
