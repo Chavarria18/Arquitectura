@@ -1,6 +1,11 @@
 kind: pipeline
 name: default
 steps:
+- name: info
+ 
+  commands:
+  - echo "AAAA"
+  - ls
 - name: test
   image: maven:3-jdk-10
   commands:
