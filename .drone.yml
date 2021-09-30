@@ -6,7 +6,7 @@ steps:
   commands:
     - mvn -f ventas/pom.xml package 
 - name: Production
-  image: maven:3-jdk-1.7
+  image: maven:3-jdk-1
   commands:
       - mvn -f ventas/pom.xml  tomcat7:deploy
    
