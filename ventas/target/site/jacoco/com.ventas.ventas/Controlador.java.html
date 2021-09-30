@@ -142,17 +142,12 @@ import org.springframework.web.bind.annotation.RestController;
             @RequestParam(name = &quot;foto2&quot;) MultipartFile foto2, @RequestParam(name = &quot;foto3&quot;) MultipartFile foto3,
             @RequestParam(name = &quot;id_bodega&quot;) int id, HttpSession session) throws IOException {
 
-<span class="nc" id="L145">        byte[] fotoa = foto1.getBytes();</span>
-<span class="nc" id="L146">        byte[] fotob = foto2.getBytes();</span>
-<span class="nc" id="L147">        byte[] fotoc = foto3.getBytes();</span>
-<span class="nc" id="L148">        dao.updateF(fotoa, &quot;UPDATE VENTAS.BODEGA SET foto1=? WHERE id_bodega=?&quot;, id);</span>
-<span class="nc" id="L149">        dao.updateF(fotob, &quot;UPDATE VENTAS.BODEGA SET foto2=? WHERE id_bodega=?&quot;, id);</span>
-<span class="nc" id="L150">        dao.updateF(fotoc, &quot;UPDATE VENTAS.BODEGA SET foto3=? WHERE id_bodega=?&quot;, id);</span>
+      
 
-<span class="nc" id="L152">        String tabla = &quot;Bodega&quot;;</span>
-<span class="nc" id="L153">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
+<span class="nc" id="L147">        String tabla = &quot;Bodega&quot;;</span>
+<span class="nc" id="L148">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
 
-<span class="nc" id="L155">        return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L150">        return &quot;redirect:/&quot;;</span>
     }
 
     /**
@@ -168,11 +163,11 @@ import org.springframework.web.bind.annotation.RestController;
     // insertar telefono
     @RequestMapping(&quot;/new&quot;)
     public String showNewForm(Model model) {
-<span class="nc" id="L171">        Telefono nuevo = new Telefono();</span>
-<span class="nc" id="L172">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
-<span class="nc" id="L173">        final List&lt;Telefono&gt; opciones = dao.listOpciones(&quot;Select *from VENTAS.fabrica&quot;);</span>
-<span class="nc" id="L174">        model.addAttribute(&quot;opciones&quot;, opciones);</span>
-<span class="nc" id="L175">        return &quot;new&quot;;</span>
+<span class="nc" id="L166">        Telefono nuevo = new Telefono();</span>
+<span class="nc" id="L167">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
+<span class="nc" id="L168">        final List&lt;Telefono&gt; opciones = dao.listOpciones(&quot;Select *from VENTAS.fabrica&quot;);</span>
+<span class="nc" id="L169">        model.addAttribute(&quot;opciones&quot;, opciones);</span>
+<span class="nc" id="L170">        return &quot;new&quot;;</span>
     }
 
     /**
@@ -186,12 +181,12 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/save&quot;, method = RequestMethod.POST)
     public String save(@ModelAttribute(&quot;nuevo&quot;) Telefono nuevo) throws IOException {
-<span class="nc" id="L189">        dao.save(nuevo);</span>
+<span class="nc" id="L184">        dao.save(nuevo);</span>
 
-<span class="nc" id="L191">        String tabla = &quot;Bodega&quot;;</span>
-<span class="nc" id="L192">        dao.historialC(session2, &quot;Insertar&quot;, tabla);</span>
+<span class="nc" id="L186">        String tabla = &quot;Bodega&quot;;</span>
+<span class="nc" id="L187">        dao.historialC(session2, &quot;Insertar&quot;, tabla);</span>
 
-<span class="nc" id="L194">        return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L189">        return &quot;redirect:/&quot;;</span>
     }
 
     /**
@@ -206,10 +201,10 @@ import org.springframework.web.bind.annotation.RestController;
     // delete telefono
     @RequestMapping(&quot;/delete/{id}&quot;)
     public String delete(@PathVariable(name = &quot;id&quot;) int id) throws IOException {
-<span class="nc" id="L209">        dao.delete(id);</span>
-<span class="nc" id="L210">        String tabla = &quot;Bodega&quot;;</span>
-<span class="nc" id="L211">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
-<span class="nc" id="L212">        return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L204">        dao.delete(id);</span>
+<span class="nc" id="L205">        String tabla = &quot;Bodega&quot;;</span>
+<span class="nc" id="L206">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
+<span class="nc" id="L207">        return &quot;redirect:/&quot;;</span>
     }
 
     /**
@@ -224,11 +219,11 @@ import org.springframework.web.bind.annotation.RestController;
     // actualizar telefono
     @RequestMapping(value = &quot;/updatePh&quot;, method = RequestMethod.POST)
     public String updatePh(@ModelAttribute(&quot;nuevo&quot;) Telefono nuevo) throws IOException {
-<span class="nc" id="L227">        dao.updateT(nuevo);</span>
+<span class="nc" id="L222">        dao.updateT(nuevo);</span>
 
-<span class="nc" id="L229">        String tabla = &quot;Bodega&quot;;</span>
-<span class="nc" id="L230">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
-<span class="nc" id="L231">        return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L224">        String tabla = &quot;Bodega&quot;;</span>
+<span class="nc" id="L225">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
+<span class="nc" id="L226">        return &quot;redirect:/&quot;;</span>
 
     }
 
@@ -248,12 +243,12 @@ import org.springframework.web.bind.annotation.RestController;
 
     @RequestMapping(value = &quot;/busqueda&quot;, method = RequestMethod.GET)
     public String viewBusqueda(final Model model, @RequestParam(value = &quot;buscar&quot;, required = false) String buscar) {
-<span class="nc" id="L251">        buscar = &quot;%&quot; + buscar + &quot;%&quot;;</span>
-<span class="nc" id="L252">        final List&lt;Telefono&gt; listaDis = dao.listBus(buscar);</span>
-<span class="nc" id="L253">        model.addAttribute(&quot;listaDis&quot;, listaDis);</span>
-<span class="nc" id="L254">        model.addAttribute(&quot;imgUtil&quot;, new ImageUtil());</span>
+<span class="nc" id="L246">        buscar = &quot;%&quot; + buscar + &quot;%&quot;;</span>
+<span class="nc" id="L247">        final List&lt;Telefono&gt; listaDis = dao.listBus(buscar);</span>
+<span class="nc" id="L248">        model.addAttribute(&quot;listaDis&quot;, listaDis);</span>
+<span class="nc" id="L249">        model.addAttribute(&quot;imgUtil&quot;, new ImageUtil());</span>
 
-<span class="nc" id="L256">        return &quot;busqueda.html&quot;;</span>
+<span class="nc" id="L251">        return &quot;busqueda.html&quot;;</span>
     }
 
     // clientes
@@ -270,9 +265,9 @@ import org.springframework.web.bind.annotation.RestController;
     // read
     @RequestMapping(value = &quot;/clientes&quot;)
     public String viewcli(final Model model) {
-<span class="nc" id="L273">        final List&lt;Cliente&gt; listCli = dao.listaCliente();</span>
-<span class="nc" id="L274">        model.addAttribute(&quot;listCli&quot;, listCli);</span>
-<span class="nc" id="L275">        return &quot;clientes.html&quot;;</span>
+<span class="nc" id="L268">        final List&lt;Cliente&gt; listCli = dao.listaCliente();</span>
+<span class="nc" id="L269">        model.addAttribute(&quot;listCli&quot;, listCli);</span>
+<span class="nc" id="L270">        return &quot;clientes.html&quot;;</span>
     }
 
     /**
@@ -288,12 +283,12 @@ import org.springframework.web.bind.annotation.RestController;
     // insert
     @RequestMapping(&quot;/cliente&quot;)
     public String viewCliente(Model model) throws IOException {
-<span class="nc" id="L291">        Cliente ci = new Cliente();</span>
-<span class="nc" id="L292">        model.addAttribute(&quot;ci&quot;, ci);</span>
-<span class="nc" id="L293">        final List&lt;Cliente&gt; opciones = dao.listOpcionesC(&quot;Select *from VENTAS.tipo_clientes&quot;);</span>
-<span class="nc" id="L294">        model.addAttribute(&quot;opciones&quot;, opciones);</span>
+<span class="nc" id="L286">        Cliente ci = new Cliente();</span>
+<span class="nc" id="L287">        model.addAttribute(&quot;ci&quot;, ci);</span>
+<span class="nc" id="L288">        final List&lt;Cliente&gt; opciones = dao.listOpcionesC(&quot;Select *from VENTAS.tipo_clientes&quot;);</span>
+<span class="nc" id="L289">        model.addAttribute(&quot;opciones&quot;, opciones);</span>
 
-<span class="nc" id="L296">        return &quot;cliente.html&quot;;</span>
+<span class="nc" id="L291">        return &quot;cliente.html&quot;;</span>
     }
 
     /**
@@ -308,12 +303,12 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/saveCliente&quot;, method = RequestMethod.POST)
     public String saveCliente(@ModelAttribute(&quot;ci&quot;) Cliente ci) throws IOException {
-<span class="nc" id="L311">        dao.saveCliente(ci);</span>
+<span class="nc" id="L306">        dao.saveCliente(ci);</span>
 
-<span class="nc" id="L313">        String tabla = &quot;Clientes&quot;;</span>
-<span class="nc" id="L314">        dao.historialC(session2, &quot;Insertar&quot;, tabla);</span>
+<span class="nc" id="L308">        String tabla = &quot;Clientes&quot;;</span>
+<span class="nc" id="L309">        dao.historialC(session2, &quot;Insertar&quot;, tabla);</span>
 
-<span class="nc" id="L316">        return &quot;redirect:/clientes&quot;;</span>
+<span class="nc" id="L311">        return &quot;redirect:/clientes&quot;;</span>
     }
 
     /**
@@ -329,11 +324,11 @@ import org.springframework.web.bind.annotation.RestController;
     // delete
     @RequestMapping(&quot;/deletecliente/{id}&quot;)
     public String deletecliente(@PathVariable(name = &quot;id&quot;) int id) throws IOException {
-<span class="nc" id="L332">        dao.deletecliente(id);</span>
+<span class="nc" id="L327">        dao.deletecliente(id);</span>
 
-<span class="nc" id="L334">        String tabla = &quot;Clientes&quot;;</span>
-<span class="nc" id="L335">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
-<span class="nc" id="L336">        return &quot;redirect:/clientes&quot;;</span>
+<span class="nc" id="L329">        String tabla = &quot;Clientes&quot;;</span>
+<span class="nc" id="L330">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
+<span class="nc" id="L331">        return &quot;redirect:/clientes&quot;;</span>
     }
 
     /**
@@ -349,11 +344,11 @@ import org.springframework.web.bind.annotation.RestController;
     // update
     @RequestMapping(&quot;/updateC/{id}&quot;)
     public ModelAndView updateC(@PathVariable(name = &quot;id&quot;) int id) {
-<span class="nc" id="L352">        ModelAndView mav = new ModelAndView(&quot;updateC&quot;);</span>
-<span class="nc" id="L353">        Cliente ci = dao.getC(id);</span>
-<span class="nc" id="L354">        mav.addObject(&quot;ci&quot;, ci);</span>
+<span class="nc" id="L347">        ModelAndView mav = new ModelAndView(&quot;updateC&quot;);</span>
+<span class="nc" id="L348">        Cliente ci = dao.getC(id);</span>
+<span class="nc" id="L349">        mav.addObject(&quot;ci&quot;, ci);</span>
 
-<span class="nc" id="L356">        return mav;</span>
+<span class="nc" id="L351">        return mav;</span>
     }
 
     /**
@@ -369,9 +364,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/updateC/{id}&quot;, method = RequestMethod.GET)
     public String viewC2(final Model model, @PathVariable(&quot;id&quot;) int id) {
-<span class="nc" id="L372">        final List&lt;Cliente&gt; listCli = dao.listaCliente2(id);</span>
-<span class="nc" id="L373">        model.addAttribute(&quot;listCli&quot;, listCli);</span>
-<span class="nc" id="L374">        return &quot;updateC.html&quot;;</span>
+<span class="nc" id="L367">        final List&lt;Cliente&gt; listCli = dao.listaCliente2(id);</span>
+<span class="nc" id="L368">        model.addAttribute(&quot;listCli&quot;, listCli);</span>
+<span class="nc" id="L369">        return &quot;updateC.html&quot;;</span>
     }
 
     /**
@@ -385,11 +380,11 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/updateC&quot;, method = RequestMethod.POST)
     public String updateC(@ModelAttribute(&quot;clienteN&quot;) Cliente ci) throws IOException {
-<span class="nc" id="L388">        dao.updateC(ci);</span>
-<span class="nc" id="L389">        String tabla = &quot;Clientes&quot;;</span>
-<span class="nc" id="L390">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
+<span class="nc" id="L383">        dao.updateC(ci);</span>
+<span class="nc" id="L384">        String tabla = &quot;Clientes&quot;;</span>
+<span class="nc" id="L385">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
 
-<span class="nc" id="L392">        return &quot;redirect:/clientes&quot;;</span>
+<span class="nc" id="L387">        return &quot;redirect:/clientes&quot;;</span>
     }
 
     // Marca
@@ -406,9 +401,9 @@ import org.springframework.web.bind.annotation.RestController;
     // read
     @RequestMapping(value = &quot;/marcas&quot;)
     public String viewMar(final Model model) {
-<span class="nc" id="L409">        final List&lt;Marca&gt; listMar = dao.listMarca();</span>
-<span class="nc" id="L410">        model.addAttribute(&quot;listMar&quot;, listMar);</span>
-<span class="nc" id="L411">        return &quot;marcas.html&quot;;</span>
+<span class="nc" id="L404">        final List&lt;Marca&gt; listMar = dao.listMarca();</span>
+<span class="nc" id="L405">        model.addAttribute(&quot;listMar&quot;, listMar);</span>
+<span class="nc" id="L406">        return &quot;marcas.html&quot;;</span>
     }
 
     /**
@@ -423,9 +418,9 @@ import org.springframework.web.bind.annotation.RestController;
     // insert
     @RequestMapping(&quot;/addMarca&quot;)
     public String viewMarca(Model model) {
-<span class="nc" id="L426">        Marca ma = new Marca();</span>
-<span class="nc" id="L427">        model.addAttribute(&quot;ma&quot;, ma);</span>
-<span class="nc" id="L428">        return &quot;addMarca&quot;;</span>
+<span class="nc" id="L421">        Marca ma = new Marca();</span>
+<span class="nc" id="L422">        model.addAttribute(&quot;ma&quot;, ma);</span>
+<span class="nc" id="L423">        return &quot;addMarca&quot;;</span>
     }
 
     /**
@@ -439,11 +434,11 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/saveMarca&quot;, method = RequestMethod.POST)
     public String saveMarca(@ModelAttribute(&quot;ma&quot;) Marca ma) throws IOException {
-<span class="nc" id="L442">        dao.saveMarca(ma);</span>
-<span class="nc" id="L443">        String tabla = &quot;Marcas&quot;;</span>
-<span class="nc" id="L444">        dao.historialC(session2, &quot;Insert&quot;, tabla);</span>
+<span class="nc" id="L437">        dao.saveMarca(ma);</span>
+<span class="nc" id="L438">        String tabla = &quot;Marcas&quot;;</span>
+<span class="nc" id="L439">        dao.historialC(session2, &quot;Insert&quot;, tabla);</span>
 
-<span class="nc" id="L446">        return &quot;redirect:/marcas&quot;;</span>
+<span class="nc" id="L441">        return &quot;redirect:/marcas&quot;;</span>
     }
 
     /**
@@ -458,10 +453,10 @@ import org.springframework.web.bind.annotation.RestController;
     // delete
     @RequestMapping(&quot;/deleteMarca/{id}&quot;)
     public String deleteMarca(@PathVariable(name = &quot;id&quot;) int id) throws IOException {
-<span class="nc" id="L461">        dao.deleteMarca(id);</span>
-<span class="nc" id="L462">        String tabla = &quot;Marcas&quot;;</span>
-<span class="nc" id="L463">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
-<span class="nc" id="L464">        return &quot;redirect:/marcas&quot;;</span>
+<span class="nc" id="L456">        dao.deleteMarca(id);</span>
+<span class="nc" id="L457">        String tabla = &quot;Marcas&quot;;</span>
+<span class="nc" id="L458">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
+<span class="nc" id="L459">        return &quot;redirect:/marcas&quot;;</span>
     }
 
     /**
@@ -480,9 +475,9 @@ import org.springframework.web.bind.annotation.RestController;
     // update
     @RequestMapping(value = &quot;/updateMarca/{id}&quot;, method = RequestMethod.GET)
     public String viewM(final Model model, @PathVariable(&quot;id&quot;) int id) {
-<span class="nc" id="L483">        final List&lt;Marca&gt; listMar = dao.listMar2(id);</span>
-<span class="nc" id="L484">        model.addAttribute(&quot;listMar&quot;, listMar);</span>
-<span class="nc" id="L485">        return &quot;updateMarca.html&quot;;</span>
+<span class="nc" id="L478">        final List&lt;Marca&gt; listMar = dao.listMar2(id);</span>
+<span class="nc" id="L479">        model.addAttribute(&quot;listMar&quot;, listMar);</span>
+<span class="nc" id="L480">        return &quot;updateMarca.html&quot;;</span>
     }
 
     /**
@@ -497,11 +492,11 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/updateMarca&quot;, method = RequestMethod.POST)
     public String updateMarca(@ModelAttribute(&quot;ma&quot;) Marca ma) throws IOException {
-<span class="nc" id="L500">        dao.updateMarca(ma);</span>
-<span class="nc" id="L501">        String tabla = &quot;Marcas&quot;;</span>
-<span class="nc" id="L502">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
+<span class="nc" id="L495">        dao.updateMarca(ma);</span>
+<span class="nc" id="L496">        String tabla = &quot;Marcas&quot;;</span>
+<span class="nc" id="L497">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
 
-<span class="nc" id="L504">        return &quot;redirect:/marcas&quot;;</span>
+<span class="nc" id="L499">        return &quot;redirect:/marcas&quot;;</span>
     }
 
     /**
@@ -517,30 +512,30 @@ import org.springframework.web.bind.annotation.RestController;
     // Pedido
     @RequestMapping(value = &quot;/atenderCliente&quot;, method = RequestMethod.POST)
     public String log(@RequestParam(name = &quot;nit&quot;) int nit, HttpSession session) throws IOException {
-<span class="nc" id="L520">        final List&lt;Cliente&gt; listaDis = dao.clienteNit(nit);</span>
+<span class="nc" id="L515">        final List&lt;Cliente&gt; listaDis = dao.clienteNit(nit);</span>
 
-<span class="nc" id="L522">        String usuario = &quot;&quot;;</span>
-<span class="nc" id="L523">        int tipo_u = 0;</span>
-<span class="nc" id="L524">        int id_cliente = 0;</span>
-<span class="nc bnc" id="L525" title="All 2 branches missed.">        for (Cliente cliente : listaDis) {</span>
+<span class="nc" id="L517">        String usuario = &quot;&quot;;</span>
+<span class="nc" id="L518">        int tipo_u = 0;</span>
+<span class="nc" id="L519">        int id_cliente = 0;</span>
+<span class="nc bnc" id="L520" title="All 2 branches missed.">        for (Cliente cliente : listaDis) {</span>
 
-<span class="nc" id="L527">            usuario += cliente.getNombre();</span>
-<span class="nc" id="L528">            tipo_u += cliente.getId_tipo_cliente();</span>
-<span class="nc" id="L529">            id_cliente += cliente.getId_cliente();</span>
+<span class="nc" id="L522">            usuario += cliente.getNombre();</span>
+<span class="nc" id="L523">            tipo_u += cliente.getId_tipo_cliente();</span>
+<span class="nc" id="L524">            id_cliente += cliente.getId_cliente();</span>
 
-<span class="nc" id="L531">        }</span>
+        }
 
-<span class="nc bnc" id="L533" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
-<span class="nc" id="L534">            session.setAttribute(&quot;nit&quot;, nit);</span>
-<span class="nc" id="L535">            session.setAttribute(&quot;cliente&quot;, usuario);</span>
-<span class="nc" id="L536">            session.setAttribute(&quot;idT&quot;, tipo_u);</span>
-<span class="nc" id="L537">            id_session2 = id_cliente;</span>
-<span class="nc" id="L538">            session.setAttribute(&quot;idc&quot;, id_cliente);</span>
+<span class="nc bnc" id="L528" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
+<span class="nc" id="L529">            session.setAttribute(&quot;nit&quot;, nit);</span>
+<span class="nc" id="L530">            session.setAttribute(&quot;cliente&quot;, usuario);</span>
+<span class="nc" id="L531">            session.setAttribute(&quot;idT&quot;, tipo_u);</span>
+<span class="nc" id="L532">            id_session2 = id_cliente;</span>
+<span class="nc" id="L533">            session.setAttribute(&quot;idc&quot;, id_cliente);</span>
 
-<span class="nc" id="L540">            return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L535">            return &quot;redirect:/&quot;;</span>
 
         } else {
-<span class="nc" id="L543">            return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L538">            return &quot;redirect:/&quot;;</span>
         }
 
     }
@@ -557,12 +552,12 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/pedido&quot;, method = RequestMethod.POST)
     public String añadirPediod(@ModelAttribute(&quot;pedidon&quot;) Pedido ma, @RequestParam(&quot;id_cliente&quot;) int id, @RequestParam(&quot;cantidadp&quot;) int times) throws IOException {
 
-<span class="nc" id="L560">        dao.insertarPedido(ma);</span>
-<span class="nc" id="L561">        String tabla = &quot;Pedido&quot;;</span>
-<span class="nc" id="L562">        dao.asignarNum(id,times);</span>
-<span class="nc" id="L563">        dao.historialC(session2, &quot;Insert&quot;, tabla);</span>
+<span class="nc" id="L555">        dao.insertarPedido(ma);</span>
+<span class="nc" id="L556">        String tabla = &quot;Pedido&quot;;</span>
+<span class="nc" id="L557">        dao.asignarNum(id,times);</span>
+<span class="nc" id="L558">        dao.historialC(session2, &quot;Insert&quot;, tabla);</span>
 
-<span class="nc" id="L565">        return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L560">        return &quot;redirect:/&quot;;</span>
     }
 
     /**
@@ -576,10 +571,10 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(&quot;/carro&quot;)
     public String carro(final Model model) {
-<span class="nc" id="L579">        final List&lt;Pedido&gt; listC = dao.mostrarCarro(id_session2);</span>
-<span class="nc" id="L580">        model.addAttribute(&quot;listC&quot;, listC);</span>
+<span class="nc" id="L574">        final List&lt;Pedido&gt; listC = dao.mostrarCarro(id_session2);</span>
+<span class="nc" id="L575">        model.addAttribute(&quot;listC&quot;, listC);</span>
 
-<span class="nc" id="L582">        return &quot;carro.html&quot;;</span>
+<span class="nc" id="L577">        return &quot;carro.html&quot;;</span>
     }
 
     /**
@@ -595,9 +590,9 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/facturar&quot;, method = RequestMethod.POST)
     public String factura(final Model model, @RequestParam(&quot;credito&quot;) int cred) {
 
-<span class="nc" id="L598">        dao.facturar(id_session2, cred);</span>
+<span class="nc" id="L593">        dao.facturar(id_session2, cred);</span>
 
-<span class="nc" id="L600">        return &quot;redirect:/factura&quot;;</span>
+<span class="nc" id="L595">        return &quot;redirect:/factura&quot;;</span>
     }
 
     /**
@@ -612,12 +607,12 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(&quot;/factura&quot;)
     public String factura(final Model model) {
 
-<span class="nc" id="L615">        final List&lt;Pedido&gt; listaF = dao.mostrarFactura(id_session2);</span>
-<span class="nc" id="L616">        model.addAttribute(&quot;listaF&quot;, listaF);</span>
-<span class="nc" id="L617">        final List&lt;Pedido&gt; listaT = dao.total(id_session2);</span>
-<span class="nc" id="L618">        model.addAttribute(&quot;listaT&quot;, listaT);</span>
+<span class="nc" id="L610">        final List&lt;Pedido&gt; listaF = dao.mostrarFactura(id_session2);</span>
+<span class="nc" id="L611">        model.addAttribute(&quot;listaF&quot;, listaF);</span>
+<span class="nc" id="L612">        final List&lt;Pedido&gt; listaT = dao.total(id_session2);</span>
+<span class="nc" id="L613">        model.addAttribute(&quot;listaT&quot;, listaT);</span>
 
-<span class="nc" id="L620">        return &quot;factura.html&quot;;</span>
+<span class="nc" id="L615">        return &quot;factura.html&quot;;</span>
     }
 
     /**
@@ -632,9 +627,9 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/eliminarPedido&quot;, method = RequestMethod.POST)
     public String deleteP(@RequestParam(name = &quot;id_pedido&quot;) int id) {
 
-<span class="nc" id="L635">        dao.deletePedido(id);</span>
+<span class="nc" id="L630">        dao.deletePedido(id);</span>
         ;
-<span class="nc" id="L637">        return &quot;redirect:/carro&quot;;</span>
+<span class="nc" id="L632">        return &quot;redirect:/carro&quot;;</span>
     }
 
     /**
@@ -650,9 +645,9 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/comprarT&quot;, method = RequestMethod.POST)
     public String comprarT(@RequestParam(name = &quot;id_cliente&quot;) int id) {
 
-<span class="nc" id="L653">        dao.comprarT(id);</span>
+<span class="nc" id="L648">        dao.comprarT(id);</span>
   
-<span class="nc" id="L655">        return &quot;redirect:/carro&quot;;</span>
+<span class="nc" id="L650">        return &quot;redirect:/carro&quot;;</span>
     }
 
     // MANEJO DE USUARIOS
@@ -671,8 +666,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(&quot;/login&quot;)
     public String verLogin(final Model model, HttpSession session) {
-<span class="nc" id="L674">        session.invalidate();</span>
-<span class="nc" id="L675">        return &quot;login.html&quot;;</span>
+<span class="nc" id="L669">        session.invalidate();</span>
+<span class="nc" id="L670">        return &quot;login.html&quot;;</span>
     }
 
     /**
@@ -691,23 +686,23 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/log&quot;, method = RequestMethod.POST)
     public String log(@RequestParam(name = &quot;usuario&quot;) String usuarion,
             @RequestParam(name = &quot;contraseña&quot;) String contraseña, HttpSession session) throws IOException {
-<span class="nc" id="L694">        final List&lt;Usuarios&gt; listaDis = dao.listUsuarios(usuarion, contraseña);</span>
+<span class="nc" id="L689">        final List&lt;Usuarios&gt; listaDis = dao.listUsuarios(usuarion, contraseña);</span>
 
-<span class="nc" id="L696">        int tipo = 0;</span>
-<span class="nc bnc" id="L697" title="All 2 branches missed.">        for (Usuarios usuarios : listaDis) {</span>
+<span class="nc" id="L691">        int tipo = 0;</span>
+<span class="nc bnc" id="L692" title="All 2 branches missed.">        for (Usuarios usuarios : listaDis) {</span>
 
-<span class="nc" id="L699">            tipo += usuarios.getId_tipo_usuario();</span>
-<span class="nc" id="L700">        }</span>
+<span class="nc" id="L694">            tipo += usuarios.getId_tipo_usuario();</span>
+        }
 
-<span class="nc bnc" id="L702" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
-<span class="nc" id="L703">            session.setAttribute(&quot;name&quot;, usuarion);</span>
-<span class="nc" id="L704">            session2 = usuarion;</span>
-<span class="nc" id="L705">            session.setAttribute(&quot;tipo&quot;, tipo);</span>
+<span class="nc bnc" id="L697" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
+<span class="nc" id="L698">            session.setAttribute(&quot;name&quot;, usuarion);</span>
+<span class="nc" id="L699">            session2 = usuarion;</span>
+<span class="nc" id="L700">            session.setAttribute(&quot;tipo&quot;, tipo);</span>
 
-<span class="nc" id="L707">            return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L702">            return &quot;redirect:/&quot;;</span>
 
         } else {
-<span class="nc" id="L710">            return &quot;redirect:/login?error=true&quot;;</span>
+<span class="nc" id="L705">            return &quot;redirect:/login?error=true&quot;;</span>
         }
 
     }
@@ -739,7 +734,7 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(&quot;/login?{error}&quot;)
     public String verLoginE(final Model model, @PathVariable(&quot;error&quot;) String error) {
 
-<span class="nc" id="L742">        return &quot;login.html&quot;;</span>
+<span class="nc" id="L737">        return &quot;login.html&quot;;</span>
     }
 
     /**
@@ -753,7 +748,7 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(&quot;/accesoProhibido&quot;)
     public String accesoP(final Model model) {
 
-<span class="nc" id="L756">        return &quot;accesoProhibido.html&quot;;</span>
+<span class="nc" id="L751">        return &quot;accesoProhibido.html&quot;;</span>
     }
 
     // Pagina usuarios
@@ -767,9 +762,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/usuarios&quot;)
     public String usuariosPag(final Model model) {
-<span class="nc" id="L770">        final List&lt;Usuarios&gt; listU = dao.usuariosMostrar();</span>
-<span class="nc" id="L771">        model.addAttribute(&quot;listU&quot;, listU);</span>
-<span class="nc" id="L772">        return &quot;usuarios.html&quot;;</span>
+<span class="nc" id="L765">        final List&lt;Usuarios&gt; listU = dao.usuariosMostrar();</span>
+<span class="nc" id="L766">        model.addAttribute(&quot;listU&quot;, listU);</span>
+<span class="nc" id="L767">        return &quot;usuarios.html&quot;;</span>
     }
 
     /**
@@ -783,10 +778,10 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/updateUsuario&quot;, method = RequestMethod.POST)
     public String actualizarU(@ModelAttribute(&quot;user&quot;) Usuarios nuevo) throws IOException {
 
-<span class="nc" id="L786">        dao.updateU(nuevo);</span>
-<span class="nc" id="L787">        String tabla = &quot;Usuarios&quot;;</span>
-<span class="nc" id="L788">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
-<span class="nc" id="L789">        return &quot;redirect:/usuarios&quot;;</span>
+<span class="nc" id="L781">        dao.updateU(nuevo);</span>
+<span class="nc" id="L782">        String tabla = &quot;Usuarios&quot;;</span>
+<span class="nc" id="L783">        dao.historialC(session2, &quot;Update&quot;, tabla);</span>
+<span class="nc" id="L784">        return &quot;redirect:/usuarios&quot;;</span>
     }
 
     /**
@@ -801,10 +796,10 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/eliminarUsuario&quot;, method = RequestMethod.POST)
     public String deleteU(@RequestParam(name = &quot;id_usuario&quot;) int id) throws IOException {
 
-<span class="nc" id="L804">        dao.deleteUsuario(id);</span>
-<span class="nc" id="L805">        String tabla = &quot;Usuarios&quot;;</span>
-<span class="nc" id="L806">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
-<span class="nc" id="L807">        return &quot;redirect:/usuarios&quot;;</span>
+<span class="nc" id="L799">        dao.deleteUsuario(id);</span>
+<span class="nc" id="L800">        String tabla = &quot;Usuarios&quot;;</span>
+<span class="nc" id="L801">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
+<span class="nc" id="L802">        return &quot;redirect:/usuarios&quot;;</span>
     }
 
     /**
@@ -818,8 +813,8 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(&quot;/logoff&quot;)
     public String logoff(final Model model, HttpSession session) {
-<span class="nc" id="L821">        session.invalidate();</span>
-<span class="nc" id="L822">        return &quot;login.html&quot;;</span>
+<span class="nc" id="L816">        session.invalidate();</span>
+<span class="nc" id="L817">        return &quot;login.html&quot;;</span>
     }
 
     // Crear usuario
@@ -834,11 +829,11 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/crearUsuario&quot;, method = RequestMethod.POST)
     public String createU(@ModelAttribute(&quot;userN&quot;) Usuarios nuevo) throws IOException {
 
-<span class="nc" id="L837">        Base64.getEncoder().encodeToString(nuevo.getContraseña().getBytes(&quot;utf-8&quot;));</span>
-<span class="nc" id="L838">        dao.crearU(nuevo);</span>
-<span class="nc" id="L839">        String tabla = &quot;Usuarios&quot;;</span>
-<span class="nc" id="L840">        dao.historialC(session2, &quot;Insert&quot;, tabla);</span>
-<span class="nc" id="L841">        return &quot;redirect:/usuarios&quot;;</span>
+<span class="nc" id="L832">        Base64.getEncoder().encodeToString(nuevo.getContraseña().getBytes(&quot;utf-8&quot;));</span>
+<span class="nc" id="L833">        dao.crearU(nuevo);</span>
+<span class="nc" id="L834">        String tabla = &quot;Usuarios&quot;;</span>
+<span class="nc" id="L835">        dao.historialC(session2, &quot;Insert&quot;, tabla);</span>
+<span class="nc" id="L836">        return &quot;redirect:/usuarios&quot;;</span>
     }
 
     // Mostrar historial
@@ -852,9 +847,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/cambios&quot;)
     public String cambiosP(final Model model) {
-<span class="nc" id="L855">        final List&lt;Historial&gt; listC = dao.cambios();</span>
-<span class="nc" id="L856">        model.addAttribute(&quot;listC&quot;, listC);</span>
-<span class="nc" id="L857">        return &quot;cambios.html&quot;;</span>
+<span class="nc" id="L850">        final List&lt;Historial&gt; listC = dao.cambios();</span>
+<span class="nc" id="L851">        model.addAttribute(&quot;listC&quot;, listC);</span>
+<span class="nc" id="L852">        return &quot;cambios.html&quot;;</span>
     }
 
     // Borrar historial
@@ -868,9 +863,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(&quot;/eliminarH&quot;)
     public String eliminarhistorial() throws IOException {
-<span class="nc" id="L871">        dao.historialBorrar();</span>
-<span class="nc" id="L872">        dao.historialC(session2, &quot;Elimino historial&quot;, &quot;Historial&quot;);</span>
-<span class="nc" id="L873">        return &quot;redirect:/cambios&quot;;</span>
+<span class="nc" id="L866">        dao.historialBorrar();</span>
+<span class="nc" id="L867">        dao.historialC(session2, &quot;Elimino historial&quot;, &quot;Historial&quot;);</span>
+<span class="nc" id="L868">        return &quot;redirect:/cambios&quot;;</span>
     }
 
     // Dispositivos individuales
@@ -886,9 +881,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/terminales&quot;)
     public String terminales(final Model model) {
-<span class="nc" id="L889">        final List&lt;Telefono&gt; listT = dao.listTerminales();</span>
-<span class="nc" id="L890">        model.addAttribute(&quot;listT&quot;, listT);</span>
-<span class="nc" id="L891">        return &quot;terminales.html&quot;;</span>
+<span class="nc" id="L884">        final List&lt;Telefono&gt; listT = dao.listTerminales();</span>
+<span class="nc" id="L885">        model.addAttribute(&quot;listT&quot;, listT);</span>
+<span class="nc" id="L886">        return &quot;terminales.html&quot;;</span>
     }
 
     // Bodega
@@ -904,9 +899,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/bodega&quot;)
     public String bodega(final Model model) {
-<span class="nc" id="L907">        final List&lt;Telefono&gt; listT = dao.bodega();</span>
-<span class="nc" id="L908">        model.addAttribute(&quot;listT&quot;, listT);</span>
-<span class="nc" id="L909">        return &quot;bodega.html&quot;;</span>
+<span class="nc" id="L902">        final List&lt;Telefono&gt; listT = dao.bodega();</span>
+<span class="nc" id="L903">        model.addAttribute(&quot;listT&quot;, listT);</span>
+<span class="nc" id="L904">        return &quot;bodega.html&quot;;</span>
     }
 
     /**
@@ -920,9 +915,9 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(&quot;/eliminarT&quot;)
     public String eliminarB(@RequestParam(name = &quot;id_bodega&quot;) int id) throws IOException {
-<span class="nc" id="L923">        dao.deleteT(id);</span>
-<span class="nc" id="L924">        dao.historialC(session2, &quot;Delete&quot;, &quot;Bodega&quot;);</span>
-<span class="nc" id="L925">        return &quot;redirect:/bodega&quot;;</span>
+<span class="nc" id="L918">        dao.deleteT(id);</span>
+<span class="nc" id="L919">        dao.historialC(session2, &quot;Delete&quot;, &quot;Bodega&quot;);</span>
+<span class="nc" id="L920">        return &quot;redirect:/bodega&quot;;</span>
     }
 
     // Mostrar compras individuales
@@ -938,11 +933,11 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/compras/{id}&quot;, method = RequestMethod.GET)
     public String viewCompra(final Model model, @PathVariable(&quot;id&quot;) int id) {
-<span class="nc" id="L941">        final List&lt;Pedido&gt; listC = dao.mostrarC(id);</span>
-<span class="nc" id="L942">        model.addAttribute(&quot;listC&quot;, listC);</span>
-<span class="nc" id="L943">        final List&lt;Pedido&gt; listaT = dao.total2(id);</span>
-<span class="nc" id="L944">        model.addAttribute(&quot;listaT&quot;, listaT);</span>
-<span class="nc" id="L945">        return &quot;compras.html&quot;;</span>
+<span class="nc" id="L936">        final List&lt;Pedido&gt; listC = dao.mostrarC(id);</span>
+<span class="nc" id="L937">        model.addAttribute(&quot;listC&quot;, listC);</span>
+<span class="nc" id="L938">        final List&lt;Pedido&gt; listaT = dao.total2(id);</span>
+<span class="nc" id="L939">        model.addAttribute(&quot;listaT&quot;, listaT);</span>
+<span class="nc" id="L940">        return &quot;compras.html&quot;;</span>
     }
 
     /**
@@ -958,23 +953,23 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/reporte/{id}/{correo}&quot;, method = RequestMethod.GET)
     public String reporte(final Model model, @PathVariable(&quot;id&quot;) int id, @PathVariable(&quot;correo&quot;) String correoE) {
-<span class="nc" id="L961">        final List&lt;Pedido&gt; listC = dao.mostrarC(id);</span>
-<span class="nc" id="L962">        model.addAttribute(&quot;listC&quot;, listC);</span>
-<span class="nc" id="L963">        final List&lt;Pedido&gt; listaT = dao.total2(id);</span>
-<span class="nc" id="L964">        model.addAttribute(&quot;listaT&quot;, listaT);</span>
+<span class="nc" id="L956">        final List&lt;Pedido&gt; listC = dao.mostrarC(id);</span>
+<span class="nc" id="L957">        model.addAttribute(&quot;listC&quot;, listC);</span>
+<span class="nc" id="L958">        final List&lt;Pedido&gt; listaT = dao.total2(id);</span>
+<span class="nc" id="L959">        model.addAttribute(&quot;listaT&quot;, listaT);</span>
 
-<span class="nc" id="L966">        String mensaje = &quot;Los dispositvos comprados este mes fueron: &quot;;</span>
-<span class="nc" id="L967">        String mensajeT = &quot; '\n'El total de compras al credito es de: &quot;;</span>
+<span class="nc" id="L961">        String mensaje = &quot;Los dispositvos comprados este mes fueron: &quot;;</span>
+<span class="nc" id="L962">        String mensajeT = &quot; '\n'El total de compras al credito es de: &quot;;</span>
 
-<span class="nc bnc" id="L969" title="All 2 branches missed.">        for (Pedido pedido : listaT) {</span>
-<span class="nc" id="L970">            mensajeT += pedido.getTotales();</span>
-<span class="nc" id="L971">        }</span>
-<span class="nc bnc" id="L972" title="All 2 branches missed.">        for (Pedido pedido : listC) {</span>
-<span class="nc" id="L973">            mensaje += pedido.getNombret() + ',' + pedido.getCantidadp() + pedido.getCantidadp_a() + ',';</span>
-<span class="nc" id="L974">        }</span>
+<span class="nc bnc" id="L964" title="All 2 branches missed.">        for (Pedido pedido : listaT) {</span>
+<span class="nc" id="L965">            mensajeT += pedido.getTotales();</span>
+        }
+<span class="nc bnc" id="L967" title="All 2 branches missed.">        for (Pedido pedido : listC) {</span>
+<span class="nc" id="L968">            mensaje += pedido.getNombret() + ',' + pedido.getCantidadp() + pedido.getCantidadp_a() + ',';</span>
+        }
 
-<span class="nc" id="L976">        correo.sendMail(&quot;marcellinos777@gmail.com&quot;, correoE, &quot;Detalle&quot;, mensaje + mensajeT);</span>
-<span class="nc" id="L977">        return &quot;compras.html&quot;;</span>
+<span class="nc" id="L971">        correo.sendMail(&quot;marcellinos777@gmail.com&quot;, correoE, &quot;Detalle&quot;, mensaje + mensajeT);</span>
+<span class="nc" id="L972">        return &quot;compras.html&quot;;</span>
     }
 
     // Mostrar el board
@@ -990,22 +985,22 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/board&quot;)
     public String board(final Model model) {
-<span class="nc" id="L993">        final List&lt;Pedido&gt; listT = dao.board();</span>
-<span class="nc" id="L994">        model.addAttribute(&quot;listT&quot;, listT);</span>
+<span class="nc" id="L988">        final List&lt;Pedido&gt; listT = dao.board();</span>
+<span class="nc" id="L989">        model.addAttribute(&quot;listT&quot;, listT);</span>
 
-<span class="nc" id="L996">        List&lt;String&gt; marcas = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L997">        List&lt;Integer&gt; cantidad = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc" id="L991">        List&lt;String&gt; marcas = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L992">        List&lt;Integer&gt; cantidad = new ArrayList&lt;Integer&gt;();</span>
 
-<span class="nc bnc" id="L999" title="All 2 branches missed.">        for (Pedido cuenta : listT) {</span>
-<span class="nc" id="L1000">            String nmarca = cuenta.getNombref();</span>
-<span class="nc" id="L1001">            marcas.add(nmarca);</span>
-<span class="nc" id="L1002">            cantidad.add(cuenta.getCantidad());</span>
-<span class="nc" id="L1003">        }</span>
-<span class="nc" id="L1004">        cantidad.add(0);</span>
-<span class="nc" id="L1005">        model.addAttribute(&quot;marcas&quot;, marcas);</span>
-<span class="nc" id="L1006">        model.addAttribute(&quot;cantidad&quot;, cantidad);</span>
+<span class="nc bnc" id="L994" title="All 2 branches missed.">        for (Pedido cuenta : listT) {</span>
+<span class="nc" id="L995">            String nmarca = cuenta.getNombref();</span>
+<span class="nc" id="L996">            marcas.add(nmarca);</span>
+<span class="nc" id="L997">            cantidad.add(cuenta.getCantidad());</span>
+        }
+<span class="nc" id="L999">        cantidad.add(0);</span>
+<span class="nc" id="L1000">        model.addAttribute(&quot;marcas&quot;, marcas);</span>
+<span class="nc" id="L1001">        model.addAttribute(&quot;cantidad&quot;, cantidad);</span>
 
-<span class="nc" id="L1008">        return &quot;board.html&quot;;</span>
+<span class="nc" id="L1003">        return &quot;board.html&quot;;</span>
     }
 
     // REST
@@ -1020,16 +1015,16 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/getdispo&quot;, method = RequestMethod.GET)
     public String getDispo(final Model model) {
-<span class="nc" id="L1023">        String uri = &quot;http://localhost:5000/api/dispositivos&quot;;</span>
-<span class="nc" id="L1024">        RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L1018">        String uri = &quot;http://localhost:5000/api/dispositivos&quot;;</span>
+<span class="nc" id="L1019">        RestTemplate restTemplate = new RestTemplate();</span>
 
-<span class="nc" id="L1026">        ResponseEntity&lt;Dispositivo[]&gt; response = restTemplate.getForEntity(uri, Dispositivo[].class);</span>
-<span class="nc" id="L1027">        Dispositivo[] employees = response.getBody();</span>
-<span class="nc" id="L1028">        model.addAttribute(&quot;listaFD&quot;, employees);</span>
-<span class="nc" id="L1029">        Telefono nuevo = new Telefono();</span>
-<span class="nc" id="L1030">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
+<span class="nc" id="L1021">        ResponseEntity&lt;Dispositivo[]&gt; response = restTemplate.getForEntity(uri, Dispositivo[].class);</span>
+<span class="nc" id="L1022">        Dispositivo[] employees = response.getBody();</span>
+<span class="nc" id="L1023">        model.addAttribute(&quot;listaFD&quot;, employees);</span>
+<span class="nc" id="L1024">        Telefono nuevo = new Telefono();</span>
+<span class="nc" id="L1025">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
 
-<span class="nc" id="L1032">        return &quot;AAFabricaDispo.html&quot;;</span>
+<span class="nc" id="L1027">        return &quot;AAFabricaDispo.html&quot;;</span>
     }
 
     // Ir a fabrica
@@ -1044,12 +1039,12 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/fabricas&quot;)
     public String fabricas(final Model model) {
-<span class="nc" id="L1047">        Fabrica nuevo = new Fabrica();</span>
-<span class="nc" id="L1048">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
-<span class="nc" id="L1049">        final List&lt;Fabrica&gt; listaDis = dao.listFabrica();</span>
-<span class="nc" id="L1050">        model.addAttribute(&quot;listaF&quot;, listaDis);</span>
+<span class="nc" id="L1042">        Fabrica nuevo = new Fabrica();</span>
+<span class="nc" id="L1043">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
+<span class="nc" id="L1044">        final List&lt;Fabrica&gt; listaDis = dao.listFabrica();</span>
+<span class="nc" id="L1045">        model.addAttribute(&quot;listaF&quot;, listaDis);</span>
 
-<span class="nc" id="L1052">        return &quot;Fabrica.html&quot;;</span>
+<span class="nc" id="L1047">        return &quot;Fabrica.html&quot;;</span>
     }
 
     // Guardar fabrica
@@ -1065,18 +1060,18 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/guardarFabrica&quot;, method = RequestMethod.POST)
     public String guardarFabri(final Model model, @ModelAttribute(&quot;nuevo&quot;) Fabrica nuevo) throws IOException {
-<span class="nc" id="L1068">        dao.guardarFabrica(nuevo);</span>
-<span class="nc" id="L1069">        Marca ma = new Marca();</span>
+<span class="nc" id="L1063">        dao.guardarFabrica(nuevo);</span>
+<span class="nc" id="L1064">        Marca ma = new Marca();</span>
 
-<span class="nc" id="L1071">        ma.setNombre_marca(nuevo.getNombref());</span>
-<span class="nc" id="L1072">        dao.saveMarca(ma);</span>
+<span class="nc" id="L1066">        ma.setNombre_marca(nuevo.getNombref());</span>
+<span class="nc" id="L1067">        dao.saveMarca(ma);</span>
 
-<span class="nc" id="L1074">        return &quot;redirect:/fabricas&quot;;</span>
+<span class="nc" id="L1069">        return &quot;redirect:/fabricas&quot;;</span>
     }
 
-<span class="nc" id="L1077">    String ip = &quot;&quot;;</span>
-<span class="nc" id="L1078">    String puerto = &quot;&quot;;</span>
-<span class="nc" id="L1079">    String url = &quot;&quot;;</span>
+<span class="nc" id="L1072">    String ip = &quot;&quot;;</span>
+<span class="nc" id="L1073">    String puerto = &quot;&quot;;</span>
+<span class="nc" id="L1074">    String url = &quot;&quot;;</span>
 
     // Conectar con fabrica
     /**
@@ -1092,39 +1087,39 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/irFabrica/{id}&quot;, method = RequestMethod.GET)
     public String irFabrica(final Model model, @PathVariable(&quot;id&quot;) int id) {
 
-<span class="nc" id="L1095">        final List&lt;Fabrica&gt; listaF = dao.getFab(id);</span>
+<span class="nc" id="L1090">        final List&lt;Fabrica&gt; listaF = dao.getFab(id);</span>
 
-<span class="nc bnc" id="L1097" title="All 2 branches missed.">        for (Fabrica fabrica : listaF) {</span>
-<span class="nc" id="L1098">            ip = fabrica.getIp();</span>
-<span class="nc" id="L1099">            puerto = fabrica.getPuerto();</span>
+<span class="nc bnc" id="L1092" title="All 2 branches missed.">        for (Fabrica fabrica : listaF) {</span>
+<span class="nc" id="L1093">            ip = fabrica.getIp();</span>
+<span class="nc" id="L1094">            puerto = fabrica.getPuerto();</span>
 
-<span class="nc" id="L1101">        }</span>
+        }
 
-<span class="nc" id="L1103">        final List&lt;Fabrica&gt; listaF2 = dao.getFab(id);</span>
-<span class="nc" id="L1104">        int idmarca = 0;</span>
-<span class="nc bnc" id="L1105" title="All 2 branches missed.">        for (Fabrica fabrica : listaF2) {</span>
-<span class="nc" id="L1106">            idmarca += fabrica.getId_fabrica();</span>
-<span class="nc" id="L1107">        }</span>
-<span class="nc" id="L1108">        model.addAttribute(&quot;id_marca&quot;, idmarca);</span>
+<span class="nc" id="L1098">        final List&lt;Fabrica&gt; listaF2 = dao.getFab(id);</span>
+<span class="nc" id="L1099">        int idmarca = 0;</span>
+<span class="nc bnc" id="L1100" title="All 2 branches missed.">        for (Fabrica fabrica : listaF2) {</span>
+<span class="nc" id="L1101">            idmarca += fabrica.getId_fabrica();</span>
+        }
+<span class="nc" id="L1103">        model.addAttribute(&quot;id_marca&quot;, idmarca);</span>
 
         // Para mostrar los dispositivos
-<span class="nc" id="L1111">        String uri = &quot;http://&quot; + ip + &quot;:&quot; + puerto + &quot;/api/dispositivos&quot;;</span>
-<span class="nc" id="L1112">        url = uri;</span>
-<span class="nc" id="L1113">        RestTemplate restTemplate = new RestTemplate();</span>
-<span class="nc" id="L1114">        ResponseEntity&lt;Telefono[]&gt; response = restTemplate.getForEntity(uri, Telefono[].class);</span>
-<span class="nc" id="L1115">        Telefono[] employees = response.getBody();</span>
-<span class="nc" id="L1116">        model.addAttribute(&quot;listaFD&quot;, employees);</span>
+<span class="nc" id="L1106">        String uri = &quot;http://&quot; + ip + &quot;:&quot; + puerto + &quot;/api/dispositivos&quot;;</span>
+<span class="nc" id="L1107">        url = uri;</span>
+<span class="nc" id="L1108">        RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L1109">        ResponseEntity&lt;Telefono[]&gt; response = restTemplate.getForEntity(uri, Telefono[].class);</span>
+<span class="nc" id="L1110">        Telefono[] employees = response.getBody();</span>
+<span class="nc" id="L1111">        model.addAttribute(&quot;listaFD&quot;, employees);</span>
         // Para mostrar los clientes
-<span class="nc" id="L1118">        String uri2 = &quot;http://&quot; + ip + &quot;:&quot; + puerto + &quot;/api/cliente&quot;;</span>
-<span class="nc" id="L1119">        RestTemplate restTemplate2 = new RestTemplate();</span>
-<span class="nc" id="L1120">        ResponseEntity&lt;Cliente[]&gt; response2 = restTemplate2.getForEntity(uri2, Cliente[].class);</span>
-<span class="nc" id="L1121">        Cliente[] clientes = response2.getBody();</span>
-<span class="nc" id="L1122">        model.addAttribute(&quot;listaC&quot;, clientes);</span>
+<span class="nc" id="L1113">        String uri2 = &quot;http://&quot; + ip + &quot;:&quot; + puerto + &quot;/api/cliente&quot;;</span>
+<span class="nc" id="L1114">        RestTemplate restTemplate2 = new RestTemplate();</span>
+<span class="nc" id="L1115">        ResponseEntity&lt;Cliente[]&gt; response2 = restTemplate2.getForEntity(uri2, Cliente[].class);</span>
+<span class="nc" id="L1116">        Cliente[] clientes = response2.getBody();</span>
+<span class="nc" id="L1117">        model.addAttribute(&quot;listaC&quot;, clientes);</span>
 
-<span class="nc" id="L1124">        Telefono nuevo = new Telefono();</span>
-<span class="nc" id="L1125">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
+<span class="nc" id="L1119">        Telefono nuevo = new Telefono();</span>
+<span class="nc" id="L1120">        model.addAttribute(&quot;nuevo&quot;, nuevo);</span>
 
-<span class="nc" id="L1127">        return &quot;AAFabricaDispo.html&quot;;</span>
+<span class="nc" id="L1122">        return &quot;AAFabricaDispo.html&quot;;</span>
     }
 
 
@@ -1140,11 +1135,11 @@ import org.springframework.web.bind.annotation.RestController;
      */
     @RequestMapping(value = &quot;/deletefab&quot;, method = RequestMethod.POST)
     public String deletefab(@RequestParam(name = &quot;id_fabrica&quot;) int id) throws IOException {
-<span class="nc" id="L1143">        dao.deletefab(id);</span>
+<span class="nc" id="L1138">        dao.deletefab(id);</span>
 
-<span class="nc" id="L1145">        String tabla = &quot;Fabrica&quot;;</span>
-<span class="nc" id="L1146">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
-<span class="nc" id="L1147">        return &quot;redirect:/fabricas&quot;;</span>
+<span class="nc" id="L1140">        String tabla = &quot;Fabrica&quot;;</span>
+<span class="nc" id="L1141">        dao.historialC(session2, &quot;Delete&quot;, tabla);</span>
+<span class="nc" id="L1142">        return &quot;redirect:/fabricas&quot;;</span>
     }
 
     
@@ -1168,28 +1163,28 @@ import org.springframework.web.bind.annotation.RestController;
             
             //dao.save(nuevo);
 
-<span class="nc" id="L1171">            String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos/gios&quot;;</span>
-<span class="nc" id="L1172">		    RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L1166">            String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos/gios&quot;;</span>
+<span class="nc" id="L1167">		    RestTemplate restTemplate = new RestTemplate();</span>
 
-<span class="nc" id="L1174">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L1175">            Date fecha = new Date(); </span>
-<span class="nc" id="L1176">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy/MM/dd&quot;);</span>
-<span class="nc" id="L1177">            String f = sdf.format(new Date());</span>
+<span class="nc" id="L1169">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L1170">            Date fecha = new Date(); </span>
+<span class="nc" id="L1171">            SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy/MM/dd&quot;);</span>
+<span class="nc" id="L1172">            String f = sdf.format(new Date());</span>
 
-<span class="nc" id="L1179">            map.put(&quot;cantidad&quot;, String.valueOf(nuevo.getExistencia()));          </span>
-<span class="nc" id="L1180">            map.put(&quot;fecha_p&quot;, f); </span>
-<span class="nc" id="L1181">            map.put(&quot;dispositivo&quot;,idd);</span>
-<span class="nc" id="L1182">            map.put(&quot;cliente&quot;,idu);              </span>
+<span class="nc" id="L1174">            map.put(&quot;cantidad&quot;, String.valueOf(nuevo.getExistencia()));          </span>
+<span class="nc" id="L1175">            map.put(&quot;fecha_p&quot;, f); </span>
+<span class="nc" id="L1176">            map.put(&quot;dispositivo&quot;,idd);</span>
+<span class="nc" id="L1177">            map.put(&quot;cliente&quot;,idu);              </span>
            
 			  
-<span class="nc" id="L1185">		    ResponseEntity&lt;Void&gt; response  = restTemplate.postForEntity(uri, map, Void.class);</span>
+<span class="nc" id="L1180">		    ResponseEntity&lt;Void&gt; response  = restTemplate.postForEntity(uri, map, Void.class);</span>
 		
-<span class="nc bnc" id="L1187" title="All 2 branches missed.">		if (response.getStatusCode() == HttpStatus.OK) {</span>
-<span class="nc" id="L1188">			System.out.println(&quot;Request Successful&quot;);</span>
-		} else {
-<span class="nc" id="L1190">			System.out.println(&quot;Request Failed&quot;);</span>
+<span class="nc bnc" id="L1182" title="All 2 branches missed.">		if (response.getStatusCode() == HttpStatus.OK) {</span>
+<span class="nc" id="L1183">			System.out.println(&quot;Request Successful&quot;);</span>
+<span class="nc" id="L1184">		} else {</span>
+<span class="nc" id="L1185">			System.out.println(&quot;Request Failed&quot;);</span>
 		}
-<span class="nc" id="L1192">		return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L1187">		return &quot;redirect:/&quot;;</span>
             
     
     
@@ -1213,37 +1208,37 @@ import org.springframework.web.bind.annotation.RestController;
                 throws IOException {
             
            
-<span class="nc" id="L1216">                dao.save(nuevo);</span>
-<span class="nc bnc" id="L1217" title="All 2 branches missed.">                    for (String string : num) {</span>
-<span class="nc" id="L1218">                        String[] parts = string.split(&quot;/&quot;);</span>
-<span class="nc bnc" id="L1219" title="All 2 branches missed.">                        if(!string.equals(&quot;1&quot;)){</span>
+<span class="nc" id="L1211">                dao.save(nuevo);</span>
+<span class="nc bnc" id="L1212" title="All 2 branches missed.">                    for (String string : num) {</span>
+<span class="nc" id="L1213">                        String[] parts = string.split(&quot;/&quot;);</span>
+<span class="nc bnc" id="L1214" title="All 2 branches missed.">                        if(!string.equals(&quot;1&quot;)){</span>
                             
-<span class="nc" id="L1221">                            dao.saveNum(string,parts[0],dao.getlastID().getId_bodega());</span>
+<span class="nc" id="L1216">                            dao.saveNum(string,parts[0],dao.getlastID().getId_bodega());</span>
                             
                         }
                         
-<span class="nc" id="L1225">                    }</span>
+                    }
   
 
         
 
-<span class="nc" id="L1230">            String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos/&quot; + idp;</span>
-<span class="nc" id="L1231">		    RestTemplate restTemplate = new RestTemplate();</span>
-<span class="nc" id="L1232">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();       </span>
-<span class="nc" id="L1233">            map.put(&quot;estado&quot;,&quot;Entregado&quot;);        </span>
+<span class="nc" id="L1225">            String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos/&quot; + idp;</span>
+<span class="nc" id="L1226">		    RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L1227">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();       </span>
+<span class="nc" id="L1228">            map.put(&quot;estado&quot;,&quot;Entregado&quot;);        </span>
   
            	
 		  
-<span class="nc" id="L1237">           Telefono wry = new Telefono();</span>
-<span class="nc" id="L1238">           wry.setEstado(&quot;Entregado&quot;);</span>
+<span class="nc" id="L1232">           Telefono wry = new Telefono();</span>
+<span class="nc" id="L1233">           wry.setEstado(&quot;Entregado&quot;);</span>
             
 		  
 
-<span class="nc" id="L1242">		   restTemplate.put(uri, map);  </span>
+<span class="nc" id="L1237">		   restTemplate.put(uri, map);  </span>
 
            
 		
-<span class="nc" id="L1246">		return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L1241">		return &quot;redirect:/&quot;;</span>
             
     
     
@@ -1263,29 +1258,29 @@ import org.springframework.web.bind.annotation.RestController;
 
         {
 
-<span class="nc" id="L1266">            final List&lt;Fabrica&gt; listaF = dao.getFab(id); </span>
+<span class="nc" id="L1261">            final List&lt;Fabrica&gt; listaF = dao.getFab(id); </span>
         
-<span class="nc bnc" id="L1268" title="All 2 branches missed.">                for (Fabrica fabrica : listaF) {</span>
-<span class="nc" id="L1269">                ip = fabrica.getIp();</span>
-<span class="nc" id="L1270">                puerto = fabrica.getPuerto(); </span>
+<span class="nc bnc" id="L1263" title="All 2 branches missed.">                for (Fabrica fabrica : listaF) {</span>
+<span class="nc" id="L1264">                ip = fabrica.getIp();</span>
+<span class="nc" id="L1265">                puerto = fabrica.getPuerto(); </span>
             
-<span class="nc" id="L1272">                }</span>
-<span class="nc" id="L1273">            final List&lt;Fabrica&gt; listaF2 = dao.getFab(id); </span>
-<span class="nc" id="L1274">            int idmarca = 0; </span>
-<span class="nc bnc" id="L1275" title="All 2 branches missed.">            for (Fabrica fabrica : listaF2) {</span>
-<span class="nc" id="L1276">                idmarca += fabrica.getId_fabrica();</span>
-<span class="nc" id="L1277">            }</span>
-<span class="nc" id="L1278">            model.addAttribute(&quot;id_marca&quot;, idmarca);</span>
-<span class="nc" id="L1279">            String con = ip +&quot;:&quot; + puerto; </span>
-<span class="nc" id="L1280">            model.addAttribute(&quot;conexion&quot;, con);</span>
+                }
+<span class="nc" id="L1268">            final List&lt;Fabrica&gt; listaF2 = dao.getFab(id); </span>
+<span class="nc" id="L1269">            int idmarca = 0; </span>
+<span class="nc bnc" id="L1270" title="All 2 branches missed.">            for (Fabrica fabrica : listaF2) {</span>
+<span class="nc" id="L1271">                idmarca += fabrica.getId_fabrica();</span>
+            }
+<span class="nc" id="L1273">            model.addAttribute(&quot;id_marca&quot;, idmarca);</span>
+<span class="nc" id="L1274">            String con = ip +&quot;:&quot; + puerto; </span>
+<span class="nc" id="L1275">            model.addAttribute(&quot;conexion&quot;, con);</span>
 
 
-<span class="nc" id="L1283">                String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos&quot;;</span>
-<span class="nc" id="L1284">                url = uri; </span>
-<span class="nc" id="L1285">                RestTemplate restTemplate = new RestTemplate();   </span>
-<span class="nc" id="L1286">                ResponseEntity&lt;Telefono[]&gt; response = restTemplate.getForEntity(uri,Telefono[].class);</span>
-<span class="nc" id="L1287">                Telefono[] employees = response.getBody();	  </span>
-<span class="nc" id="L1288">                model.addAttribute(&quot;listaFD&quot;, employees); </span>
+<span class="nc" id="L1278">                String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos&quot;;</span>
+<span class="nc" id="L1279">                url = uri; </span>
+<span class="nc" id="L1280">                RestTemplate restTemplate = new RestTemplate();   </span>
+<span class="nc" id="L1281">                ResponseEntity&lt;Telefono[]&gt; response = restTemplate.getForEntity(uri,Telefono[].class);</span>
+<span class="nc" id="L1282">                Telefono[] employees = response.getBody();	  </span>
+<span class="nc" id="L1283">                model.addAttribute(&quot;listaFD&quot;, employees); </span>
 
                 /*
                 final List&lt;Telefono&gt; listaDis = dao.listPedidoF();
@@ -1298,7 +1293,7 @@ import org.springframework.web.bind.annotation.RestController;
 
         
             
-<span class="nc" id="L1301">                return &quot;FabricaControl.html&quot;;</span>
+<span class="nc" id="L1296">                return &quot;FabricaControl.html&quot;;</span>
         }
     
 
@@ -1319,17 +1314,17 @@ import org.springframework.web.bind.annotation.RestController;
 
         {       
         
-<span class="nc" id="L1322">            String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos/6074b74053f92e0fb4017181&quot;;</span>
-<span class="nc" id="L1323">            RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L1317">            String uri = &quot;http://&quot; + ip +&quot;:&quot;+ puerto+ &quot;/api/pedidos/6074b74053f92e0fb4017181&quot;;</span>
+<span class="nc" id="L1318">            RestTemplate restTemplate = new RestTemplate();</span>
 
-<span class="nc" id="L1325">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L1320">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();</span>
            
-<span class="nc" id="L1327">            map.put(&quot;Estado&quot;, &quot;Entregado&quot;);         </span>
+<span class="nc" id="L1322">            map.put(&quot;Estado&quot;, &quot;Entregado&quot;);         </span>
         
 
             
 		
-<span class="nc" id="L1332">		    return &quot;a &quot;; </span>
+<span class="nc" id="L1327">		    return &quot;a &quot;; </span>
 		
 		  
 
@@ -1342,12 +1337,12 @@ import org.springframework.web.bind.annotation.RestController;
         public String devolucion(final Model model,@RequestParam(name=&quot;ip&quot;) String ips,@RequestParam(name=&quot;puerto&quot;) String puertos,@RequestParam(name=&quot;series&quot;) String series)
 
         {       
-<span class="nc" id="L1345">            String conexion =  &quot;&quot; + ips +&quot;:&quot; + puertos; </span>
+<span class="nc" id="L1340">            String conexion =  &quot;&quot; + ips +&quot;:&quot; + puertos; </span>
             
-<span class="nc" id="L1347">            model.addAttribute(&quot;conexion&quot;,conexion);</span>
-<span class="nc" id="L1348">            model.addAttribute(&quot;series&quot;,series);</span>
+<span class="nc" id="L1342">            model.addAttribute(&quot;conexion&quot;,conexion);</span>
+<span class="nc" id="L1343">            model.addAttribute(&quot;series&quot;,series);</span>
 
-<span class="nc" id="L1350">            return &quot;terminalIndividual.html&quot;;</span>
+<span class="nc" id="L1345">            return &quot;terminalIndividual.html&quot;;</span>
            
         }
 
@@ -1359,21 +1354,21 @@ import org.springframework.web.bind.annotation.RestController;
 
         {       
         
-<span class="nc" id="L1362">            String uri = &quot;http://&quot; + conexion+ &quot;/api/serie/&quot;+num_series;</span>
-<span class="nc" id="L1363">            RestTemplate restTemplate = new RestTemplate();</span>
-<span class="nc" id="L1364">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();           </span>
-<span class="nc" id="L1365">            map.put(&quot;estado&quot;, &quot;Devuelto&quot;);         </span>
+<span class="nc" id="L1357">            String uri = &quot;http://&quot; + conexion+ &quot;/api/serie/&quot;+num_series;</span>
+<span class="nc" id="L1358">            RestTemplate restTemplate = new RestTemplate();</span>
+<span class="nc" id="L1359">		    Map&lt;String, String&gt; map = new HashMap&lt;&gt;();           </span>
+<span class="nc" id="L1360">            map.put(&quot;estado&quot;, &quot;Devuelto&quot;);         </span>
 
             
 		
-<span class="nc" id="L1369">            restTemplate.put(uri, map);  </span>
+<span class="nc" id="L1364">            restTemplate.put(uri, map);  </span>
 		
 		  
 
 		  
         
             
-<span class="nc" id="L1376">            return &quot;redirect:/terminales&quot;;</span>
+<span class="nc" id="L1371">            return &quot;redirect:/terminales&quot;;</span>
         }
 
      
