@@ -7,6 +7,6 @@ steps:
     - mvn -f ventas/pom.xml package 
 - name: Servers
   commands:
-    - sh 'mv ventas-0.0.1-SNAPSHOT.war main-uat.war'          
-    - sh 'docker cp main-uat.war tomcat1:/usr/local/tomcat/webapps'
+    - mv ventas-0.0.1-SNAPSHOT.war main-uat.war        
+   
    
