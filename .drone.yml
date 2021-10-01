@@ -9,7 +9,7 @@ steps:
   commands:
     - mvn -f ventas/pom.xml package 
 - name: Servers
-  image: alpine
+  image: docker
   commands:
     - ls
     - cd ventas/target
