@@ -14,9 +14,9 @@ steps:
     - ls
     - cd ventas/target
     - ls
-    - sudo apt install curl
+    - apt install curl
     - curl -L https://github.com/drone/drone-cli/releases/latest/download/drone_linux_amd64.tar.gz | tar zx
-    - sudo install -t /usr/local/bin drone
+    - apt install -t /usr/local/bin drone
     - drone exec --trusted curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'http://0.0.0.0:7777/manager/text/deploy?path=/my-app-path&update=true'
     
 
