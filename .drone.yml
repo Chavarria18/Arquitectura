@@ -14,7 +14,7 @@ steps:
     - ls
     - cd ventas/target
     - ls
-    - scp ventas-0.0.1-SNAPSHOT.war gab@gab-X541UAK:/Escritorio
+    - curl -v -u admin:admin -T 	ventas-0.0.1-SNAPSHOT.war 'http://localhost:8088/manager/text/deploy?path=/my-app-path&update=true'
     
 
 
