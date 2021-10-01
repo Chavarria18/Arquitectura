@@ -4,14 +4,6 @@ name: Integration
 
 
 steps:
-- name: build-war
- 
+- name: Prueba
   commands:
-    - mvn -f ventas/pom.xml package 
-- name: Servers
-
-  commands:
-    - ls
-    - cd ventas/target
-    - ls   
-    - drone exec --trusted curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'http://0.0.0.0:7777/manager/text/deploy?path=/my-app-path&update=true'
+  - echo "aaaaaa"
