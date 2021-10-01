@@ -1,9 +1,9 @@
 kind: pipeline
-type: exec
+type: docker
 name: Integration
 
 
 steps:
 - name: Prueba
   commands:
-  - echo "aaaaaa"
+  - whoami
