@@ -15,7 +15,8 @@ steps:
     - cd ventas/target
     - ls  
     - apk add curl
-    - docker cp main-dev.war tomcat1:/usr/local/tomcat/webappsa
+    - mv ventas-0.0.1-SNAPSHOT.war main-dev.war
+    - docker cp main-dev.war tomcat1:/usr/local/tomcat/webapps
     
     
     
