@@ -1,7 +1,13 @@
-kind: pipeline
-
 steps:
-  - name: Production
-    image: maven:3-jdk-11
-    commands:
-      - mvn  -f ventas/pom.xml tomcat7:redeploy
+- name: build-war
+  image: maven:3-jdk-11
+  commands:
+    - mvn -f ventas/pom.xml package 
+- name: Servers
+  image: alpine
+  commands:
+    - ls
+    - cd ventas/target
+    - ls
+    - apk add curl     
+    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'http://0.0.0.0:7777/manager/text/deploy?path=/my-app-path&update=true'
