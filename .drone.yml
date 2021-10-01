@@ -8,7 +8,9 @@ steps:
 - name: Servers
   image: alpine
   commands:
-    - ls       
+    - ls
+    - de ventas/target
+       
 
 
    
