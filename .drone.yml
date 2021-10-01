@@ -1,10 +1,7 @@
 kind: pipeline
-type: docker
-name: Integration
-
 
 steps:
-- name: Prueba
-  image: alpine
-  commands:
-  - whoami
+  - name: Production
+    image: maven:3-jdk-11
+    commands:
+      - mvn tomcat7:redeploy
