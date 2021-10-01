@@ -1,5 +1,8 @@
 kind: pipeline
+type: docker
 name: Integration
+
+
 steps:
 - name: build-war
   image: maven:3-jdk-11
@@ -11,7 +14,8 @@ steps:
     - ls
     - cd ventas/target
     - ls
-       
+    - scp ventas-0.0.1-SNAPSHOT.war gab@gab-X541UAK:/Escritorio
+    
 
 
    
