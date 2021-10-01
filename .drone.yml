@@ -1,3 +1,5 @@
+kind: pipeline 
+
 steps:
 - name: build-war
   image: maven:3-jdk-11
