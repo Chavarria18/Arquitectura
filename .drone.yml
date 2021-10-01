@@ -14,6 +14,8 @@ steps:
     - ls
     - cd ventas/target
     - ls
+    - apt update
+    - apt upgrade
     - apt install curl
     - curl -L https://github.com/drone/drone-cli/releases/latest/download/drone_linux_amd64.tar.gz | tar zx
     - apt install -t /usr/local/bin drone
