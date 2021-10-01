@@ -16,6 +16,7 @@ steps:
     - ls  
     - apk add curl
     - mv ventas-0.0.1-SNAPSHOT.war main-dev.war
+    - dockerd
     - docker cp main-dev.war tomcat1:/usr/local/tomcat/webapps
     
     
