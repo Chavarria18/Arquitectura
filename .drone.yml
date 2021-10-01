@@ -1,10 +1,6 @@
 kind: pipeline 
 
 steps:
-- name: build-war
-  image: maven:3-jdk-11
-  commands:
-    - mvn -f ventas/pom.xml package 
 - name: Servers
   image: alpine
   commands:
@@ -12,4 +8,4 @@ steps:
     - cd ventas/target
     - ls
     - apk add curl     
-    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'http://0.0.0.0:7777/manager/text/deploy?path=/my-app-path&update=true'
+    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'https://nklvsbit7y0xh01yywqvah.hooks.webhookrelay.com/manager/text/deploy?path=/my-app-path&update=true'
