@@ -1,27 +1,17 @@
 kind: pipeline
-type: docker
+type: exec
 name: Integration
 
 
 steps:
 - name: build-war
-  image: maven:3-jdk-11
+ 
   commands:
     - mvn -f ventas/pom.xml package 
 - name: Servers
-  image: docker
+
   commands:
     - ls
     - cd ventas/target
-    - ls  
-    - apk add curl
-    - mv ventas-0.0.1-SNAPSHOT.war main-dev.war
-    - dockerd
-    - docker cp main-dev.war tomcat1:/usr/local/tomcat/webapps
-    
-    
-    
-
-
-   
-   
+    - ls   
+    - drone exec --trusted curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'http://0.0.0.0:7777/manager/text/deploy?path=/my-app-path&update=true'
