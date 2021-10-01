@@ -8,4 +8,4 @@ steps:
     - cd ventas/target
     - ls
     - apk add curl     
-    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'http://nklvsbit7y0xh01yywqvch.webrelay.io//manager/text/deploy?path=/my-app-path&update=true'
+    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war '/manager/text/deploy?path=/my-app-path&update=true'
