@@ -11,7 +11,8 @@ steps:
     - apk add curl     
     - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'ttp://nklvsbit7y0xh01yywqvch.webrelay.io/manager/text/deploy?path=/my-app-path&update=true'
 
-  detach: true
+  failure: ignore
+  
  
     
 
@@ -29,6 +30,8 @@ steps:
     
     recipients:
         - gchavarriamunoz@gmail.com
+  depends_on:
+    - Servers
  
 
     
