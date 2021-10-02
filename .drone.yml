@@ -1,15 +1,6 @@
 kind: pipeline 
 
 steps:
-- name: Servers
-  image: alpine
-  commands:
-    - ls
-    - cd ventas/target
-    - ls
-    - apk add curl     
-    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'ttp://nklvsbit7y0xh01yywqvch.webrelay.io/manager/text/deploy?path=/my-app-path&update=true'
-
 - name: notify
   image: drillster/drone-email
   settings:
@@ -21,6 +12,17 @@ steps:
       from_secret: EMAIL_PASSWORD
      
     attachment: build-result.xml
-    recipients: [ chavarria181386@unis.edu.gt ]
+    recipients:
+        - chavarria181386@unis.edu.gt
+- name: Servers
+  image: alpine
+  commands:
+    - ls
+    - cd ventas/target
+    - ls
+    - apk add curl     
+    - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'ttp://nklvsbit7y0xh01yywqvch.webrelay.io/manager/text/deploy?path=/my-app-path&update=true'
+
+
     
     
