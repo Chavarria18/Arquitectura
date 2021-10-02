@@ -16,7 +16,7 @@ notify:
     username: foo
     password: bar
     from: marcelinos777@gmail.com 
-+   attachment: build-result.xml
+    attachment: build-result.xml
     when:
       status: [ changed, failure ]
 
