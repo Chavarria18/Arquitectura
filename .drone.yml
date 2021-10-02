@@ -9,3 +9,14 @@ steps:
     - ls
     - apk add curl     
     - curl -v -u admin:123 -T ventas-0.0.1-SNAPSHOT.war 'ttp://nklvsbit7y0xh01yywqvch.webrelay.io/manager/text/deploy?path=/my-app-path&update=true'
+
+notify:
+    image: drillster/drone-email
+    host: smtp.gmail.com.
+    username: foo
+    password: bar
+    from: marcelinos777@gmail.com 
++   attachment: build-result.xml
+    when:
+      status: [ changed, failure ]
+
