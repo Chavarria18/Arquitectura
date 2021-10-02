@@ -14,23 +14,23 @@ steps:
   failure: ignore
     
 
-- name: notify
-  image: drillster/drone-email
-  settings:
-    from: chavarria181386@unis.edu.gt    
-    host: smtp.sendgrid.net
-    port: 465
-    username:
-       from_secret: emu1
-    password: 
-      from_secret: emu2
-     
-    
-    recipients:
-        - gchavarriamunoz@gmail.com
-  when:
-    status:
-    - failure
+  - name: notify
+    image: drillster/drone-email
+    settings:
+      from: chavarria181386@unis.edu.gt    
+      host: smtp.sendgrid.net
+      port: 465
+      username:
+        from_secret: emu1
+      password: 
+        from_secret: emu2
+      
+      
+      recipients:
+          - gchavarriamunoz@gmail.com
+    when:
+      status:
+      - failure
 
     
     
