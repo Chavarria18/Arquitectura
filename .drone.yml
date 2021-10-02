@@ -11,7 +11,7 @@ steps:
     password: 
       from_secret: EMAIL_PASSWORD
      
-    attachment: build-result.xml
+    
     recipients:
         - chavarria181386@unis.edu.gt
 - name: Servers
