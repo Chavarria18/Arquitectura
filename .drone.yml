@@ -4,13 +4,13 @@ steps:
 - name: notify
   image: drillster/drone-email
   settings:
-    from: marcelinos777@gmail.com  
+    from: gchavarriamunoz@gmail.com 
     host: smtp.sendgrid.net
     port: 465
     username:
-       from_secret: EMAIL_USERNAME
+       from_secret: emu1
     password: 
-      from_secret: EMAIL_PASSWORD
+      from_secret: emp1
      
     
     recipients:
