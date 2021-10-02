@@ -15,6 +15,7 @@ notify:
     host: smtp.gmail.com
     from: marcelinos777@gmail.com     
     attachment: build-result.xml
+    recipients: [ chavarria181386@unis.edu.gt ]
     secrets: [EMAIL_USERNAME, EMAIL_PASSWORD]
     when:
      
