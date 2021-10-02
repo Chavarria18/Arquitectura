@@ -23,6 +23,4 @@ steps:
     attachment: build-result.xml
     recipients: [ chavarria181386@unis.edu.gt ]
     
-    when:
-      status: [ changed, failure ]
-
+    
