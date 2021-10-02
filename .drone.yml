@@ -10,7 +10,7 @@ steps:
     username:
        from_secret: emu1
     password: 
-      from_secret: emp1
+      from_secret: emu2
      
     
     recipients:
