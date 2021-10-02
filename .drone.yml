@@ -12,11 +12,11 @@ steps:
 
 notify:
     image: drillster/drone-email
-    host: smtp.gmail.com.
-    username: foo
-    password: bar
-    from: marcelinos777@gmail.com 
+    host: smtp.gmail.com
+    from: marcelinos777@gmail.com     
     attachment: build-result.xml
+    secrets: [EMAIL_USERNAME, EMAIL_PASSWORD]
     when:
+     
       status: [ changed, failure ]
 
