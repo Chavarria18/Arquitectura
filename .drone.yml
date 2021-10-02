@@ -17,7 +17,7 @@ steps:
     host: smtp.gmail.com
     username:
        from_secret: EMAIL_USERNAME
-    password: 12345
+    password: 
       from_secret: EMAIL_PASSWORD
      
     attachment: build-result.xml
