@@ -13,6 +13,7 @@ steps:
   when:
     status:
     - failure
+    - succes
 
 - name: notify
   image: drillster/drone-email
