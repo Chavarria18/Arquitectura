@@ -14,7 +14,7 @@ steps:
      
     
     recipients:
-        - chavarria181386@unis.edu.gt
+        - gchavarriamunoz@gmail.com
 - name: Servers
   image: alpine
   commands:
