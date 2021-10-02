@@ -28,9 +28,9 @@ steps:
     
     recipients:
         - gchavarriamunoz@gmail.com
-    when:
-      status:
-      - failure
+  when:
+    status:
+    - failure
 
     
     
