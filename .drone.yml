@@ -53,8 +53,7 @@ steps:
     
     recipients:
         - gchavarriamunoz@gmail.com
-  depends_on:
-    - Servers
+
   when:
     status:
     - success
