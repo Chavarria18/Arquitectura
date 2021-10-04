@@ -55,10 +55,7 @@ steps:
   when:
     branch:
       - DEV
-    event:
-      include:        
-        - push
-        - pull request
+    
 
 
 - name: Servers-uat
