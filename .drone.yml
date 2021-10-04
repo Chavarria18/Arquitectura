@@ -5,7 +5,7 @@ steps:
 - name: Build-dev
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/poim.xml -Pdev package
+    - mvn -f ventas/pom.xml -Pdev package
   when:
     branch:
       -DEV
