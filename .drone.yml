@@ -29,6 +29,9 @@ steps:
   image: maven:3-jdk-11
   commands:  
     - mvn -f ventas/pom.xml -Pprod package
+  when:
+    branch:
+      -main
 
      
       
@@ -82,6 +85,9 @@ steps:
     - apk add curl
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
     - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
+  when:
+    branch:
+      -main
  
 
 
