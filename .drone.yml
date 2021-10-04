@@ -5,30 +5,59 @@ steps:
 - name: Build-dev
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Pdev package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=dev package
   when:
     branch:
-      -DEV
+      - DEV
+    event:
+      include:
+      - push
+      - pull_request
+
+  
+
+
+
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Puat package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=uat package
   when:
     branch:
-      -UAT
+      - UAT
+    event:
+      include:
+      - push
+      - pull_request
+
 
 - name: Build-prod
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Pprod package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=prod package
   when:
     branch:
-      -PROD1
+      - 1PROD
+    event:
+      include:
+      - push
+      - pull_request
+
+      
 
 - name: Build-main
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Pprod package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=prod package
+    
+  when:
+    branch:
+      - main
+    event:
+      include:
+      - push
+      - pull_request
+
 
      
       
@@ -37,51 +66,80 @@ steps:
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
+    - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
     - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
   when:
     branch:
-      -DEV
+      - DEV
+    event:
+      include:
+      - push
+      - pull_request
+
+    
 
 
 - name: Servers-uat
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
-    - mv  ventas-0.0.1-SNAPSHOT.war main.war
+    - stat ventas-0.0.1-SNAPSHOT.war
+    - mv  ventas-0.0.1-SNAPSHOT.war main.war  
     - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
   when:
     branch:
-      -UAT
+      - UAT
+    event:
+      include:
+      - push
+      - pull_request
+
 
 - name: Servers-prod
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
+    - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
     - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
   when:
     branch:
-      -PROD1
+      - 1PROD
+    event:
+      include:
+      - push
+      - pull_request
+
       
 - name: Servers-main
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
+    - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
     - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
+  when:
+    branch:
+      - main
+    
+    event:
+      include:
+      - push
+      - pull_request
+
  
 
 
