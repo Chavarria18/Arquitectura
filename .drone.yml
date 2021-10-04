@@ -62,7 +62,7 @@ steps:
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
@@ -76,7 +76,7 @@ steps:
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
@@ -90,7 +90,7 @@ steps:
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
