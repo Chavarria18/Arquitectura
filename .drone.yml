@@ -5,7 +5,7 @@ steps:
 - name: Build-dev
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Dspring.profiles.active=dev package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=dev clean package
   when:
     branch:
       - DEV
@@ -21,7 +21,7 @@ steps:
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Dspring.profiles.active=uat package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=uat clean package
   when:
     branch:
       - UAT
@@ -34,7 +34,7 @@ steps:
 - name: Build-prod
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Dspring.profiles.active=prod package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=prod clean package
   when:
     branch:
       - 1PROD
@@ -48,7 +48,7 @@ steps:
 - name: Build-main
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/pom.xml -Dspring.profiles.active=prod package
+    - mvn -f ventas/pom.xml -Dspring.profiles.active=prod clean package
     
   when:
     branch:

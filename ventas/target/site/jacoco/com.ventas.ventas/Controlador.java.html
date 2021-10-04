@@ -523,7 +523,7 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="nc" id="L523">            tipo_u += cliente.getId_tipo_cliente();</span>
 <span class="nc" id="L524">            id_cliente += cliente.getId_cliente();</span>
 
-        }
+<span class="nc" id="L526">        }</span>
 
 <span class="nc bnc" id="L528" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
 <span class="nc" id="L529">            session.setAttribute(&quot;nit&quot;, nit);</span>
@@ -692,7 +692,7 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="nc bnc" id="L692" title="All 2 branches missed.">        for (Usuarios usuarios : listaDis) {</span>
 
 <span class="nc" id="L694">            tipo += usuarios.getId_tipo_usuario();</span>
-        }
+<span class="nc" id="L695">        }</span>
 
 <span class="nc bnc" id="L697" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
 <span class="nc" id="L698">            session.setAttribute(&quot;name&quot;, usuarion);</span>
@@ -963,10 +963,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 <span class="nc bnc" id="L964" title="All 2 branches missed.">        for (Pedido pedido : listaT) {</span>
 <span class="nc" id="L965">            mensajeT += pedido.getTotales();</span>
-        }
+<span class="nc" id="L966">        }</span>
 <span class="nc bnc" id="L967" title="All 2 branches missed.">        for (Pedido pedido : listC) {</span>
 <span class="nc" id="L968">            mensaje += pedido.getNombret() + ',' + pedido.getCantidadp() + pedido.getCantidadp_a() + ',';</span>
-        }
+<span class="nc" id="L969">        }</span>
 
 <span class="nc" id="L971">        correo.sendMail(&quot;marcellinos777@gmail.com&quot;, correoE, &quot;Detalle&quot;, mensaje + mensajeT);</span>
 <span class="nc" id="L972">        return &quot;compras.html&quot;;</span>
@@ -995,7 +995,7 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="nc" id="L995">            String nmarca = cuenta.getNombref();</span>
 <span class="nc" id="L996">            marcas.add(nmarca);</span>
 <span class="nc" id="L997">            cantidad.add(cuenta.getCantidad());</span>
-        }
+<span class="nc" id="L998">        }</span>
 <span class="nc" id="L999">        cantidad.add(0);</span>
 <span class="nc" id="L1000">        model.addAttribute(&quot;marcas&quot;, marcas);</span>
 <span class="nc" id="L1001">        model.addAttribute(&quot;cantidad&quot;, cantidad);</span>
@@ -1093,13 +1093,13 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="nc" id="L1093">            ip = fabrica.getIp();</span>
 <span class="nc" id="L1094">            puerto = fabrica.getPuerto();</span>
 
-        }
+<span class="nc" id="L1096">        }</span>
 
 <span class="nc" id="L1098">        final List&lt;Fabrica&gt; listaF2 = dao.getFab(id);</span>
 <span class="nc" id="L1099">        int idmarca = 0;</span>
 <span class="nc bnc" id="L1100" title="All 2 branches missed.">        for (Fabrica fabrica : listaF2) {</span>
 <span class="nc" id="L1101">            idmarca += fabrica.getId_fabrica();</span>
-        }
+<span class="nc" id="L1102">        }</span>
 <span class="nc" id="L1103">        model.addAttribute(&quot;id_marca&quot;, idmarca);</span>
 
         // Para mostrar los dispositivos
@@ -1181,7 +1181,7 @@ import org.springframework.web.bind.annotation.RestController;
 		
 <span class="nc bnc" id="L1182" title="All 2 branches missed.">		if (response.getStatusCode() == HttpStatus.OK) {</span>
 <span class="nc" id="L1183">			System.out.println(&quot;Request Successful&quot;);</span>
-<span class="nc" id="L1184">		} else {</span>
+		} else {
 <span class="nc" id="L1185">			System.out.println(&quot;Request Failed&quot;);</span>
 		}
 <span class="nc" id="L1187">		return &quot;redirect:/&quot;;</span>
@@ -1217,7 +1217,7 @@ import org.springframework.web.bind.annotation.RestController;
                             
                         }
                         
-                    }
+<span class="nc" id="L1220">                    }</span>
   
 
         
@@ -1264,12 +1264,12 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="nc" id="L1264">                ip = fabrica.getIp();</span>
 <span class="nc" id="L1265">                puerto = fabrica.getPuerto(); </span>
             
-                }
+<span class="nc" id="L1267">                }</span>
 <span class="nc" id="L1268">            final List&lt;Fabrica&gt; listaF2 = dao.getFab(id); </span>
 <span class="nc" id="L1269">            int idmarca = 0; </span>
 <span class="nc bnc" id="L1270" title="All 2 branches missed.">            for (Fabrica fabrica : listaF2) {</span>
 <span class="nc" id="L1271">                idmarca += fabrica.getId_fabrica();</span>
-            }
+<span class="nc" id="L1272">            }</span>
 <span class="nc" id="L1273">            model.addAttribute(&quot;id_marca&quot;, idmarca);</span>
 <span class="nc" id="L1274">            String con = ip +&quot;:&quot; + puerto; </span>
 <span class="nc" id="L1275">            model.addAttribute(&quot;conexion&quot;, con);</span>
