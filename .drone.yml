@@ -24,6 +24,13 @@ steps:
   when:
     branch:
       -prod
+
+- name: Build-main
+  image: maven:3-jdk-11
+  commands:  
+    - mvn -f ventas/target -Pprod package
+  when:
+    branch:
       -main
      
       
@@ -67,7 +74,20 @@ steps:
   when:
     branch:
       -prod
+      
+- name: Servers-main
+  image: alpine
+  commands:
+    - ls
+    - cd ventas/target
+    - ls
+    - apk add curl
+    - mv  ventas-0.0.1-SNAPSHOT.war main.war
+    - curl -v -u admin:admin -T main.war 'http://j6oc0tsmiw4dohyjwum5a5.webrelay.io//manager/text/deploy?path=/main-prodmain&update=true'
+  when:
+    branch:
       -main
+
 
 
     
