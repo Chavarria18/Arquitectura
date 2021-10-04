@@ -23,7 +23,7 @@ steps:
     - mvn -f ventas/pom.xml -Pprod package
   when:
     branch:
-      -PROD1
+      -1PROD
 
 - name: Build-main
   image: maven:3-jdk-11
@@ -71,7 +71,7 @@ steps:
     - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
   when:
     branch:
-      -PROD1
+      -1PROD
       
 - name: Servers-main
   image: alpine
