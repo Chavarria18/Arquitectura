@@ -9,6 +9,11 @@ steps:
   when:
     branch:
       - DEV
+    event:
+      include:
+        - push
+        - pull_request
+
   
 
 
@@ -20,6 +25,11 @@ steps:
   when:
     branch:
       - UAT
+    event:
+      include:
+        - push
+        - pull_request
+
 
 - name: Build-prod
   image: maven:3-jdk-11
@@ -28,6 +38,11 @@ steps:
   when:
     branch:
       - 1PROD
+    event:
+      include:
+        - push
+        - pull_request
+
       
 
 - name: Build-main
@@ -38,6 +53,11 @@ steps:
   when:
     branch:
       - main
+      event:
+      include:
+        - push
+        - pull_request
+
 
      
       
@@ -55,6 +75,11 @@ steps:
   when:
     branch:
       - DEV
+    event:
+      include:
+        - push
+        - pull_request
+
     
 
 
@@ -62,7 +87,7 @@ steps:
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
@@ -71,12 +96,17 @@ steps:
   when:
     branch:
       - UAT
+    event:
+      include:
+        - push
+        - pull_request
+
 
 - name: Servers-prod
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
@@ -85,12 +115,17 @@ steps:
   when:
     branch:
       - 1PROD
+    event:
+      include:
+        - push
+        - pull_request
+
       
 - name: Servers-main
   image: alpine
   commands:
     - ls
-    - cd ventas/target
+    - cd /drone/src/ventas/target/
     - ls
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
@@ -99,6 +134,12 @@ steps:
   when:
     branch:
       - main
+    
+    event:
+      include:
+        - push
+        - pull_request
+
  
 
 
