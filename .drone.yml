@@ -24,7 +24,7 @@ steps:
   when:
     branch:
       -prod
-      -main
+     
       
 
 - name: Servers-dev
@@ -65,7 +65,7 @@ steps:
   when:
     branch:
       -prod
-      -main 
+
 
     
 
