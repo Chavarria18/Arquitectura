@@ -9,6 +9,14 @@ steps:
   when:
     branch:
       - DEV
+    event:
+      include:
+        - push
+        - pull request
+   
+
+
+
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
@@ -24,6 +32,7 @@ steps:
   when:
     branch:
       - 1PROD
+      
 
 - name: Build-main
   image: maven:3-jdk-11
@@ -49,6 +58,10 @@ steps:
   when:
     branch:
       - DEV
+     event:
+      include:        
+        - push
+        - pull request
 
 
 - name: Servers-uat
