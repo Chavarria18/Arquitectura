@@ -11,8 +11,8 @@ steps:
       - DEV
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
   
 
@@ -27,8 +27,8 @@ steps:
       - UAT
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
 
 - name: Build-prod
@@ -40,8 +40,8 @@ steps:
       - 1PROD
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
       
 
@@ -53,10 +53,10 @@ steps:
   when:
     branch:
       - main
-      event:
+    event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
 
      
@@ -77,8 +77,8 @@ steps:
       - DEV
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
     
 
@@ -98,8 +98,8 @@ steps:
       - UAT
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
 
 - name: Servers-prod
@@ -117,8 +117,8 @@ steps:
       - 1PROD
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
       
 - name: Servers-main
@@ -137,8 +137,8 @@ steps:
     
     event:
       include:
-        - push
-        - pull_request
+      - push
+      - pull_request
 
  
 
