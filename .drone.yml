@@ -5,14 +5,14 @@ steps:
 - name: Build-dev
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/target -Pdev package
+    - mvn -f ventas/poim.xml -Pdev package
   when:
     branch:
       -DEV
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/target -Puat package
+    - mvn -f ventas/pom.xml -Puat package
   when:
     branch:
       -UAT
@@ -20,7 +20,7 @@ steps:
 - name: Build-prod
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/target -Pprod package
+    - mvn -f ventas/pom.xml -Pprod package
   when:
     branch:
       -PROD1
@@ -28,7 +28,7 @@ steps:
 - name: Build-main
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/target -Pprod package
+    - mvn -f ventas/pom.xml -Pprod package
 
      
       
@@ -41,7 +41,7 @@ steps:
     - ls
     - apk add curl
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://j6oc0tsmiw4dohyjwum5a5.webrelay.io//manager/text/deploy?path=/main-dev&update=true'
+    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
   when:
     branch:
       -DEV
@@ -55,7 +55,7 @@ steps:
     - ls
     - apk add curl
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://j6oc0tsmiw4dohyjwum5a5.webrelay.io//manager/text/deploy?path=/main-uat&update=true'
+    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
   when:
     branch:
       -UAT
@@ -68,7 +68,7 @@ steps:
     - ls
     - apk add curl
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://j6oc0tsmiw4dohyjwum5a5.webrelay.io//manager/text/deploy?path=/main-prod&update=true'
+    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
   when:
     branch:
       -PROD1
@@ -81,7 +81,7 @@ steps:
     - ls
     - apk add curl
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://j6oc0tsmiw4dohyjwum5a5.webrelay.io//manager/text/deploy?path=/main-prodmain&update=true'
+    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
  
 
 
