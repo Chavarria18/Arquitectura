@@ -2,10 +2,29 @@ kind: pipeline
 
 steps:
 
-- name: Build
+- name: Build-dev
   image: maven:3-jdk-11
   commands:  
-    - mvn -f ventas/target package
+    - mvn -f ventas/target -Pdev package
+  when:
+    branch:
+      -dev
+- name: Build-uat
+  image: maven:3-jdk-11
+  commands:  
+    - mvn -f ventas/target -Puat package
+  when:
+    branch:
+      -dev
+
+- name: Build-prod
+  image: maven:3-jdk-11
+  commands:  
+    - mvn -f ventas/target -Pprod package
+  when:
+    branch:
+      -prod
+      
 
 - name: Servers
   image: alpine
