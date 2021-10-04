@@ -27,7 +27,7 @@ steps:
       -main
       
 
-- name: Servers
+- name: Servers-dev
   image: alpine
   commands:
     - ls
@@ -40,7 +40,7 @@ steps:
     branch:
       -dev
 
-- name: Servers
+- name: Servers-uat
   image: alpine
   commands:
     - ls
@@ -53,7 +53,7 @@ steps:
     branch:
       -uat
 
-- name: Servers
+- name: Servers-prod
   image: alpine
   commands:
     - ls
