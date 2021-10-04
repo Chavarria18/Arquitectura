@@ -53,7 +53,7 @@ steps:
   when:
     branch:
       - main
-      event:
+    event:
       include:
       - push
       - pull_request
