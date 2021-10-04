@@ -9,6 +9,11 @@ steps:
   when:
     branch:
       - DEV
+    event:
+      include:
+        - push
+        - pull_request
+
   
 
 
@@ -20,6 +25,11 @@ steps:
   when:
     branch:
       - UAT
+    event:
+      include:
+        - push
+        - pull_request
+
 
 - name: Build-prod
   image: maven:3-jdk-11
@@ -28,6 +38,11 @@ steps:
   when:
     branch:
       - 1PROD
+    event:
+      include:
+        - push
+        - pull_request
+
       
 
 - name: Build-main
@@ -38,6 +53,11 @@ steps:
   when:
     branch:
       - main
+      event:
+      include:
+        - push
+        - pull_request
+
 
      
       
@@ -55,6 +75,11 @@ steps:
   when:
     branch:
       - DEV
+    event:
+      include:
+        - push
+        - pull_request
+
     
 
 
@@ -71,6 +96,11 @@ steps:
   when:
     branch:
       - UAT
+    event:
+      include:
+        - push
+        - pull_request
+
 
 - name: Servers-prod
   image: alpine
@@ -85,6 +115,11 @@ steps:
   when:
     branch:
       - 1PROD
+    event:
+      include:
+        - push
+        - pull_request
+
       
 - name: Servers-main
   image: alpine
@@ -99,6 +134,12 @@ steps:
   when:
     branch:
       - main
+    
+    event:
+      include:
+        - push
+        - pull_request
+
  
 
 
