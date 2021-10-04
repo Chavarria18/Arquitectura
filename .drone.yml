@@ -58,7 +58,7 @@ steps:
   when:
     branch:
       - DEV
-     event:
+    event:
       include:        
         - push
         - pull request
