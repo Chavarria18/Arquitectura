@@ -29,7 +29,7 @@ steps:
       body: Los unit test fallaron 
       attachment: build-result.xml
     when:
-     event:
+      event:
         include:     
         - pull_request
       status:      
