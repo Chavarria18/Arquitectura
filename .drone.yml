@@ -7,6 +7,10 @@ steps:
     image: maven:3-jdk-11
     commands:    
       - mvn test
+    when:
+      event:
+        include:     
+        - pull_request
  
 
   - name: notify-unit-test 
