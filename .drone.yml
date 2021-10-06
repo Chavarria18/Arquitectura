@@ -7,33 +7,33 @@ steps:
     image: maven:3-jdk-11
     commands:    
       - mvn test
-  - name: Sonar
-    image: maven:3-jdk-11
-    commands:
-      - mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=mora456 -Dsonar.host.url=http://52.188.188.66:9000
-
-- name: notify-unit-test 
-  image: drillster/drone-email
-  settings:
-    from: chavarria181386@unis.edu.gt    
-    host: smtp.sendgrid.net
-    port: 465
-    username:
-       from_secret: emu1
-    password: 
-      from_secret: emu2    
-    
-    recipients:
-        - gchavarriamunoz@gmail.com
-    body: Los unit test fallaron 
-    attachment: build-result.xml
-  when:
-    status:
-    - success
-    - failure
  
 
+  - name: notify-unit-test 
+    image: drillster/drone-email
+    settings:
+      from: chavarria181386@unis.edu.gt    
+      host: smtp.sendgrid.net
+      port: 465
+      username:
+        from_secret: emu1
+      password: 
+        from_secret: emu2    
+      
+      recipients:
+          - gchavarriamunoz@gmail.com
+      body: Los unit test fallaron 
+      attachment: build-result.xml
+    when:
+      status:
+      - success
+      - failure
+  
 
+  - name: Sonar
+      image: maven:3-jdk-11
+      commands:
+        - mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=mora456 -Dsonar.host.url=http://52.188.188.66:9000
 
 
 
