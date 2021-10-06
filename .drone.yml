@@ -2,36 +2,16 @@ kind: pipeline
 name: Springboot
 
 steps:
-  - name: UnitTest
-    image: maven:3-jdk-11
-    commands:    
-      - mvn -f vetnas/pom.xml test
-    when:
-      event:
-        include:     
-        - pull_request
+- name: UnitTest
+  image: maven:3-jdk-11
+  commands:    
+    - mvn -f vetnas/pom.xml test
+  when:
+    event:
+      include:     
+      - pull_request
 
-  - name: notifyunittest 
-    image: drillster/drone-email
-    settings:
-      from: chavarria181386@unis.edu.gt    
-      host: smtp.sendgrid.net
-      port: 465
-      username:
-        from_secret: emu1
-      password: 
-        from_secret: emu2    
-      
-      recipients:
-          - gchavarriamunoz@gmail.com
-      body: Los unit test fallaron 
-      attachment: build-result.xml
-    when:
-      event:
-        include:     
-        - pull_request
-      status:      
-      - failure
+
   
 
   
