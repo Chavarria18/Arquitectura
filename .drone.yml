@@ -1,6 +1,9 @@
 kind: pipeline 
+type: docker
+name: Springboot
 
-steps:
+
+
 
 steps:
   - name: UnitTest
@@ -55,6 +58,28 @@ steps:
       event:
         include:     
         - pull_request
+
+  - name: notify-unit-test 
+    image: drillster/drone-email
+    settings:
+      from: chavarria181386@unis.edu.gt    
+      host: smtp.sendgrid.net
+      port: 465
+      username:
+        from_secret: emu1
+      password: 
+        from_secret: emu2    
+      
+      recipients:
+          - gchavarriamunoz@gmail.com
+      body: El analisis sonarq indica que no pasa las quality gates 
+      attachment: build-result.xml
+    when:
+      event:
+        include:     
+        - pull_request
+      status:      
+      - failure
 
 
 
