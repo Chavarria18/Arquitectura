@@ -1,7 +1,79 @@
 kind: pipeline 
+name: Springboot
 
 steps:
+- name: UnitTest
+  image: maven:3-jdk-11
+  commands:    
+    - mvn -f vetnas/pom.xml test
+  when:
+    event:
+      include:     
+      - pull_request
 
+- name: notifyunittest 
+  image: drillster/drone-email
+  settings:
+    from: chavarria181386@unis.edu.gt    
+    host: smtp.sendgrid.net
+    port: 465
+    username:
+      from_secret: emu1
+    password: 
+      from_secret: emu2 
+    recipients:
+      - gchavarriamunoz@gmail.com
+    body: Los unit test fallaron 
+    attachment: build-result.xml
+  when:
+    event:
+      include:     
+      - pull_request
+    status:      
+    - failure
+
+
+- name: Sonarqube-analisis 
+  image: maven:3-jdk-11
+  commands:
+    - mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://52.188.188.66:9000
+  when:
+    event:
+      include:     
+      - pull_request
+
+
+
+- name: Quality-Gate
+  image: maven:3-jdk-11
+  commands:
+    - mvn clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://52.188.188.66:9000
+  when:
+    event:
+      include:     
+      - pull_request
+
+- name: notify-sonar-q
+  image: drillster/drone-email
+  settings:
+    from: chavarria181386@unis.edu.gt    
+    host: smtp.sendgrid.net
+    port: 465
+    username:
+      from_secret: emu1
+    password: 
+      from_secret: emu2    
+    
+    recipients:
+        - gchavarriamunoz@gmail.com
+    body: El analisis sonarq indica que no pasa las quality gates 
+    attachment: build-result.xml
+  when:
+    event:
+      include:     
+      - pull_request
+    status:      
+    - failure
 - name: Build-dev
   image: maven:3-jdk-11
   commands:  
@@ -12,12 +84,8 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
+    
   
-
-
-
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
@@ -29,8 +97,6 @@ steps:
       include:
       - push
       - pull_request
-
-
 - name: Build-prod
   image: maven:3-jdk-11
   commands:  
@@ -41,10 +107,8 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
+     
       
-
 - name: Build-main
   image: maven:3-jdk-11
   commands:  
@@ -57,11 +121,8 @@ steps:
       include:
       - push
       - pull_request
-
-
-     
+    
       
-
 - name: Servers-dev
   image: alpine
   commands:
@@ -78,11 +139,8 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
     
-
-
+    
 - name: Servers-uat
   image: alpine
   commands:
@@ -100,8 +158,6 @@ steps:
       include:
       - push
       - pull_request
-
-
 - name: Servers-prod
   image: alpine
   commands:
@@ -119,7 +175,6 @@ steps:
       include:
       - push
       - pull_request
-
       
 - name: Servers-main
   image: alpine
@@ -140,33 +195,6 @@ steps:
       - push
       - pull_request
 
+    
  
 
-
-
-    
-
-
-
-- name: notify
-  image: drillster/drone-email
-  settings:
-    from: chavarria181386@unis.edu.gt    
-    host: smtp.sendgrid.net
-    port: 465
-    username:
-       from_secret: emu1
-    password: 
-      from_secret: emu2    
-    
-    recipients:
-        - gchavarriamunoz@gmail.com
-
-  when:
-    status:
-    - success
-    - failure
- 
-
-    
-    
