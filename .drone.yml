@@ -84,7 +84,7 @@ steps:
     event:
       include:
       - push
-      - pull_request
+    
   
 - name: Build-uat
   image: maven:3-jdk-11
@@ -107,7 +107,7 @@ steps:
     event:
       include:
       - push
-      - pull_request
+     
       
 - name: Build-main
   image: maven:3-jdk-11
@@ -139,7 +139,7 @@ steps:
     event:
       include:
       - push
-      - pull_request
+    
     
 - name: Servers-uat
   image: alpine
@@ -196,5 +196,5 @@ steps:
       - pull_request
 
     
-
+ 
 
