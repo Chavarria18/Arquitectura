@@ -53,7 +53,7 @@ steps:
       include:     
       - pull_request
 
-- name: notify-unit-test 
+- name: notify-sonar-q
   image: drillster/drone-email
   settings:
     from: chavarria181386@unis.edu.gt    
