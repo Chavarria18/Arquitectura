@@ -225,9 +225,14 @@ steps:
   when:
     event:
       include:     
-      - pull_request
+      - push
     status:      
     - failure
-    - success 
+    - success
+    branch:
+    - main
+    - DEV
+    - UAT
+    - 1PROD
  
 
