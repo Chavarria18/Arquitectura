@@ -225,7 +225,7 @@ steps:
   when:
     event:
       include:     
-      - push
+      - pull_request
     status:      
     - failure
     - success 
