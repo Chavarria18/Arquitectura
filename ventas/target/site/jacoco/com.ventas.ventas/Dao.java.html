@@ -115,8 +115,8 @@ public class Dao {
 
 <span class="nc" id="L116">        SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);</span>
 <span class="nc" id="L117">        insertActor.withSchemaName(&quot;VENTAS&quot;).withTableName(&quot;BODEGA&quot;).usingColumns( &quot;existencia&quot;,</span>
-<span class="nc" id="L118">                &quot;precio_lista&quot;, &quot;codigo_modelo&quot;, &quot;ram&quot;, &quot;almacenamiento&quot;, &quot;procesador&quot;, &quot;numero_cores&quot;, &quot;color&quot;,</span>
-<span class="nc" id="L119">                &quot;descripcion&quot;, &quot;nombret&quot;,&quot;origen&quot;,&quot;id_estados&quot;,&quot;foto1&quot;,&quot;foto2&quot;,&quot;foto3&quot;);</span>
+                &quot;precio_lista&quot;, &quot;codigo_modelo&quot;, &quot;ram&quot;, &quot;almacenamiento&quot;, &quot;procesador&quot;, &quot;numero_cores&quot;, &quot;color&quot;,
+                &quot;descripcion&quot;, &quot;nombret&quot;,&quot;origen&quot;,&quot;id_estados&quot;,&quot;foto1&quot;,&quot;foto2&quot;,&quot;foto3&quot;);
 <span class="nc" id="L120">        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(nuevo);</span>
 
 <span class="nc" id="L122">        insertActor.execute(param);    </span>
@@ -788,8 +788,8 @@ public class Dao {
 
 <span class="nc" id="L789">        SimpleJdbcInsert insertActor = new SimpleJdbcInsert(jdbcTemplate);</span>
 <span class="nc" id="L790">        insertActor.withSchemaName(&quot;VENTAS&quot;).withTableName(&quot;BODEGA&quot;).usingColumns( &quot;existencia&quot;,</span>
-<span class="nc" id="L791">                &quot;precio_lista&quot;, &quot;codigo_modelo&quot;, &quot;ram&quot;, &quot;almacenamiento&quot;, &quot;procesador&quot;, &quot;numero_cores&quot;, &quot;color&quot;,</span>
-<span class="nc" id="L792">                &quot;descripcion&quot;, &quot;nombret&quot;,&quot;origen&quot;,&quot;id_estados&quot;);</span>
+                &quot;precio_lista&quot;, &quot;codigo_modelo&quot;, &quot;ram&quot;, &quot;almacenamiento&quot;, &quot;procesador&quot;, &quot;numero_cores&quot;, &quot;color&quot;,
+                &quot;descripcion&quot;, &quot;nombret&quot;,&quot;origen&quot;,&quot;id_estados&quot;);
 <span class="nc" id="L793">        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(nuevo);</span>
 
 <span class="nc" id="L795">        insertActor.execute(param);</span>
