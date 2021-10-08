@@ -55,8 +55,10 @@
 		 <dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
-			<version>${micrometer.version}</version>
+			<scope>runtime</scope>
 		</dependency>
+
+		<!-- Dependencia para la cobertura de prometheus-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
