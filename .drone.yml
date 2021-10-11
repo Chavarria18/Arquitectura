@@ -1,5 +1,6 @@
 kind: pipeline 
-name: Springboot
+name: siu
+type: docker
 
 steps:
 - name: UnitTest
