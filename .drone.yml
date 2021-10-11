@@ -1,6 +1,7 @@
 kind: pipeline 
-name: siu
 type: docker
+name: siu
+
 
 steps:
 - name: UnitTest
