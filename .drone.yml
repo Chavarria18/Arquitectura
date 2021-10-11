@@ -1,7 +1,5 @@
 kind: pipeline 
 type: docker
-name: siu
-
 
 steps:
 - name: UnitTest
@@ -45,8 +43,6 @@ steps:
       include:     
       - pull_request
 
-
-
 - name: Quality-Gate
   image: maven:3-jdk-11
   commands:
@@ -79,11 +75,6 @@ steps:
     status:      
     - failure
 
-
-
-
-
-
 - name: Build-dev
   image: maven:3-jdk-11
   commands:  
@@ -95,7 +86,7 @@ steps:
       include:
       - push
     
-  
+ 
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
@@ -107,7 +98,6 @@ steps:
       include:
       - push
    
-
 
 - name: Build-prod
   image: maven:3-jdk-11
@@ -132,7 +122,6 @@ steps:
     event:
       include:
       - push
-   
     
       
 - name: Servers-dev
@@ -151,8 +140,8 @@ steps:
     event:
       include:
       - push
-    
-    
+  
+   
 - name: Servers-uat
   image: alpine
   commands:
@@ -170,8 +159,6 @@ steps:
       include:
       - push
  
-
-
 - name: Servers-prod
   image: alpine
   commands:
@@ -189,7 +176,7 @@ steps:
       include:
       - push
   
-      
+     
 - name: Servers-main
   image: alpine
   commands:
