@@ -55,8 +55,10 @@
 		 <dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
-			<version>${micrometer.version}</version>
+			<scope>runtime</scope>
 		</dependency>
+
+		<!-- Dependencia para la cobertura de prometheus-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -154,6 +156,14 @@
 					<password>123</password>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>io.github.r0bb3n</groupId>
+				<artifactId>sonar-quality-gate-maven-plugin</artifactId>
+				<version>1.1.0</version>
+			</plugin>
+
+			
 			<plugin>
 				
 				<groupId>org.apache.maven.plugins</groupId>

@@ -1,6 +1,79 @@
 kind: pipeline 
+type: docker
 
 steps:
+- name: UnitTest
+  image: maven:3-jdk-11
+  commands:    
+    - mvn -f ventas/pom.xml test
+  when:
+    event:
+      include:     
+      - pull_request
+
+- name: notify-unit-test 
+  image: drillster/drone-email
+  settings:
+    from: chavarria181386@unis.edu.gt    
+    host: smtp.sendgrid.net
+    port: 465
+    username:
+      from_secret: emu1
+    password: 
+      from_secret: emu2 
+    recipients:
+      - gchavarriamunoz@gmail.com
+      - jflores@unis.edu.gt
+    body: Los unit test fallaron 
+    attachment: build-result.xml
+  when:
+    event:
+      include:     
+      - pull_request
+    status:      
+    - failure
+
+
+- name: Sonarqube-analisis 
+  image: maven:3-jdk-11
+  commands:
+    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://e56e-45-229-42-199.ngrok.io
+  when:
+    event:
+      include:     
+      - pull_request
+
+- name: Quality-Gate
+  image: maven:3-jdk-11
+  commands:
+    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://e56e-45-229-42-199.ngrok.io
+  when:
+    event:
+      include:     
+      - pull_request
+
+- name: notify-sonar-q
+  image: drillster/drone-email
+  settings:
+    from: chavarria181386@unis.edu.gt    
+    host: smtp.sendgrid.net
+    port: 465
+    username:
+      from_secret: emu1
+    password: 
+      from_secret: emu2    
+    
+    recipients:
+        - gchavarriamunoz@gmail.com
+        - jflores@unis.edu.gt
+    body: El analisis sonarq indica que no pasa las quality gates 
+    attachment: build-result.xml
+  when:
+    event:
+      include:     
+      - pull_request
+    status:      
+    - failure
 
 - name: Build-dev
   image: maven:3-jdk-11
@@ -12,12 +85,8 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
-  
-
-
-
+    
+ 
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
@@ -28,8 +97,7 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
+   
 
 - name: Build-prod
   image: maven:3-jdk-11
@@ -41,10 +109,8 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
+     
       
-
 - name: Build-main
   image: maven:3-jdk-11
   commands:  
@@ -56,12 +122,8 @@ steps:
     event:
       include:
       - push
-      - pull_request
-
-
-     
+    
       
-
 - name: Servers-dev
   image: alpine
   commands:
@@ -71,18 +133,15 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxzna.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
   when:
     branch:
       - DEV
     event:
       include:
       - push
-      - pull_request
-
-    
-
-
+  
+   
 - name: Servers-uat
   image: alpine
   commands:
@@ -92,16 +151,14 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war  
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxzna.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
   when:
     branch:
       - UAT
     event:
       include:
       - push
-      - pull_request
-
-
+ 
 - name: Servers-prod
   image: alpine
   commands:
@@ -111,16 +168,15 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxzna.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
   when:
     branch:
       - 1PROD
     event:
       include:
       - push
-      - pull_request
-
-      
+  
+     
 - name: Servers-main
   image: alpine
   commands:
@@ -130,7 +186,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovyj5.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxzna.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
   when:
     branch:
       - main
@@ -138,35 +194,34 @@ steps:
     event:
       include:
       - push
-      - pull_request
+   
 
- 
-
-
-
-    
-
-
-
-- name: notify
+- name: Notifiación-final
   image: drillster/drone-email
   settings:
     from: chavarria181386@unis.edu.gt    
     host: smtp.sendgrid.net
     port: 465
     username:
-       from_secret: emu1
+      from_secret: emu1
     password: 
       from_secret: emu2    
-    
+    subject: status pipeline 
     recipients:
         - gchavarriamunoz@gmail.com
-
+        - jflores@unis.edu.gt
+    attachment: build-result.xml
   when:
-    status:
-    - success
+    event:
+      include:     
+      - push
+    status:      
     - failure
+    - success
+    branch:
+    - main
+    - DEV
+    - UAT
+    - 1PROD
  
 
-    
-    
