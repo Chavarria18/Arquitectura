@@ -24,7 +24,7 @@ steps:
     recipients:
       - gchavarriamunoz@gmail.com
       - jflores@unis.edu.gt
-    body: Los unit test fallaron 
+    body: Error en la pipeline;Los unit test fallaron 
     attachment: build-result.xml
   when:
     event:
@@ -66,7 +66,7 @@ steps:
     recipients:
         - gchavarriamunoz@gmail.com
         - jflores@unis.edu.gt
-    body: El analisis sonarq indica que no pasa las quality gates 
+    body: Error en la pipeline; El analisis sonarq indica que no pasa las quality gates 
     attachment: build-result.xml
   when:
     event:
