@@ -26,14 +26,14 @@ import org.springframework.web.client.RestTemplate;
  * &lt;p&gt;Clase utilizada para probar los controladores rest&lt;/p&gt;
  */
 @RestController
-<span class="nc" id="L29">public class restControler {</span>
+<span class="fc" id="L29">public class restControler {</span>
 	@Autowired(required = true)
 	private Dao dao;
 	
 	
 
     private static final String template = &quot;Hello, %s!&quot;;
-<span class="nc" id="L36">	private final AtomicLong counter = new AtomicLong();</span>
+<span class="fc" id="L36">	private final AtomicLong counter = new AtomicLong();</span>
 
     @GetMapping(&quot;/greeting&quot;)
 	public Restservice greeting(@RequestParam(value = &quot;name&quot;, defaultValue = &quot;World&quot;) String name) {

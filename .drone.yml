@@ -1,5 +1,5 @@
 kind: pipeline 
-name: Springboot
+type: docker
 
 steps:
 - name: UnitTest
@@ -24,7 +24,7 @@ steps:
     recipients:
       - gchavarriamunoz@gmail.com
       - jflores@unis.edu.gt
-    body: Los unit test fallaron 
+    body: Error en la pipeline;Los unit test fallaron 
     attachment: build-result.xml
   when:
     event:
@@ -37,18 +37,16 @@ steps:
 - name: Sonarqube-analisis 
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://cc5c-45-229-42-199.ngrok.io 
+    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://3b03-45-229-42-199.ngrok.io 
   when:
     event:
       include:     
       - pull_request
 
-
-
 - name: Quality-Gate
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://cc5c-45-229-42-199.ngrok.io 
+    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://3b03-45-229-42-199.ngrok.io 
   when:
     event:
       include:     
@@ -68,7 +66,7 @@ steps:
     recipients:
         - gchavarriamunoz@gmail.com
         - jflores@unis.edu.gt
-    body: El analisis sonarq indica que no pasa las quality gates 
+    body: Error en la pipeline; El analisis sonarq indica que no pasa las quality gates 
     attachment: build-result.xml
   when:
     event:
@@ -76,11 +74,6 @@ steps:
       - pull_request
     status:      
     - failure
-
-
-
-
-
 
 - name: Build-dev
   image: maven:3-jdk-11
@@ -93,7 +86,7 @@ steps:
       include:
       - push
     
-  
+ 
 - name: Build-uat
   image: maven:3-jdk-11
   commands:  
@@ -105,7 +98,6 @@ steps:
       include:
       - push
    
-
 
 - name: Build-prod
   image: maven:3-jdk-11
@@ -130,7 +122,6 @@ steps:
     event:
       include:
       - push
-   
     
       
 - name: Servers-dev
@@ -142,15 +133,15 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovebi.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
+    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
   when:
     branch:
       - DEV
     event:
       include:
       - push
-    
-    
+  
+   
 - name: Servers-uat
   image: alpine
   commands:
@@ -160,7 +151,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war  
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovebi.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
+    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
   when:
     branch:
       - UAT
@@ -168,8 +159,6 @@ steps:
       include:
       - push
  
-
-
 - name: Servers-prod
   image: alpine
   commands:
@@ -179,7 +168,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovebi.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
+    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
   when:
     branch:
       - 1PROD
@@ -187,7 +176,7 @@ steps:
       include:
       - push
   
-      
+     
 - name: Servers-main
   image: alpine
   commands:
@@ -197,7 +186,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://wzcvu06han7aiqu3qovebi.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
+    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
   when:
     branch:
       - main
@@ -236,3 +225,16 @@ steps:
     - 1PROD
  
 
+steps:
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack  
+    channel: drone
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}
