@@ -1,1 +1,4 @@
 com/ventas/ventas/VentasApplicationTests.class
+com/ventas/ventas/TestLogin.class
+com/ventas/ventas/UsuariosTest.class
+com/ventas/ventas/TelefonoTest.class
