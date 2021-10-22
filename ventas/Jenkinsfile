@@ -78,7 +78,7 @@ node {
       try {
         echo 'REALIZANDO EL BUILD PARA DEV'
         withMaven(maven: 'M3') {
-              sh 'mvn -f ventas/pom.xml -Pdev package'
+              sh 'mvn -f ventas/pom.xml -Dspring.profiles.active=dev package'
         }
         }catch (err) {
         echo 'ERROR EN EL BUILD'
@@ -98,13 +98,15 @@ node {
       emailext attachLog: false,body: 'Hubo un error en el deploy en el server de DEV', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
     }
+   
+
   //--------------------------------------
   }else if (env.BRANCH_NAME == 'UAT') {
     stage('Build war') {
       try {
         echo 'REALIZANDO EL BUILD EN UAT'
         withMaven(maven: 'M3') {
-              sh 'mvn -f ventas/pom.xml -Puat package'
+              sh 'mvn -f ventas/pom.xml -Dspring.profiles.active=uat package'
         }
         }catch (err) {
           emailext attachLog: false,body: 'Hubo un error en el build', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -117,7 +119,7 @@ node {
 
         dir('ventas/target') {
            sh 'mv ventas-0.0.1-SNAPSHOT.war main-uat.war'          
-          sh 'docker cp main-uat.war tomcat2:/usr/local/tomcat/webapps'
+          sh 'docker cp main-uat.war tomcat1:/usr/local/tomcat/webapps'
         }
 
       
@@ -132,7 +134,7 @@ node {
         echo 'REALIZANDO EL BUILD para PROD' 
  
        withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml -Pprod package"
+              sh "mvn -f ventas/pom.xml -Dspring.profiles.active=uat package"
           }
         }catch (err) {
           emailext attachLog: false,body: 'Hubo un error en el build de Producción', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -141,7 +143,7 @@ node {
     stage('Server') {
       try {
         dir("ventas/target"){
-          sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod.war'
+          sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod-jk.war'
           sh "docker cp main-prod.war tomcat3:/usr/local/tomcat/webapps"
         }
 
@@ -151,5 +153,12 @@ node {
       }
     }
   }
+
+ stage ("Slack notification" ){
+      slackSend channel: 'jenkins', message: "Pipeline in ${env.BRANCH_NAME} finished", teamDomain: 'arquitectura-2021 ', tokenCredentialId: 'anN6EXGn3tOpcGHNUwYp12hp'
+
+    }
+  
+
+
 }
-//Comentario
