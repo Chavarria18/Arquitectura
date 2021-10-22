@@ -21,7 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.RedirectView;
 
 @SpringBootTest
-public class TestLogin extends VentasApplicationTests {
+class TestLogin extends VentasApplicationTests {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -29,14 +29,14 @@ public class TestLogin extends VentasApplicationTests {
 	private MockMvc mockMvc;
 
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	
 	
 	@Test
-	public void logCorrecto() throws Exception {
+	void logCorrecto() throws Exception {
 		mockMvc.perform(post("/log")
         .param("usuario","Empleado01")
         .param("contraseña","aaa"))

@@ -32,9 +32,9 @@ public class Dao {
     /**
         *&lt;p&gt;Constructor de la clase dao &lt;/p&gt; 
     */
-<span class="nc" id="L35">    public Dao(){</span>
+<span class="fc" id="L35">    public Dao(){</span>
 
-<span class="nc" id="L37">    }</span>
+<span class="fc" id="L37">    }</span>
 
     /**
         *&lt;p&gt;Inicializar el jdbcTemplate para generar las consultas &lt;/p&gt; 
@@ -545,10 +545,10 @@ public class Dao {
     public List&lt;Usuarios&gt; listUsuarios( String usuario,String contraseña) {
         
 
-<span class="nc" id="L548">        String sql = &quot;select *from VENTAS.USUARIO where usuario = ? and contraseña = ?&quot;;</span>
-<span class="nc" id="L549">        Object[] args = { usuario,contraseña };</span>
-<span class="nc" id="L550">        List&lt;Usuarios&gt; listaU = jdbcTemplate.query(sql, args, BeanPropertyRowMapper.newInstance(Usuarios.class));</span>
-<span class="nc" id="L551">        return listaU;</span>
+<span class="fc" id="L548">        String sql = &quot;select *from VENTAS.USUARIO where usuario = ? and contraseña = ?&quot;;</span>
+<span class="fc" id="L549">        Object[] args = { usuario,contraseña };</span>
+<span class="fc" id="L550">        List&lt;Usuarios&gt; listaU = jdbcTemplate.query(sql, args, BeanPropertyRowMapper.newInstance(Usuarios.class));</span>
+<span class="fc" id="L551">        return listaU;</span>
 
     }
 

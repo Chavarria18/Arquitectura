@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class UsuariosTest extends VentasApplicationTests{
+class UsuariosTest extends VentasApplicationTests{
 
     public Usuarios user = new Usuarios(); 
 
     @Test
-    public void testNombreUsuario(){
+    void testNombreUsuario(){
         user.setContraseña("aaa");
         user.setId_tipo_usuario(2);
         user.setId_usuario(1);
