@@ -134,7 +134,7 @@ node {
         echo 'REALIZANDO EL BUILD para PROD' 
  
        withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml -Dspring.profiles.active=uat package"
+              sh "mvn -f ventas/pom.xml -Dspring.profiles.active=prod package"
           }
         }catch (err) {
           emailext attachLog: false,body: 'Hubo un error en el build de Producción', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
