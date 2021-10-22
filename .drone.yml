@@ -229,7 +229,7 @@ steps:
 - name: slack
   image: plugins/slack
   settings:
-    webhook: https://hooks.slack.com/services/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
+    webhook: https://hooks.slack.com/services/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
     channel: dev
     template: >
       {{#success build.status}}
