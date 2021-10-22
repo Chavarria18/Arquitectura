@@ -144,7 +144,7 @@ node {
       try {
         dir("ventas/target"){
           sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod.war'
-          sh "docker cp main-prod.war tomcat3:/usr/local/tomcat/webapps"
+          sh "docker cp main-prod.war tomcat1:/usr/local/tomcat/webapps"
         }
 
         
