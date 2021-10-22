@@ -98,6 +98,8 @@ node {
       emailext attachLog: false,body: 'Hubo un error en el deploy en el server de DEV', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
       }
     }
+   
+
   //--------------------------------------
   }else if (env.BRANCH_NAME == 'UAT') {
     stage('Build war') {
@@ -151,4 +153,12 @@ node {
       }
     }
   }
+
+ stage ("Slack notification" ){
+      slackSend channel: 'jenkins', message: "Pipeline in ${env.BRANCH_NAME} finished", teamDomain: 'arquitectura-2021 ', tokenCredentialId: 'anN6EXGn3tOpcGHNUwYp12hp'
+
+    }
+  
+
+
 }
