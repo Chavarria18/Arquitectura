@@ -225,9 +225,15 @@ steps:
     - 1PROD
  
 
-
-- name: Slack
-  image: alpine
-  commands:  
-    - apk add curl  
-    - curl -X POST -H 'Content-type: application/json' --data '{"text":"Hello, World!"}' https://hooks.slack.com/services/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
+steps:
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
+    channel: dev
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}
