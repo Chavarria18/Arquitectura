@@ -225,7 +225,7 @@ steps:
     - 1PROD
  
 
-steps:
+
 - name: slack
   image: plugins/slack
   settings:
