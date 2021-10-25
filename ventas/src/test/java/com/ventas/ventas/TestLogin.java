@@ -35,16 +35,6 @@ class TestLogin extends VentasApplicationTests {
 
 	
 	
-	@Test
-	void logCorrecto() throws Exception {
-		mockMvc.perform(post("/log")
-        .param("usuario","Empleado01")
-        .param("contraseña","aaa"))
-        .andExpect(redirectedUrl("/"));
-					
-
-	}
-
    
 
 
