@@ -234,7 +234,7 @@ steps:
     channel: drone
     template: >
       {{#success build.status}}
-        build {{build.number}} succeeded. Good job.
+        build {{build.number}} Exito la pipeline se ejecuto correctamente.
       {{else}}
-        build {{build.number}} failed. Fix me please.
+        build {{build.number}} fallo el build . Revisar ejecucion pipeline.
       {{/success}}
