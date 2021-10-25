@@ -545,10 +545,10 @@ public class Dao {
     public List&lt;Usuarios&gt; listUsuarios( String usuario,String contraseña) {
         
 
-<span class="fc" id="L548">        String sql = &quot;select *from VENTAS.USUARIO where usuario = ? and contraseña = ?&quot;;</span>
-<span class="fc" id="L549">        Object[] args = { usuario,contraseña };</span>
-<span class="fc" id="L550">        List&lt;Usuarios&gt; listaU = jdbcTemplate.query(sql, args, BeanPropertyRowMapper.newInstance(Usuarios.class));</span>
-<span class="fc" id="L551">        return listaU;</span>
+<span class="nc" id="L548">        String sql = &quot;select *from VENTAS.USUARIO where usuario = ? and contraseña = ?&quot;;</span>
+<span class="nc" id="L549">        Object[] args = { usuario,contraseña };</span>
+<span class="nc" id="L550">        List&lt;Usuarios&gt; listaU = jdbcTemplate.query(sql, args, BeanPropertyRowMapper.newInstance(Usuarios.class));</span>
+<span class="nc" id="L551">        return listaU;</span>
 
     }
 
