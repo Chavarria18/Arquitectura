@@ -43,7 +43,7 @@ steps:
 - name: Sonarqube-analisis 
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://04be-45-229-42-199.ngrok.io  
+    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dmaven.test.skip=true -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://04be-45-229-42-199.ngrok.io  
   when:
     event:
       include:     
@@ -243,4 +243,8 @@ steps:
         build {{build.number}} Exito la pipeline se ejecuto correctamente.
       {{else}}
         build {{build.number}} fallo el build . Revisar ejecucion pipeline.
-      {{/success}}
+      {{/success}
+   when:
+    status:      
+    - failure
+    - success
