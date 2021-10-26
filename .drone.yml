@@ -244,7 +244,7 @@ steps:
       {{else}}
         build {{build.number}} fallo el build . Revisar ejecucion pipeline.
       {{/success}
-   when:
+  when:
     status:      
     - failure
     - success
