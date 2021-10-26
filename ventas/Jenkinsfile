@@ -134,7 +134,7 @@ node {
         echo 'REALIZANDO EL BUILD para PROD' 
  
        withMaven(maven: 'M3') {
-              sh "mvn -f ventas/pom.xml -Dspring.profiles.active=uat package"
+              sh "mvn -f ventas/pom.xml -Dspring.profiles.active=prod package"
           }
         }catch (err) {
           emailext attachLog: false,body: 'Hubo un error en el build de Producción', subject: 'Jenkins-pipeline-status', to: 'gchavarriamunoz@gmail.com'
@@ -143,8 +143,8 @@ node {
     stage('Server') {
       try {
         dir("ventas/target"){
-          sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod-jk.war'
-          sh "docker cp main-prod.war tomcat3:/usr/local/tomcat/webapps"
+          sh 'mv ventas-0.0.1-SNAPSHOT.war main-prod.war'
+          sh "docker cp main-prod.war tomcat1:/usr/local/tomcat/webapps"
         }
 
         
