@@ -243,7 +243,7 @@ steps:
         build {{build.number}} Exito la pipeline se ejecuto correctamente.
       {{else}}
         build {{build.number}} fallo el build . Revisar ejecucion pipeline.
-      {{/success}
+      {{/success}}
   when:
     status:      
     - failure
