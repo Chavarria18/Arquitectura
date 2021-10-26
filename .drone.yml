@@ -3,6 +3,9 @@ type: docker
 platform:
   os: linux
   arch: amd64
+
+workspace:
+  path: /drone/ventas
 steps:
 - name: code
   image: aosapps/drone-sonar-plugin
