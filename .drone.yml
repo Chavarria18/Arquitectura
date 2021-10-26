@@ -1,7 +1,13 @@
 kind: pipeline 
 type: docker
+platform:
+  os: linux
+  arch: amd64
+
 
 steps:
+
+
 - name: UnitTest
   image: maven:3-jdk-11
   commands:    
@@ -37,7 +43,7 @@ steps:
 - name: Sonarqube-analisis 
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://3b03-45-229-42-199.ngrok.io 
+    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dmaven.test.skip=true -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=https://e3cc-2803-d100-e520-54f-e822-6d15-8c57-2209.ngrok.io
   when:
     event:
       include:     
@@ -46,7 +52,7 @@ steps:
 - name: Quality-Gate
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://3b03-45-229-42-199.ngrok.io 
+    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=https://e3cc-2803-d100-e520-54f-e822-6d15-8c57-2209.ngrok.io
   when:
     event:
       include:     
@@ -123,7 +129,7 @@ steps:
       include:
       - push
     
-      
+     
 - name: Servers-dev
   image: alpine
   commands:
@@ -133,14 +139,14 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxhae.webrelay.io/manager/text/deploy?path=/main-dev&update=true'
   when:
     branch:
       - DEV
     event:
       include:
       - push
-  
+
    
 - name: Servers-uat
   image: alpine
@@ -151,7 +157,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war  
-    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxhae.webrelay.io/manager/text/deploy?path=/main-uat&update=true'
   when:
     branch:
       - UAT
@@ -168,7 +174,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxhae.webrelay.io/manager/text/deploy?path=/main-prod&update=true'
   when:
     branch:
       - 1PROD
@@ -186,7 +192,7 @@ steps:
     - apk add curl
     - stat ventas-0.0.1-SNAPSHOT.war
     - mv  ventas-0.0.1-SNAPSHOT.war main.war
-    - curl -v -u admin:admin -T main.war 'http://tl7bhzyrnqzb4ycj7uckio.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
+    - curl -v -u admin:admin -T main.war 'http://1rzzy5jihajnmxkmecxhae.webrelay.io/manager/text/deploy?path=/main-prodmain&update=true'
   when:
     branch:
       - main
@@ -225,8 +231,8 @@ steps:
     - 1PROD
  
 
-steps:
-- name: slack
+
+- name: notificación-slack
   image: plugins/slack
   settings:
     webhook:
@@ -234,7 +240,11 @@ steps:
     channel: drone
     template: >
       {{#success build.status}}
-        build {{build.number}} succeeded. Good job.
+        build {{build.number}} Exito la pipeline se ejecuto correctamente.
       {{else}}
-        build {{build.number}} failed. Fix me please.
+        build {{build.number}} fallo el build . Revisar ejecucion pipeline.
       {{/success}}
+  when:
+    status:      
+    - failure
+    - success
