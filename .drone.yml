@@ -4,6 +4,14 @@ platform:
   os: linux
   arch: amd64
 steps:
+- name: code
+  image: aosapps/drone-sonar-plugin
+  settings:
+    sonar_host:
+      from_secret: sonar_host
+    sonar_token:
+      from_secret: sonar_token
+
 - name: UnitTest
   image: maven:3-jdk-11
   commands:    
