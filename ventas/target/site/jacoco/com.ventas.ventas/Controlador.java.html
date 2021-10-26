@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
  * &lt;p&gt;El controlador, sirve para mostrar, redireccionar las paginas web, asi como mostrar los resultados de las paginas web&lt;/p&gt;
  */
 @Controller
-<span class="fc" id="L47">public class Controlador {</span>
+<span class="nc" id="L47">public class Controlador {</span>
     String session2; 
     int id_session2; 
     @Autowired 
@@ -686,20 +686,20 @@ import org.springframework.web.bind.annotation.RestController;
     @RequestMapping(value = &quot;/log&quot;, method = RequestMethod.POST)
     public String log(@RequestParam(name = &quot;usuario&quot;) String usuarion,
             @RequestParam(name = &quot;contraseña&quot;) String contraseña, HttpSession session) throws IOException {
-<span class="fc" id="L689">        final List&lt;Usuarios&gt; listaDis = dao.listUsuarios(usuarion, contraseña);</span>
+<span class="nc" id="L689">        final List&lt;Usuarios&gt; listaDis = dao.listUsuarios(usuarion, contraseña);</span>
 
-<span class="fc" id="L691">        int tipo = 0;</span>
-<span class="fc bfc" id="L692" title="All 2 branches covered.">        for (Usuarios usuarios : listaDis) {</span>
+<span class="nc" id="L691">        int tipo = 0;</span>
+<span class="nc bnc" id="L692" title="All 2 branches missed.">        for (Usuarios usuarios : listaDis) {</span>
 
-<span class="fc" id="L694">            tipo += usuarios.getId_tipo_usuario();</span>
-<span class="fc" id="L695">        }</span>
+<span class="nc" id="L694">            tipo += usuarios.getId_tipo_usuario();</span>
+<span class="nc" id="L695">        }</span>
 
-<span class="pc bpc" id="L697" title="1 of 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
-<span class="fc" id="L698">            session.setAttribute(&quot;name&quot;, usuarion);</span>
-<span class="fc" id="L699">            session2 = usuarion;</span>
-<span class="fc" id="L700">            session.setAttribute(&quot;tipo&quot;, tipo);</span>
+<span class="nc bnc" id="L697" title="All 2 branches missed.">        if (listaDis.size() &gt; 0) {</span>
+<span class="nc" id="L698">            session.setAttribute(&quot;name&quot;, usuarion);</span>
+<span class="nc" id="L699">            session2 = usuarion;</span>
+<span class="nc" id="L700">            session.setAttribute(&quot;tipo&quot;, tipo);</span>
 
-<span class="fc" id="L702">            return &quot;redirect:/&quot;;</span>
+<span class="nc" id="L702">            return &quot;redirect:/&quot;;</span>
 
         } else {
 <span class="nc" id="L705">            return &quot;redirect:/login?error=true&quot;;</span>
@@ -1069,9 +1069,9 @@ import org.springframework.web.bind.annotation.RestController;
 <span class="nc" id="L1069">        return &quot;redirect:/fabricas&quot;;</span>
     }
 
-<span class="fc" id="L1072">    String ip = &quot;&quot;;</span>
-<span class="fc" id="L1073">    String puerto = &quot;&quot;;</span>
-<span class="fc" id="L1074">    String url = &quot;&quot;;</span>
+<span class="nc" id="L1072">    String ip = &quot;&quot;;</span>
+<span class="nc" id="L1073">    String puerto = &quot;&quot;;</span>
+<span class="nc" id="L1074">    String url = &quot;&quot;;</span>
 
     // Conectar con fabrica
     /**
