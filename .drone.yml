@@ -43,7 +43,7 @@ steps:
 - name: Sonarqube-analisis 
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dmaven.test.skip=true -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://ddb2-2803-d100-e520-54f-dd33-1805-e582-147b.ngrok.io
+    - mvn -f ventas/pom.xml clean verify sonar:sonar -Dmaven.test.skip=true -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://a2c2-2803-d100-e520-54f-e822-6d15-8c57-2209.ngrok.io 
   when:
     event:
       include:     
@@ -52,7 +52,7 @@ steps:
 - name: Quality-Gate
   image: maven:3-jdk-11
   commands:
-    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://ddb2-2803-d100-e520-54f-dd33-1805-e582-147b.ngrok.io
+    - mvn -f ventas/pom.xml  clean verify sonar:sonar sonar-quality-gate:check -Dsonar.login=admin -Dsonar.password=tzec99 -Dsonar.host.url=http://a2c2-2803-d100-e520-54f-e822-6d15-8c57-2209.ngrok.io 
   when:
     event:
       include:     
